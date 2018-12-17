@@ -1,0 +1,107 @@
+﻿@{
+    ViewBag.Title = "Cài đặt tiếng anh";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@model CucDiSanVN.Areas.Admin.Models.modelConfig
+<section class="content-header">
+    <h1>
+        @ViewBag.Title
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/Admin"><i class="fa fa-dashboard"></i>Admin</a></li>
+        <li><a href="/Admin/ConfigSystem">Cài đặt</a></li>
+        <li class="active">@ViewBag.Title</li>
+    </ol>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                @using (Html.BeginForm())
+                {
+                    <div class="box-body">
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary("", new { @class = "text-danger" })
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.Label("Banner trang", new { @class = "control-lable" })
+                                    @Html.TextBoxFor(x => x.SiteBannerEn, new { @class = "form-control", @placeholder = "Chọn banner.." })
+                                    @Html.ValidationMessageFor(x => x.SiteBannerEn, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.Label("Tiêu đề trang", new { @class = "control-lable" })
+                                    @Html.TextBoxFor(x => x.SiteTitleEn, new { @class = "form-control", @placeholder = "Nhập tiêu đề.." })
+                                    @Html.ValidationMessageFor(x => x.SiteTitleEn, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.Label("Mô tả trang", new { @class = "control-lable" })
+                                    @Html.TextBoxFor(x => x.SiteDescriptionEn, new { @class = "form-control", @placeholder = "Nhập mô tả.." })
+                                    @Html.ValidationMessageFor(x => x.SiteDescriptionEn, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.Label("Banner trái", new { @class = "control-lable" })
+                                    @Html.DropDownListFor(x => x.BannerLeftEn, null, "---Chọn danh mục baner---", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(x => x.BannerLeftEn, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.Label("Banner phải", new { @class = "control-lable" })
+                                    @Html.DropDownListFor(x => x.BannerRightEn, null, "---Chọn danh mục sự baner---", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(x => x.BannerRightEn, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.Label("Danh mục chính", new { @class = "control-lable" })
+                                    @Html.DropDownListFor(x => x.MenuMainEn, null, "---Chọn danh mục---", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(x => x.MenuMainEn, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.Label("Danh mục trái 1", new { @class = "control-lable" })
+                                    @Html.DropDownListFor(x => x.MenuLeft1En, null, "---Chọn danh mục---", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(x => x.MenuLeft1En, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.Label("Danh mục trái 2", new { @class = "control-lable" })
+                                    @Html.DropDownListFor(x => x.MenuLeft2En, null, "---Chọn danh mục---", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(x => x.MenuLeft2En, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.Label("Hình ảnh", new { @class = "control-lable" })
+                                    @Html.DropDownListFor(x => x.BoxHinhAnhEn, null, "---Chọn danh mục sự kiện---", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(x => x.BoxHinhAnhEn, "", new { @class = "text-danger" })
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Nội dung chân trang", new { @class = "control-lable" })
+                            @Html.TextAreaFor(x => x.SiteFooterInfoEn, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.SiteFooterInfoEn, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-12 text-right">
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Lưu dữ liệu</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+@section scriptAs {
+    <script>
+        $(function () {
+            CKEDITOR.replace('SiteFooterInfoEn', {
+                toolbar: [
+                    ['Bold', 'Italic', 'Underline'],
+                    ['Styles', 'Format', 'Font', 'FontSize']
+                ], height: '100px'
+
+            });
+        });
+    </script>
+}

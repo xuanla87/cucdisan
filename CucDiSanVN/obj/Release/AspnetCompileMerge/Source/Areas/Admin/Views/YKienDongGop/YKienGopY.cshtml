@@ -1,0 +1,71 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    int count = 0;
+}
+@model IEnumerable<CucDiSanService.Models.FeedbackDetail>
+<section class="content-header">
+    <h1 class="title text-uppercase text-bold">@ViewBag.Title</h1>
+    <ol class="breadcrumb">
+        <li><a href="/Admin"><i class="fa fa-dashboard"></i> Admin</a></li>
+        <li><a href="/Admin/YKienDongGop">Quản lý ý kiến đóng góp</a></li>
+        <li class="active">@ViewBag.Title</li>
+    </ol>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div style="padding:8px 15px; width:100%; font-weight:600; box-sizing:border-box;">
+                    @ViewBag.FeedbackName
+                </div>
+                <div class="box-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th class="text-center" width="25">STT</th>
+                                    <th width="100">Họ và tên</th>
+                                    <th width="100">Thư điện tử</th>
+                                    <th width="100">Số điện thoại</th>
+                                    <th width="200">Nội dung</th>
+                                    <th width="100">Ngày tạo</th>
+                                    <th width="120">Thao tác</th>
+                                </tr>
+                            </thead>
+                            @if (Model != null && Model.Count() > 0)
+                            {
+                                foreach (var item in Model)
+                                {
+                                    count++;
+                                    <tr>
+                                        <td class="text-center">@count</td>
+                                        <td>@item.fullName</td>
+                                        <td>@item.email</td>
+                                        <td>@item.phone</td>
+                                        <td>
+                                            @item.feedbackContent
+                                            <br />
+                                            <a href="/FileAtachment/@item.fileAttachment">Tệp đính kèm</a>
+                                        </td>
+                                        <td>@item.createTime.ToString("dd/MM/yyyy")</td>
+                                        <td>
+                                            <button type="button" class="btn btn-danger btn-flat" title="Xóa" onclick="trashFeedbackDetail('@item.feedbackDetailId')"><i class="fa fa-trash"></i></button>
+                                            @if (item.isApproval)
+                                            {
+                                                <button type="button" class="btn btn-warning btn-flat" title="Hủy" onclick="UnApprovalDetail('@item.feedbackDetailId')"><i class="fa fa-times"></i></button>
+                                            }
+                                            else
+                                            {
+                                                <button type="button" class="btn btn-success btn-flat" title="Duyệt" onclick="ApprovalDetail('@item.feedbackDetailId')"><i class="fa fa-check"></i></button>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

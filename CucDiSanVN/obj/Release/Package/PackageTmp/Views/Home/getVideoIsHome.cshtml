@@ -1,0 +1,8 @@
+﻿@model CucDiSanService.Models.Video
+@if (Model != null)
+{
+    <video controls="controls" poster="@Model.thumbnail" width="100%">
+        <source src="/FileVideo/@Model.videoBody" />
+    </video>
+    <a href="video-clip">Xem tất cả</a>
+}

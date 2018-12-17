@@ -1,0 +1,15 @@
+﻿@model IEnumerable<CucDiSanService.Models.Content>
+@if (Model != null && Model.Count() > 0)
+{
+    foreach (var item in Model)
+    {
+        <div class="item">
+            <a href="@item.note">
+                <img src="@item.contentThumbnail" alt="@item.contentName" />
+            </a>
+            <div class="title">
+                @item.contentName
+            </div>
+        </div>
+    }
+}

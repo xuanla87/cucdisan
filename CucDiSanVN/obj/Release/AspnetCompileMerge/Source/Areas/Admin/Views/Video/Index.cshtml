@@ -1,0 +1,159 @@
+﻿@{
+    ViewBag.Title = "Danh sách video";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    int ipage = 1;
+    if (ViewBag.pageIndex != null)
+    {
+        ipage = (int)ViewBag.pageIndex;
+    }
+    int totalPage = 1;
+    if (ViewBag.TotalPage != null)
+    {
+        totalPage = (int)ViewBag.TotalPage;
+    }
+    int firstPaging = ipage - 2;
+    int lastPaging = ipage + 2;
+    firstPaging = firstPaging <= 0 ? 1 : firstPaging;
+    lastPaging = lastPaging - firstPaging < 5 ? firstPaging + 4 : lastPaging;
+    lastPaging = lastPaging >= totalPage ? totalPage : lastPaging;
+    int count = (ipage - 1) * 20;
+}
+@model IEnumerable<CucDiSanService.Models.Video>
+<section class="content-header">
+    <h1 class="title text-uppercase text-bold">@ViewBag.Title</h1>
+    <ol class="breadcrumb">
+        <li><a href="/Admin"><i class="fa fa-dashboard"></i> Admin</a></li>
+        <li><a href="/Admin/Video">Quản lý video</a></li>
+        <li class="active">@ViewBag.Title</li>
+    </ol>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                @using (Html.BeginForm("Index", "Video", FormMethod.Get, new { @id = "video-list" }))
+                {
+                    <div class="box-body">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="text" name="searchKey" value="@ViewBag.SearchKey" class="form-control" placeholder="Nhập từ khóa.." />
+                                </div>
+                                <div class="col-md-2">
+
+                                    <input type="text" name="fromDate" value="@ViewBag.FromDate" class="form-control datepicker" placeholder="Từ ngày.." />
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" name="toDate" value="@ViewBag.ToDate" class="form-control datepicker" placeholder="Đến ngày.." />
+                                </div>
+                                <div class="col-md-2 text-right">
+                                    <button type="button" class="btn btn-danger search btn-flat"><i class="fa fa-filter"></i> Lọc</button>
+                                    <button type="button" class="btn btn-info btn-flat" onclick="refresh('Video')"><i class="fa fa-refresh"></i> Hủy</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <a class="btn btn-primary" title="Thêm mới" href="@Url.Action("Add")"><i class="fa fa-plus"></i> Thêm mới</a>
+                        </div>
+                        @if (Model != null)
+                        {
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Tiêu đề video</th>
+                                            <th>Ngày đăng</th>
+                                            <th>Chuyên mục</th>
+                                            <th>Ngôn ngữ</th>
+                                            <th>Thao tác</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            count++;
+                                        <tr>
+                                            <td>@count</td>
+                                            <td>@item.videoTitle</td>
+                                            <td>@item.createTime.ToString("dd/MM/yyyy")</td>
+                                            <td>@Html.Action("_getCategoryNameById", "Video", new { Id = item.parentId })</td>
+                                            @if (item.languageId == 1)
+                                            {
+                                                <td>Tiếng Việt</td>
+                                            }
+                                            else
+                                            {
+                                                <td>Tiếng Anh</td>
+                                            }
+                                            <td>
+                                                <a class="btn btn-info" href="@Url.Action("Update", new { id = item.videoId})" ti title="Cập nhật"><i class="fa fa-edit"></i></a>
+                                                <button type="button" data-id="@item.videoId" class="btn btn-danger trash-video" title="Hủy"><i class="fa fa-trash"></i></button>
+                                            </td>
+                                        </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+                        @if (totalPage > 1)
+                        {
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination">
+                                    @if (firstPaging > 1)
+                                    {
+                                        <li>
+                                            <a href="#" aria-label="Previous" onclick="moveToPreviousPage(@ipage, 'video-list')">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </li>
+                                    }
+                                    @for (int i = firstPaging; i <= lastPaging; i++)
+                                    {
+                                        var cssClass = "";
+                                        if (i == ipage)
+                                        {
+                                            cssClass = "active";
+                                        }
+                                        <li class="@cssClass"><a href="#" onclick="moveToPage(@i, 'video-list')">@i</a></li>
+                                    }
+                                    @if (lastPaging < totalPage)
+                                    {
+                                        <li>
+                                            <a href="#" aria-label="Next" onclick="moveToNextPage(@ipage, 'video-list')">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                            </nav>
+                        }
+                        <input type="hidden" name="pageIndex" value="@ipage" class="page-to-move" />
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+@section scriptAs {
+    <script>
+        $(document).ready(function () {
+            $(".trash-video").click(function () {
+                var x = $(this).attr("data-id");
+                $.ajax({
+                    type: "GET",
+                    url: "@Url.Action("Trash", "Video", new { area = "Admin" } )",
+                    data: { id: x },
+                    datatype: "json",
+                    success: function (data) {
+                        window.location.reload(true);
+                    }
+                });
+            });
+        });
+    </script>
+}
+
+
+
+

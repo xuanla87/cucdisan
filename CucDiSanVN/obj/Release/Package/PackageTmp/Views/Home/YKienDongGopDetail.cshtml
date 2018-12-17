@@ -1,0 +1,193 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    bool _end = (bool)ViewBag.End;
+    List<CucDiSanService.Models.FeedbackDetail> _list = (List<CucDiSanService.Models.FeedbackDetail>)ViewBag.ListFile;
+}
+@model CucDiSanVN.Models.DongGopYKienModel
+<div class="page-content">
+    <div class="text-black text-bold">
+        @Html.Raw(ViewBag.Title)
+    </div>
+    <div class="time">
+        Ngày bắt đầu lấy ý kiến: @ViewBag.StartDate Ngày hết hạn lấy ý kiến: @ViewBag.EndDate
+    </div>
+    <div>
+        @Html.Raw(ViewBag.Note)
+    </div>
+    <div>
+        @Html.Raw(ViewBag.Content)
+    </div>
+    @if (_list != null && _list.Count > 0)
+    {
+        <div class="file-du-thao">
+            File dự thảo góp ý
+            <div class="list-file">
+                @foreach (var item in _list)
+                {
+                    <div class="item"><a href="/FileAtachment/@item.fileAttachment">@Html.Action("getFileName", "Home", new { _linkFile = item.fileAttachment })</a></div>
+                }
+            </div>
+        </div>
+    }
+    @if (!_end)
+    {
+        using (Html.BeginForm("YKienDongGopDetail", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+            @Html.HiddenFor(x => x.feedbackId)
+            <div class="row gopy">
+                <div class="col-md-12">
+                    <h2 class="title-page">Đóng góp ý kiến</h2>
+                </div>
+                <div class="col-md-1">
+
+                </div>
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="col-md-4 control-label">Họ và tên (*)</label>
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(x => x.FullName, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.FullName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="col-md-4 control-label">Thư điện tử (*)</label>
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="col-md-4 control-label">Điện thoại</label>
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(x => x.Phone, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.Phone, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="col-md-4 control-label">Địa chỉ</label>
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(x => x.Add, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.Add, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="col-md-4 control-label">Tệp (*)</label>
+                            <div class="col-md-8">
+                                @Html.TextBox("FileAtachment", "", new { @class = "form-control", @type = "file" })
+                                @Html.ValidationMessageFor(x => x.FileAtachment, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="col-md-4 control-label">Nội dung</label>
+                            <div class="col-md-8">
+                                @Html.TextAreaFor(x => x.Body, new { @class = "form-control", @placeholder = "Nhập..", @rows = "5" })
+                                @Html.ValidationMessageFor(x => x.Body, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="col-md-4 control-label">Bảo mật</label>
+                            <div class="col-md-8">
+                                <img src="@Url.Action("GetCaptchaImage", "Home")" style="width:100%;border-width:0px;" />
+                                @Html.TextBoxFor(x => x.CaptCha, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.CaptCha, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="col-md-4 control-label"></label>
+                            <div class="col-md-8">
+                                <button type="submit" class="btn btn-primary">Gửi góp ý</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+@section scripts {
+    <script>
+        function sendYKien() {
+            var _fullName = $("#FullName").val();
+            var _email = $("#Email").val();
+            var _add = $("#Address").val();
+            var _phone = $("#Phone").val();
+            var _content = $("#Body").val();
+            var _captchar = $("#CodeCaptcha").val();
+            var _file = $("#FileAttachment").val();
+            if (_fullName.length < 1) {
+                $("#FullName").focus();
+                swal({
+                    title: "Bạn chưa nhập họ tên!",
+                    text: " ",
+                    icon: "warning",
+                    timer: 2000,
+                    showConfirmButton: false,
+                    showCancelButton: false,
+                    closeOnClickOutside: false,
+                    button: false
+                });
+                return;
+            }
+            if (_email.length < 1) {
+                $("#Email").focus();
+                swal({
+                    title: "Bạn chưa nhập thư điện tử!",
+                    text: " ",
+                    icon: "warning",
+                    timer: 2000,
+                    showConfirmButton: false,
+                    showCancelButton: false,
+                    closeOnClickOutside: false,
+                    button: false
+                });
+                return;
+            }
+            if (_file.length < 1) {
+                $("#FileAttachment").focus()
+                swal({
+                    title: "Bạn chưa chọn tệp!",
+                    text: " ",
+                    icon: "warning",
+                    timer: 2000,
+                    showConfirmButton: false,
+                    showCancelButton: false,
+                    closeOnClickOutside: false,
+                    button: false
+                });
+                return;
+            }
+            if (_captchar.length < 1) {
+                $("#CodeCaptcha").focus()
+                swal({
+                    title: "Bạn chưa nhập mã bảo mật!",
+                    text: " ",
+                    icon: "warning",
+                    timer: 2000,
+                    showConfirmButton: false,
+                    showCancelButton: false,
+                    closeOnClickOutside: false,
+                    button: false
+                });
+                return;
+            }
+        }
+    </script>
+}

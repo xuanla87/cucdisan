@@ -1,0 +1,120 @@
+﻿@{
+    ViewBag.Title = "Các dự thảo lấy ý kiến góp ý";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<CucDiSanService.Models.Feedback> _list = (List<CucDiSanService.Models.Feedback>)ViewBag.Entity;
+    int ipage = 1;
+    if (ViewBag.PageIndex != null)
+    {
+        ipage = (int)ViewBag.PageIndex;
+    }
+    int totalPage = 1;
+    if (ViewBag.TotalPage != null)
+    {
+        totalPage = (int)ViewBag.TotalPage;
+    }
+    int firstPaging = ipage - 2;
+    int lastPaging = ipage + 2;
+    firstPaging = firstPaging <= 0 ? 1 : firstPaging;
+    lastPaging = lastPaging - firstPaging < 5 ? firstPaging + 4 : lastPaging;
+    lastPaging = lastPaging >= totalPage ? totalPage : lastPaging;
+}
+@model IEnumerable<CucDiSanService.Models.Feedback>
+<div class="page-content">
+    @if (_list != null && _list.Count > 0)
+    {
+        <div class="row">
+            <div class="col-md-8">
+                <h2 class="title-page text-uppercase">Các dự thảo đang lấy ý kiến góp ý</h2>
+            </div>
+            <div class="col-md-4 text-right" style="line-height:34px;">
+                <b>kết quả: </b> <b class="text-danger">@ViewBag.TotalRecord</b>
+            </div>
+        </div>
+        <table class="table table-bordered ykien">
+            <tr>
+                <th valign="middle" class="text-center">Trích dẫn</th>
+                <th valign="middle" width="80" class="text-center">Ngày bắt đầu lấy ý kiến</th>
+                <th valign="middle" width="80" class="text-center">Ngày hết hạn lấy ý kiến</th>
+            </tr>
+            @foreach (var item in _list)
+            {
+                <tr>
+                    <td><a href="van-ban-du-thao-xin-y-kien-dong-gop-@item.feedbackId"> @Html.Raw(item.feedbackName)</a></td>
+                    <td>@item.startDate.ToString("dd/MM/yyyy")</td>
+                    <td>@item.endDate.ToString("dd/MM/yyyy")</td>
+                </tr>
+            }
+        </table>
+
+    }
+    @if (Model != null && Model.Count() > 0)
+    {
+        using (Html.BeginForm("YKienDongGop", "Home", FormMethod.Get))
+        {
+            <div class="row">
+                <div class="col-md-7">
+                    <h2 class="title-page text-uppercase">Các dự thảo đã hết hạn lấy ý kiến góp ý</h2>
+                </div>
+                <div class="col-md-5 text-right">
+                    <input type="text" placeholder="Tìm kiếm.." class="_searchKey" name="_searchKey" id="_searchKey" /><button type="submit">Tìm kiếm</button>
+                </div>
+            </div>
+            <table class="table table-bordered ykien">
+                <tr>
+                    <th valign="middle" class="text-center">Trích dẫn</th>
+                    <th valign="middle" width="80" class="text-center">Ngày bắt đầu lấy ý kiến</th>
+                    <th valign="middle" width="80" class="text-center">Ngày hết hạn lấy ý kiến</th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td><a href="van-ban-du-thao-xin-y-kien-dong-gop-@item.feedbackId"> @Html.Raw(item.feedbackName)</a></td>
+                        <td>@item.startDate.ToString("dd/MM/yyyy")</td>
+                        <td>@item.endDate.ToString("dd/MM/yyyy")</td>
+                    </tr>
+                }
+            </table>
+            <div class="row">
+                <div class="col-md-6" style="line-height:34px;">
+                    <b>Trang @ipage/@totalPage</b> | <b>kết quả: </b> <b class="text-danger">@ViewBag.TotalRecordEnd</b>
+                </div>
+                @if (totalPage > 1)
+                {
+                    <div class="col-md-6 text-right">
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination">
+                                @if (firstPaging > 1)
+                                {
+                                    <li>
+                                        <a href="van-ban-du-thao-xin-y-kien-dong-gop?_searchKey=@ViewBag.SearchKey&_pageIndex=@(firstPaging - 1)" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+                                }
+                                @for (int i = firstPaging; i <= lastPaging; i++)
+                                {
+                                    var cssClass = "";
+                                    if (i == ipage)
+                                    {
+                                        cssClass = "active";
+                                    }
+                                    <li class="@cssClass"><a href="van-ban-du-thao-xin-y-kien-dong-gop?_searchKey=@ViewBag.SearchKey&_pageIndex=@i">@i</a></li>
+                                }
+                                @if (lastPaging < totalPage)
+                                {
+                                    <li>
+                                        <a href="van-ban-du-thao-xin-y-kien-dong-gop?_searchKey=@ViewBag.SearchKey&_pageIndex=@(firstPaging + 1)" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        </nav>
+                    </div>
+
+                }
+                <input type="hidden" name="_pageIndex" value="@ipage" class="page-to-move" />
+            </div>
+        }
+    }
+</div>

@@ -1,0 +1,61 @@
+﻿@{
+    /**/
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model CucDiSanService.Models.Content
+@if (Model != null)
+{
+    <div class="breadcrumb">
+        @Html.Action("getBreadcrumb", "Home", new { pageUrl = Model.contentAlias })
+        @Model.contentName
+    </div>
+    if (Model.contentKey.Contains("csukienquaanh"))
+    {
+        <div class="page-content">
+            <div class="slider">
+                @Html.Action("getChildDisplay2", "Home", new { Id = Model.contentId, _url = Model.contentAlias })
+            </div>
+        </div>
+    }
+    else if (Model.contentKey== "cvanbanphapluat")
+    {
+        <div class="page-content">
+            @Html.Action("ViewVanBan", "Home", new { Id = Model.contentId, _url = Model.contentAlias })
+        </div>
+    }
+    else if (Model.contentKey.StartsWith("c"))
+    {
+        <div class="page-content">
+            @Html.Action("getChildDisplay", "Home", new { Id = Model.contentId, _url = Model.contentAlias })
+            @Html.Raw(Model.contentBody)
+        </div>
+    }
+    else if (Model.contentKey == "SuKienQuaAnh")
+    {
+        <div class="page-content">
+            <h1 class="page-title">@Model.contentName</h1>
+            <div class="date-post text-left">
+                <i class="fa fa-clock-o"></i> @Model.createTime.ToString("dd-MM-yyyy HH-mm")
+            </div>
+            <img src="@Model.contentThumbnail" alt="@Model.contentName" />
+        </div>
+    }
+    else
+    {
+        <div class="page-content">
+            <h1 class="page-title">@Model.contentName</h1>
+            <div class="date-post text-left">
+                <i class="fa fa-clock-o"></i> @Model.createTime.ToString("dd-MM-yyyy HH-mm")
+            </div>
+            @Html.Raw(Model.note)
+            @Html.Raw(Model.contentBody)
+        </div>
+    }
+}
+else
+{
+    @Html.Action("Index", "Home")
+}
+
+

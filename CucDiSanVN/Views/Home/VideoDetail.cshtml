@@ -1,0 +1,16 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model CucDiSanService.Models.Video
+<div class="breadcrumb">
+    @Html.Raw(ViewBag.Breadcrumb)
+</div>
+<div class="page-content">
+    <h1 class="page-title">@ViewBag.Title</h1>
+    @if (Model != null)
+    {
+        <video controls="controls" poster="@Model.thumbnail" width="100%">
+            <source src="/FileVideo/@Model.videoBody" />
+        </video>
+    }
+</div>

@@ -1,0 +1,51 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@model CucDiSanService.Models.CategoryVideo
+<section class="content-header">
+    <h1>
+        @ViewBag.Title
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/Admin"><i class="fa fa-dashboard"></i>Admin</a></li>
+        <li><a href="/Admin/Video/CategoryVideo">Danh sách chuyên mục</a></li>
+        <li class="active">@ViewBag.Title</li>
+    </ol>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                @using (Html.BeginForm())
+                {
+                    <div class="box-body">
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary("", new { @class = "text-danger" })
+                        @Html.HiddenFor(x => x.categoryId)
+                        @Html.HiddenFor(x => x.isSort)
+                        @Html.HiddenFor(x => x.isTrash)
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(x => x.categoryName, new { @class = "control-lable" })
+                                    @Html.TextBoxFor(x => x.categoryName, new { @class = "form-control", @placeholder = "Nhập.." })
+                                    @Html.ValidationMessageFor(x => x.categoryName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(x => x.parentId, new { @class = "control-lable" })
+                                    @Html.DropDownListFor(x => x.parentId, null, "---Chọn danh mục---", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(x => x.parentId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Lưu dữ liệu</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>

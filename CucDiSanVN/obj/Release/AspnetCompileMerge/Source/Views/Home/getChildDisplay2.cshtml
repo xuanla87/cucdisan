@@ -1,0 +1,34 @@
+﻿
+@model IEnumerable<CucDiSanService.Models.Content>
+@{
+    int ipage = 1;
+    if (ViewBag.PageIndex != null)
+    {
+        ipage = (int)ViewBag.PageIndex;
+    }
+    int totalPage = 1;
+    if (ViewBag.TotalPage != null)
+    {
+        totalPage = (int)ViewBag.TotalPage;
+    }
+    int firstPaging = ipage - 2;
+    int lastPaging = ipage + 2;
+    firstPaging = firstPaging <= 0 ? 1 : firstPaging;
+    lastPaging = lastPaging - firstPaging < 5 ? firstPaging + 4 : lastPaging;
+    lastPaging = lastPaging >= totalPage ? totalPage : lastPaging;
+}
+@if (Model != null && Model.Count() > 0)
+{
+    foreach (var item in Model)
+    {
+        if (item.contentKey == "SuKienQuaAnh")
+        {
+            <div class="item">
+                <img class="thumb" src="@item.contentThumbnail" alt="@item.contentName">
+                <div class="title">@item.contentName</div>
+            </div>
+
+        }
+    }
+}
+

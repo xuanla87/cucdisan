@@ -1,0 +1,640 @@
+﻿body {
+    background: url(bg.jpg) repeat;
+}
+
+/* Set padding to keep content from hitting the edges */
+.main-body {
+    background: url(bg2.jpg) repeat;
+}
+
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 100%;
+}
+
+.banner {
+    position: relative;
+}
+
+    .banner img {
+        width: 100%;
+    }
+
+.left {
+}
+
+.main-nav {
+    background: rgba(255,234,212,0.3);
+}
+
+    .main-nav li {
+        border-bottom: 1px solid #b7250c;
+    }
+
+        .main-nav li:last-child {
+            border-bottom: none;
+        }
+
+        .main-nav li:hover {
+            background: transparent;
+        }
+
+            .main-nav li:hover > a {
+                background: transparent;
+            }
+
+        .main-nav li > a {
+            text-transform: uppercase;
+            color: #000;
+            font: 14px/20px Arial;
+            font-weight: 600;
+        }
+
+        .main-nav li.active a {
+            color: #b7250c;
+        }
+
+.box > .main-nav {
+    border-top: 2px solid #9a4912;
+}
+
+.box-title {
+    font: 14px/26px Arial;
+    font-weight: 600;
+    color: #fff;
+    background: #9a4912;
+    width: 80%;
+    text-transform: uppercase;
+    line-height: 35px;
+    border-top-right-radius: 100px;
+    padding-left: 15px;
+    box-sizing: content-box;
+    margin-top: 15px;
+}
+
+
+
+.main-page {
+    padding: 0px;
+}
+
+.breadcrumb {
+    padding-left: 0px;
+    margin-bottom: 0px;
+}
+
+    .breadcrumb, .breadcrumb a {
+        background: transparent;
+        color: #b7250c;
+    }
+
+.page-content {
+    padding: 15px;
+    background: rgba(255,234,212,0.3);
+    color:#000;
+    text-align:justify;
+}
+
+.page-title {
+    font-size: 18px;
+    margin: 0px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.page-content ul {
+    margin: 0px;
+}
+
+    .page-content ul li a {
+        color: #000;
+        font-weight: 600;
+    }
+
+    .page-content ul li:last-child {
+        margin-bottom: 15px;
+    }
+
+.page-content .item {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px dotted #b7250c;
+}
+
+    .page-content .item .title a {
+        font-weight: 600;
+        color: #000;
+        text-transform: uppercase;
+    }
+
+        .page-content .item .title a:hover {
+            text-decoration: none;
+        }
+
+    .page-content .item .note {
+        color: #808080;
+        font-size: 12px;
+    }
+
+.su-kien-qua-anh {
+    background: rgba(255,234,212,0.3);
+    min-height: 290px;
+    border-top-left-radius: 30px;
+}
+
+    .su-kien-qua-anh .title {
+        text-align: right;
+        padding: 8px 15px;
+        text-transform: uppercase;
+        font-weight: bold;
+        color: #91603f;
+    }
+
+.chuyen-muc-trang-chu {
+    background: rgba(255,234,212,0.3);
+}
+
+    .chuyen-muc-trang-chu .item {
+        margin-top: 15px;
+    }
+
+        .chuyen-muc-trang-chu .item .thumbnail {
+            border: none;
+        }
+
+        .chuyen-muc-trang-chu .item .text .title {
+            text-transform: uppercase;
+            font-weight: 600;
+            border-bottom: 2px solid #b7250c;
+        }
+
+        .chuyen-muc-trang-chu .item .text ul {
+            margin: 0px;
+            padding-left: 15px;
+        }
+
+        .chuyen-muc-trang-chu .item .text li {
+            line-height: 25px;
+        }
+
+            .chuyen-muc-trang-chu .item .text li a {
+                color: #000;
+            }
+
+        .chuyen-muc-trang-chu .item .read-more {
+            text-align: right;
+        }
+
+            .chuyen-muc-trang-chu .item .read-more a {
+                color: #b7250c;
+            }
+
+.anh-video .nav-tabs {
+    border: none;
+}
+
+    .anh-video .nav-tabs > li > a {
+        border: none;
+        color: #929497;
+    }
+
+.anh-video li a.image, .anh-video li a.image :hover, .anh-video li.active a.image {
+    padding-left: 30px;
+    padding-right: 30px;
+    border-radius: 0px;
+    border-top-right-radius: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    background: rgba(255,234,212,0.3);
+    z-index: 999;
+    color: #91603f;
+}
+
+.anh-video li a.video, .anh-video li a.video :hover, .anh-video li.active a.video {
+    padding-left: 45px;
+    padding-right: 30px;
+    border-radius: 0px;
+    border-top-right-radius: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    background: rgba(230,231,232,0.3);
+    margin-left: -35px;
+}
+
+.anh-video .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .anh-video .nav-tabs > li.active > a:focus {
+    border: none;
+}
+
+.anh-video .tab-content {
+    background: rgba(255,234,212,0.3);
+    padding: 15px;
+}
+
+.footer {
+    margin-top: 15px;
+    min-height: 120px;
+    border-top: 2px solid #b7250c;
+    padding: 15px;
+}
+
+.footer-nav {
+    margin-top: 15px;
+}
+
+    .footer-nav li {
+        display: inline-block;
+        color: #b7250c;
+    }
+
+        .footer-nav li a:hover {
+            background: none;
+        }
+
+        .footer-nav li a {
+            color: #b7250c;
+        }
+
+p {
+    margin: 0px;
+    padding: 0px;
+}
+
+#Video video {
+    max-width: 100%;
+}
+
+img {
+    max-width: 100%;
+}
+
+#BoxSuKien {
+    padding: 0px 15px 10px 15px;
+    max-height: 300px;
+    overflow: hidden;
+}
+
+    #BoxSuKien .item {
+        position: relative;
+        max-height: 300px;
+    }
+
+        #BoxSuKien .item .title {
+            position: absolute;
+            bottom: 0px;
+            background: rgba(0,0,0,0.4);
+            color: #fff;
+            text-align: left;
+            font-weight: 500;
+        }
+
+.bodySukien {
+    padding-bottom: 10px;
+}
+
+    .bodySukien .carousel-control.left, .bodySukien .carousel-control.right {
+        background: none;
+        display: none;
+    }
+
+    .bodySukien:hover .carousel-control.left, .bodySukien:hover .carousel-control.right {
+        display: block;
+    }
+
+.carousel .carousel-control.left, .carousel .carousel-control.right {
+    display: none;
+}
+
+.carousel:hover .carousel-control.left, .carousel:hover .carousel-control.right {
+    display: block;
+}
+
+.chuyen-muc-trang-chu .col-lg-4 {
+    padding-right: 0px;
+}
+
+    .chuyen-muc-trang-chu .col-lg-4 .thumbnail {
+        padding: 0px;
+    }
+
+#BoxHinhAnh {
+    max-height: 150px;
+    overflow: hidden;
+}
+
+.banner-right {
+    margin-top: 15px;
+}
+
+    .banner-right .item {
+        margin-bottom: 15px;
+    }
+
+#BoxBanner {
+    margin-top: 15px;
+}
+
+.carousel-control.right, .carousel-control.left {
+    background: none;
+}
+
+.carousel-control span {
+    display: none;
+}
+
+.box-news .nav-tabs {
+    margin-top: 5px;
+    border: none !important;
+    padding: 0px;
+}
+
+    .box-news .nav-tabs > li {
+        border-right: 1px solid #000 !important;
+        padding-right: 10px;
+        cursor: pointer !important;
+    }
+
+        .box-news .nav-tabs > li:last-child {
+            border-right: none !important;
+            padding-right: 0px !important;
+        }
+
+        .box-news .nav-tabs > li > a {
+            border: none !important;
+            color: #000 !important;
+            font-weight: 600 !important;
+            position: relative;
+            padding: 3px 10px 3px 3px;
+            text-transform: uppercase;
+        }
+
+            .box-news .nav-tabs > li > a:hover {
+                background: none;
+            }
+
+            .box-news .nav-tabs > li > a em {
+                color: #ff0000;
+                font-size: 9px;
+                font-style: normal;
+                position: absolute;
+                right: -10px;
+                top: 4px;
+            }
+
+        .box-news .nav-tabs > li.active > a, .box-news .nav-tabs > li.active > a:hover, .box-news .nav-tabs > li.active > a:focus {
+            border: none !important;
+            color: #000 !important;
+            font-weight: 600 !important;
+        }
+
+.box-news .tab-content .read-more {
+    text-align: right;
+}
+
+    .box-news .tab-content .read-more a {
+        color: #b7250c;
+    }
+
+.box-news .text ul {
+    padding: 0px;
+}
+
+    .box-news .text ul li {
+        line-height: 30px;
+        margin-left: 15px;
+    }
+
+        .box-news .text ul li a {
+            color: #000;
+        }
+
+.box-news .thumbnail {
+    margin-top: 5px;
+}
+
+.item .title {
+    position: relative;
+}
+
+    .item .title em {
+        color: #ff0000;
+        font-size: 9px;
+        font-style: normal;
+        position: absolute;
+        right: -10px;
+        top: 4px;
+    }
+
+.hit-counter .online b {
+    color: #ff0000;
+}
+
+.hit-counter .total b {
+    color: #1922ca;
+}
+
+.sub-menu {
+    display: none;
+}
+
+    .sub-menu li a {
+        font-size: 12px;
+    }
+
+.nav li:hover {
+    cursor: pointer;
+}
+
+    .nav li:hover > a {
+        color: #b7250c;
+    }
+
+    .nav li:hover > .sub-menu {
+        display: block;
+    }
+
+.sub-menu li {
+    border: none;
+}
+
+.date-page {
+    padding: 10px 0px;
+    text-align: right;
+}
+
+.language {
+    width: 32px;
+    height: auto;
+    position: absolute;
+    right: 5px;
+    top: 20%;
+    cursor: pointer;
+}
+
+    .language img {
+        width: 100%;
+        height: auto;
+    }
+
+.title {
+    float: left;
+    width: 100%;
+}
+
+.title2 {
+    float: left;
+    position: relative;
+}
+
+.item .title2 em {
+    color: #ff0000;
+    font-size: 9px;
+    font-style: normal;
+    position: absolute;
+    right: -20px;
+    top: 4px;
+}
+
+.date-post {
+    color: #808080;
+    font-style: italic;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ccc;
+}
+
+.title-page {
+    margin: 0px;
+    font-size: 13px;
+    line-height: 28px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.ykien tr th {
+    vertical-align: middle !important;
+}
+
+.ykien a {
+    color: #000;
+}
+
+    .ykien a:hover {
+    }
+
+._searchKey {
+    width: 130px;
+}
+
+.time {
+    color: #808284;
+    padding: 6px 0px;
+    margin: 5px 0px;
+}
+
+.file-du-thao {
+    margin-top: 15px;
+}
+
+.gopy {
+    margin-top: 15px;
+}
+
+li.hassub > ul {
+    padding-left: 5px;
+}
+
+ul.main-nav {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    position: relative;
+}
+
+    ul.main-nav li {
+    }
+
+        ul.main-nav li a {
+            position: relative;
+        }
+
+        ul.main-nav li li a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -2px;
+            bottom: 50%;
+            width: 0.75em;
+            border: 1px solid #b7250c;
+            border-top: 0 none transparent;
+            border-right: 0 none transparent;
+        }
+
+    ul.main-nav > li:last-child {
+        border-left: 1px solid transparent;
+    }
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    background: transparent;
+}
+
+.item a {
+    color: #000;
+    font-weight: 600;
+}
+
+a {
+    color: #000;
+}
+
+.item-video {
+    max-height: 120px;
+    overflow: hidden;
+}
+
+li li.hassub > a:after {
+    content: "\f13a";
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+    font: normal normal normal 14px/1 FontAwesome;
+    color: #b7250c;
+}
+
+li li.hassub:hover > a:after {
+    content: "\f138";
+}
+
+ul.sub-menu li ul {
+    position: absolute;
+    left: 100%;
+    top: 0px;
+    z-index: 9999;
+    width: 100%;
+    background: rgba(255,234,212,.8);
+    padding: 0px;
+}
+
+    ul.sub-menu li ul li {
+        border-bottom: 1px solid #b7250c;
+    }
+
+        ul.sub-menu li ul li a:before {
+            border: none;
+        }
+.vanban > thead > tr > th, .vanban > tbody > tr > th, .vanban > tfoot > tr > th, .vanban > thead > tr > td, .vanban > tbody > tr > td, .vanban > tfoot > tr > td {
+    border-color:#b7250c;
+}

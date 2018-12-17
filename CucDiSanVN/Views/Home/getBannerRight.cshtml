@@ -1,0 +1,22 @@
+﻿@model List<CucDiSanService.Models.Content>
+@if (Model != null && Model.Count() > 0)
+{
+    <div class="banner-right">
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            if (!string.IsNullOrEmpty(Model[i].note))
+            {
+                <div class="item">
+                    <a href="@Model[i].note"><img src="@Model[i].contentThumbnail" alt="@Model[i].contentName"></a>
+                </div>
+            }
+            else
+            {
+                <div class="item">
+                    <img src="@Model[i].contentThumbnail" alt="@Model[i].contentName">
+                </div>
+            }
+        }
+    </div>
+}
+

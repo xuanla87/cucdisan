@@ -1,0 +1,20 @@
+﻿@using CucDiSanService.Models
+@model IEnumerable<Content>
+@if (Model != null && Model.Count() > 0)
+{
+    <ul>
+        @foreach (var item in Model)
+        {
+            if (item.contentName.Length > 45)
+            {
+                <li><a href="@item.contentAlias" title="@item.contentName">@item.contentName.Substring(0, 45) ..</a></li>
+            }
+            else
+            {
+                <li><a href="@item.contentAlias" title="@item.contentName">@item.contentName</a></li>
+            }
+        }
+    </ul>
+}
+
+

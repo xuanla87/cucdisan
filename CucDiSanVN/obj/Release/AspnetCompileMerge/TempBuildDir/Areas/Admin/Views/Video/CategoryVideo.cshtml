@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "Danh sach chuyên mục video";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    int count = 0;
+
+}
+@model IEnumerable<CucDiSanService.Models.CategoryVideo>
+<section class="content-header">
+    <h1 class="title text-uppercase text-bold">@ViewBag.Title</h1>
+    <ol class="breadcrumb">
+        <li><a href="/Admin"><i class="fa fa-dashboard"></i> Admin</a></li>
+        <li><a href="/Admin/Video">Quản lý video</a></li>
+        <li class="active">@ViewBag.Title</li>
+    </ol>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-body">
+                    <div class="form-group">
+                        <a class="btn btn-primary" title="Thêm mới" href="@Url.Action("DetailCategory")"><i class="fa fa-plus"></i> Thêm mới</a>
+                    </div>
+                    @if (Model != null)
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Tên chuyên mục</th>
+                                        <th>Chuyên mục cha</th>
+                                        <th>Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        count++;
+                                        <tr>
+                                            <td>@count</td>
+                                            <td>@item.categoryName</td>
+                                            <td>@Html.Action("_getCategoryNameById", "Video", new { Id = item.parentId })</td>
+                                            <td>
+                                                <a class="btn btn-info" href="@Url.Action("DetailCategory", new { Id = item.categoryId})" ti title="Cập nhật"><i class="fa fa-edit"></i></a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

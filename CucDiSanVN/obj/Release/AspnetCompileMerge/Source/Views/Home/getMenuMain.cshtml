@@ -1,0 +1,25 @@
+﻿@using CucDiSanService.Models
+@model List<Menu>
+@if (Model != null && Model.Count > 0)
+{
+<ul class="main-nav nav">
+    @foreach (var item in Model)
+    {
+        if (item.menuUrl == "/" || string.IsNullOrEmpty(item.menuUrl))
+        {
+            <li class="active">
+                <a href="@item.menuUrl">@item.menuName</a>
+                @Html.Action("getSubMenu", "Home", new { Id = item.menuId })
+            </li>
+        }
+        else
+        {
+            <li>
+                <a href="@item.menuUrl">@item.menuName</a>
+                @Html.Action("getSubMenu", "Home", new { Id = item.menuId })
+            </li>
+        }
+
+    }
+</ul>
+}

@@ -1,0 +1,90 @@
+﻿@{
+    ViewBag.Title = "Thêm mới video";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@model CucDiSanService.Models.Video
+<section class="content-header">
+    <h1>
+        @ViewBag.Title
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/Admin"><i class="fa fa-dashboard"></i>Admin</a></li>
+        <li><a href="/Admin/Video">Danh sách video</a></li>
+        <li class="active">@ViewBag.Title</li>
+    </ol>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                @using (Html.BeginForm("Add", "Video", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <div class="box-body">
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary("", new { @class = "text-danger" })
+                        @Html.HiddenFor(x => x.videoId)
+                        @Html.HiddenFor(x => x.createTime)
+                        @Html.HiddenFor(x => x.updateTime)
+                        @Html.HiddenFor(x => x.isTrash)
+                        @Html.HiddenFor(x => x.videoBody)
+                        @Html.HiddenFor(x => x.languageId)
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(x => x.videoTitle, new { @class = "control-lable" })
+                                    @Html.TextBoxFor(x => x.videoTitle, new { @class = "form-control", @placeholder = "Nhập.." })
+                                    @Html.ValidationMessageFor(x => x.videoTitle, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(x => x.thumbnail, new { @class = "control-lable" })
+                                    @Html.TextBoxFor(x => x.thumbnail, new { @class = "form-control", @placeholder = "Chọn ảnh.." })
+                                    @Html.ValidationMessageFor(x => x.thumbnail, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(x => x.parentId, new { @class = "control-lable" })
+                                    @Html.DropDownListFor(x => x.parentId, null, "---Chọn danh mục---", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(x => x.parentId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(x => x.videoDecription, new { @class = "control-lable" })
+                                    @Html.TextAreaFor(x => x.videoDecription, new { @class = "form-control", @placeholder = "Nhập..", @rows = "5" })
+                                    @Html.ValidationMessageFor(x => x.videoDecription, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(x => x.videoBody, new { @class = "control-lable" })
+                                    @Html.TextBox("fileVideo", "", new { @class = "form-control", @type = "file" })
+                                    @Html.ValidationMessageFor(x => x.videoBody, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                @Html.Label("Hiện thị ngoài trang chủ", new { @class = "control-lable" })
+                                @Html.CheckBoxFor(x => x.isHome)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Lưu dữ liệu</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+@section scriptAs {
+    <script>
+
+        $("input[type=file]").on('change', function () {
+            $("#videoBody").val(this.files[0].name);
+        });
+    </script>
+}
+
+
+
+

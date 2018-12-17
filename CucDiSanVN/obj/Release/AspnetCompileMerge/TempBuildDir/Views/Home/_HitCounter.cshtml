@@ -1,0 +1,38 @@
+﻿@{
+    int _languageId = (int)ViewBag.LaguageId;
+}
+@if (_languageId == 1)
+{
+    <div class="hit-counter">
+        <div class="online">
+            Đang truy cập : <b>@ViewBag.TotalOnline</b>
+        </div>
+        <div class="yesterday">
+            Hôm nay : <span>@ViewBag.TotalYesterday</span>
+        </div>
+        <div class="month">
+            Tháng hiện tại : <span>@ViewBag.TotalMonth</span>
+        </div>
+        <div class="total">
+            Tổng : <b>@ViewBag.Total</b>
+        </div>
+    </div>
+}
+else
+{
+    <div class="hit-counter">
+        <div class="online">
+            Online : <b>@ViewBag.TotalOnline</b>
+        </div>
+        <div class="yesterday">
+            Yesterday : <span>@ViewBag.TotalYesterday</span>
+        </div>
+        <div class="month">
+            Month : <span>@ViewBag.TotalMonth</span>
+        </div>
+        <div class="total">
+            Total : <b>@ViewBag.Total</b>
+        </div>
+    </div>
+}
+

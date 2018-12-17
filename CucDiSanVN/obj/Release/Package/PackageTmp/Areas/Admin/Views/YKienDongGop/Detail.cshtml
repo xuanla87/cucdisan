@@ -1,0 +1,99 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@model  CucDiSanService.Models.FeedbackModel
+<section class="content-header">
+    <h1>
+        @ViewBag.Title
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/Admin"><i class="fa fa-dashboard"></i>Admin</a></li>
+        <li><a href="/Admin/YKienDongGop">Danh sách ý kiến đóng góp</a></li>
+        <li class="active">@ViewBag.Title</li>
+    </ol>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                @using (Html.BeginForm())
+                {
+                    <div class="box-body">
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary("", new { @class = "text-danger" })
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    @Html.Label("Tiêu đề", new { @class = "control-lable" })
+                                    @Html.TextBoxFor(x => x.feedbackName, new { @class = "form-control", @placeholder = "Nhập tiêu đề.." })
+                                    @Html.ValidationMessageFor(x => x.feedbackName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    @Html.Label("Ghi chú", new { @class = "control-lable" })
+                                    @Html.TextAreaFor(x => x.feedbackNote, new { @class = "form-control", @placeholder = "Nhập ghi chú.." })
+                                    @Html.ValidationMessageFor(x => x.feedbackNote, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    @Html.Label("Nội dung", new { @class = "control-lable" })
+                                    @Html.TextAreaFor(x => x.feedbackBody, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(x => x.feedbackBody, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.Label("Ngày bắt đầu", new { @class = "control-lable" })
+                                        @Html.TextBoxFor(x => x.startDate, new { @class = "form-control datepicker", @placeholder = "Từ ngày.." })
+                                        @Html.ValidationMessageFor(x => x.startDate, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.Label("Ngày kết thúc", new { @class = "control-lable" })
+                                        @Html.TextBoxFor(x => x.endDate, new { @class = "form-control datepicker", @placeholder = "Từ ngày.." })
+                                        @Html.ValidationMessageFor(x => x.endDate, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+
+                                </div>
+                                <div class="col-md-2">
+
+                                </div>
+                                @Html.HiddenFor(x => x.feedbackId)
+                                @Html.HiddenFor(x => x.createTime)
+                                @Html.HiddenFor(x => x.updateTime)
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-offset-10 col-md-2 text-right">
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Lưu dữ liệu</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+@section scriptAs {
+    <script>
+        $(function () {
+            CKEDITOR.replace('feedbackBody', {
+                toolbar: [
+                    ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+                    ['Bold', 'Italic', 'Underline'],
+                    ['Image', 'Youtube', 'Link', 'Unlink'], ['Styles', 'Format', 'Font', 'FontSize'], ['TextColor', 'BGColor'], ['Maximize', 'Source']
+                ]
+
+            });
+        });
+    </script>
+}

@@ -625,5 +625,25 @@ namespace CucDiSanVN.Controllers
             ViewBag.ListItem = entitys.Contents.ToList();
             return PartialView(entity.Contents);
         }
+
+        public ActionResult Search(string SearchKey, int? _pageIndex)
+        {
+            try
+            {
+                _languageId = (int)Session["languageId"];
+            }
+            catch
+            {
+            }
+            int _totalRecord = 0;
+            _pageIndex = _pageIndex ?? 1;
+            var entity = _services.GetAll(SearchKey, null, null, null, null, _languageId, false, _pageIndex, 20);
+            _totalRecord = entity.TotalRecord;
+            ViewBag.TotalRecord = _totalRecord.ToString();
+            ViewBag.TotalPage = entity.Total;
+            ViewBag.PageIndex = _pageIndex ?? 1;
+            ViewBag.SearchKey = SearchKey;
+            return View(entity.Contents);
+        }
     }
 }

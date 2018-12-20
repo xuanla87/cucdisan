@@ -19,7 +19,7 @@ namespace CucDiSanVN
            );
             routes.MapRoute(
            name: "TIMKIEM",
-           url: "tim-kiem/",
+           url: "tim-kiem",
            defaults: new { controller = "Home", action = "Search", id = UrlParameter.Optional }
           );
             routes.MapRoute(

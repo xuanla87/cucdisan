@@ -635,15 +635,25 @@ namespace CucDiSanVN.Controllers
             catch
             {
             }
-            int _totalRecord = 0;
-            _pageIndex = _pageIndex ?? 1;
-            var entity = _services.GetAll(SearchKey, null, null, null, null, _languageId, false, _pageIndex, 20);
-            _totalRecord = entity.TotalRecord;
-            ViewBag.TotalRecord = _totalRecord.ToString();
-            ViewBag.TotalPage = entity.Total;
-            ViewBag.PageIndex = _pageIndex ?? 1;
-            ViewBag.SearchKey = SearchKey;
-            return View(entity.Contents);
+            if (!string.IsNullOrEmpty(SearchKey))
+            {
+                int _totalRecord = 0;
+                _pageIndex = _pageIndex ?? 1;
+                var entity = _services.GetAll(SearchKey, null, null, null, "News", _languageId, false, _pageIndex, 20);
+                _totalRecord = entity.TotalRecord;
+                ViewBag.TotalRecord = _totalRecord.ToString();
+                ViewBag.TotalPage = entity.Total;
+                ViewBag.PageIndex = _pageIndex ?? 1;
+                ViewBag.SearchKey = SearchKey;
+                return View(entity.Contents);
+            }
+            else
+            {
+                ViewBag.TotalRecord = 0;
+                ViewBag.TotalPage = 0;
+                ViewBag.PageIndex = 1;
+                return View();
+            }
         }
     }
 }

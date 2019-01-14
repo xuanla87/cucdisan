@@ -73,12 +73,13 @@
                         </div>
                         <div class="form-group">
                             <div class="row">
+                                <div class="col-md-2">
+                                    @Html.Label("Thứ tự", new { @class = "control-lable" })
+                                    @Html.TextBoxFor(x => x.No, new { @class = "form-control number", @placeholder = "Nhập số.." })
+                                </div>
                                 <div class="col-md-4">
                                     @Html.Label("Hiện thị ngoài trang chủ", new { @class = "control-lable" })
                                     @Html.CheckBoxFor(x => x.IsHome)
-                                </div>
-                                <div class="col-md-2">
-
                                 </div>
                                 <div class="col-md-2">
 

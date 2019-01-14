@@ -225,6 +225,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.isSort = entity.No.Value;
                     model.isTrash = false;
                     model.contentKey = "cnews";
+                    model.isSort = entity.No.GetValueOrDefault();
                     _services.Update(model);
                     _services.Save();
                 }
@@ -241,7 +242,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.note = entity.Note;
                     model.contentName = entity.Name;
                     model.createTime = DateTime.Now;
-                    model.isSort = entity.No.Value;
+                    model.isSort = entity.No.GetValueOrDefault();
                     model.isHome = entity.IsHome;
                     model.isTrash = false;
                     model.isView = 0;

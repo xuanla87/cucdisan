@@ -54,6 +54,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Content\ckfinder\bin\Debug\CKFinder.dll</HintPath>
     </Reference>
+    <Reference Include="CucDiSanService, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\CucDiSanService\bin\Release\CucDiSanService.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -1593,6 +1597,7 @@
     <Content Include="Views\Home\VideoAll.cshtml" />
     <Content Include="Views\Home\VideoDetail.cshtml" />
     <Content Include="Views\Home\ViewVanBan.cshtml" />
+    <Content Include="Views\Home\TraCuuVanBan.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

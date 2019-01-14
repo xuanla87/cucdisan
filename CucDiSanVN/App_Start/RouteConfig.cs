@@ -18,6 +18,11 @@ namespace CucDiSanVN
             defaults: new { controller = "Home", action = "VideoDetail", id = UrlParameter.Optional }
            );
             routes.MapRoute(
+          name: "TRACUUVANBAN",
+          url: "tra-cuu-van-ban",
+          defaults: new { controller = "Home", action = "TraCuuVanBan", id = UrlParameter.Optional }
+         );
+            routes.MapRoute(
            name: "TIMKIEM",
            url: "tim-kiem",
            defaults: new { controller = "Home", action = "Search", id = UrlParameter.Optional }

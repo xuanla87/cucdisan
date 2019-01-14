@@ -105,8 +105,8 @@ textarea {
 .page-content {
     padding: 15px;
     background: rgba(255,234,212,0.3);
-    color:#000;
-    text-align:justify;
+    color: #000;
+    text-align: justify;
 }
 
 .page-title {
@@ -194,6 +194,10 @@ textarea {
             .chuyen-muc-trang-chu .item .text li a {
                 color: #000;
             }
+
+                .chuyen-muc-trang-chu .item .text li a:hover {
+                    color: #b7250c;
+                }
 
         .chuyen-muc-trang-chu .item .read-more {
             text-align: right;
@@ -635,6 +639,7 @@ ul.sub-menu li ul {
         ul.sub-menu li ul li a:before {
             border: none;
         }
+
 .vanban > thead > tr > th, .vanban > tbody > tr > th, .vanban > tfoot > tr > th, .vanban > thead > tr > td, .vanban > tbody > tr > td, .vanban > tfoot > tr > td {
-    border-color:#b7250c;
+    border-color: #b7250c;
 }

@@ -106,6 +106,16 @@
                 }
             });
         }
+        function moveToPreviousPage(currentPage, formId) {
+            moveToPage(currentPage - 1, formId);
+        }
+        function moveToNextPage(currentPage, formId) {
+            moveToPage(currentPage + 1, formId);
+        }
+        function moveToPage(page, formId) {
+            $(".page-to-move").val(page);
+            $("#" + formId).submit();
+        }
     </script>
     @RenderSection("scripts", required: false)
 </body>

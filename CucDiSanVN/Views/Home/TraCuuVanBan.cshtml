@@ -19,33 +19,46 @@
 }
 @model IEnumerable<CucDiSanService.Models.Content>
 <div class="breadcrumb">
-   Tra cứu văn bản
+    Tra cứu văn bản
 </div>
 @using (Html.BeginForm("TraCuuVanBan", "Home", FormMethod.Get, new { @id = "tra-cuu-van-ban" }))
 {
-    <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-6">
-            <div class="form-group">
+
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-3">
                 <label>Tên văn bản</label>
+            </div>
+            <div class="col-md-9">
                 <input type="text" name="_Name" value="@ViewBag._Name" class="form-control" placeholder="Nhập từ khóa.." />
-            </div>
-            <div class="form-group">
-                <label>Số/Ký hiệu</label>
-                <input type="text" name="_No" value="@ViewBag._No" class="form-control" placeholder="Số/ký hiệu.." />
-            </div>
-            <div class="form-group">
-                <label>Ngày ban hành</label>
-                <input type="text" name="_NgayBanHanh" value="@ViewBag._NgayBanHanh" class="form-control datepicker" placeholder="Ngày ban hành.." />
-            </div>
-            <div class="form-group text-center">
-                <button type="submit" class="btn btn-primary search btn-flat"><i class="fa fa-search"></i> Tra cứu</button>
             </div>
         </div>
     </div>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-3">
+                <label>Số/Ký hiệu</label>
+            </div>
+            <div class="col-md-9">
+                <input type="text" name="_No" value="@ViewBag._No" class="form-control" placeholder="Số/ký hiệu.." />
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-3">
+                <label>Ngày ban hành</label>
+            </div>
+            <div class="col-md-9">
+                <input type="text" name="_NgayBanHanh" value="@ViewBag._NgayBanHanh" class="form-control datepicker" placeholder="Ngày ban hành.." />
+            </div>
+        </div>
+    </div>
+    <div class="form-group text-center">
+        <button type="submit" class="btn btn-primary search btn-flat"><i class="fa fa-search"></i> Tra cứu</button>
+    </div>
     if (Model != null && Model.Count() > 0)
     {
-
         <table class="table table-bordered vanban">
             <tr>
                 <th class="text-center" style="width:90px;">Số kí hiệu</th>

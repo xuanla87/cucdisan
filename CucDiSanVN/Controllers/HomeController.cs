@@ -9,6 +9,7 @@ using CucDiSanService.Services;
 using CucDiSanVN.Models;
 using System.Text;
 using System.IO;
+using System.Globalization;
 
 namespace CucDiSanVN.Controllers
 {
@@ -624,6 +625,32 @@ namespace CucDiSanVN.Controllers
             var entitys = _services.GetAll(null, null, null, Id, "cvanbanphapluat", _languageId, false, null, null);
             ViewBag.ListItem = entitys.Contents.ToList();
             return PartialView(entity.Contents);
+        }
+        public ActionResult TraCuuVanBan(string _Name, string _No, string _NgayBanHanh, int? _pageIndex)
+        {
+            try
+            {
+                _languageId = (int)Session["languageId"];
+            }
+            catch
+            {
+            }
+            DateTime? NgayBanHanh = null;
+            if (!string.IsNullOrEmpty(_NgayBanHanh))
+            {
+                NgayBanHanh = DateTime.ParseExact(_NgayBanHanh, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            }
+            int _totalRecord = 0;
+            _pageIndex = _pageIndex ?? 1;
+            var entity = _services.TraCuuVanBan(_Name, _No, NgayBanHanh, _languageId, _pageIndex, 10);
+            _totalRecord = entity.TotalRecord;
+            ViewBag.TotalRecord = _totalRecord.ToString();
+            ViewBag.TotalPage = entity.Total;
+            ViewBag.PageIndex = _pageIndex ?? 1;
+            ViewBag._Name = _Name;
+            ViewBag._No = _No;
+            ViewBag._NgayBanHanh = _NgayBanHanh;
+            return View(entity.Contents);
         }
     }
 }

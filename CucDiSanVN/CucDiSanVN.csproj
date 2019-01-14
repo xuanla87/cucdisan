@@ -56,7 +56,7 @@
     </Reference>
     <Reference Include="CucDiSanService, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\CucDiSanService\bin\Release\CucDiSanService.dll</HintPath>
+      <HintPath>bin\CucDiSanService.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
@@ -1597,7 +1597,7 @@
     <Content Include="Views\Home\VideoAll.cshtml" />
     <Content Include="Views\Home\VideoDetail.cshtml" />
     <Content Include="Views\Home\ViewVanBan.cshtml" />
-    <Content Include="Views\Home\TraCuuVanBan.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

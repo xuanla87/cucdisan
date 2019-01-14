@@ -625,24 +625,5 @@ namespace CucDiSanVN.Controllers
             ViewBag.ListItem = entitys.Contents.ToList();
             return PartialView(entity.Contents);
         }
-
-        public ActionResult TraCuuVanBan(string _Name, string _No, DateTime? _NgayBanHanh, int? _pageIndex)
-        {
-            try
-            {
-                _languageId = (int)Session["languageId"];
-            }
-            catch
-            {
-            }
-            int _totalRecord = 0;
-            _pageIndex = _pageIndex ?? 1;
-            var entity = _services.TraCuuVanBan(_Name, _No, _NgayBanHanh, _languageId, _pageIndex, 10);
-            _totalRecord = entity.TotalRecord;
-            ViewBag.TotalRecord = _totalRecord.ToString();
-            ViewBag.TotalPage = entity.Total;
-            ViewBag.PageIndex = _pageIndex ?? 1;
-            return View(entity.Contents);
-        }
     }
 }

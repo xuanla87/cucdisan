@@ -18,15 +18,26 @@ namespace CucDiSanVN
             defaults: new { controller = "Home", action = "VideoDetail", id = UrlParameter.Optional }
            );
             routes.MapRoute(
-          name: "TRACUUVANBAN",
-          url: "tra-cuu-van-ban",
-          defaults: new { controller = "Home", action = "TraCuuVanBan", id = UrlParameter.Optional }
-         );
-            routes.MapRoute(
            name: "TIMKIEM",
            url: "tim-kiem",
            defaults: new { controller = "Home", action = "Search", id = UrlParameter.Optional }
           );
+            routes.MapRoute(
+           name: "SUKIENQUAANH",
+           url: "su-kien-hinh-anh",
+           defaults: new { controller = "Home", action = "GetAllAnh", id = UrlParameter.Optional }
+          );
+            routes.MapRoute(
+          name: "LIENHE",
+          url: "lien-he",
+          defaults: new { controller = "Home", action = "LienHe", id = UrlParameter.Optional }
+         );
+            routes.MapRoute(
+          name: "TRACUUVANBAN",
+          url: "tra-cuu-van-ban",
+          defaults: new { controller = "Home", action = "TraCuuVanBan", id = UrlParameter.Optional }
+         );
+            
             routes.MapRoute(
           name: "VIDEOALL",
           url: "video-clip/{id}",

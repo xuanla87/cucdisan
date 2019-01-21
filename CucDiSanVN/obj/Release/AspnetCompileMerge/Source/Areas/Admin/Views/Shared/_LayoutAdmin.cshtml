@@ -240,6 +240,17 @@
                     </li>
                     <li class="treeview">
                         <a href="#">
+                            <i class="fa fa-comment"></i> <span>Liên hệ</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="@Url.Action("Index","LienHe")"><i class="fa fa-circle-o"></i> Danh sách</a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#">
                             <i class="fa fa-file-video-o"></i> <span>Quản lý video</span>
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
@@ -250,6 +261,18 @@
                             <li><a href="@Url.Action("Add","Video")"><i class="fa fa-circle-o"></i> Thêm mới video</a></li>
                             <li><a href="@Url.Action("CategoryVideo","Video")"><i class="fa fa-circle-o"></i> Danh sách chuyên mục</a></li>
                             <li><a href="@Url.Action("DetailCategory","Video")"><i class="fa fa-circle-o"></i> Thêm mới chuyên mục</a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-link"></i> <span>Quản lý liên kết website</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="@Url.Action("Index","LienKet")"><i class="fa fa-circle-o"></i> Danh sách liên kết</a></li>
+                            <li><a href="@Url.Action("Detail","LienKet")"><i class="fa fa-circle-o"></i> Thêm mới</a></li>
                         </ul>
                     </li>
                     <li><a href="@Url.Action("Index","ConfigSystem")"><i class="fa fa-gears"></i> <span>Cấu hình</span></a></li>

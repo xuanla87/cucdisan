@@ -57,10 +57,10 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     MetaKeywords = x.contentKeywords,
                     MetaTitle = x.contentTitle,
                     Name = x.contentName,
-                    Note = x.no??x.note,
+                    Note = x.no ?? x.note,
                     ParentId = x.parentId,
                     ParentName = _services.GetNameById(x.parentId),
-                    CreateTime = x.updateTime.ToString("dd/MM/yyyy")
+                    CreateTime = x.ngayBanHanh
                 });
                 return View(model);
             }
@@ -279,7 +279,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     Id = model.contentId,
                     Alias = model.contentAlias,
                     BodyContent = model.contentBody,
-                    CreateTime = model.updateTime.ToString("dd/MM/yyyy"),
+                    CreateTime = model.ngayBanHanh,
                     Img = model.contentThumbnail,
                     LanguageId = model.languageId,
                     MetaDescription = model.contentDescription,
@@ -348,6 +348,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.note = entity.Note;
                     model.contentName = entity.Name;
                     model.createTime = DateTime.Now;
+                    model.ngayBanHanh = entity.CreateTime;
                     model.isSort = 0;
                     model.isTrash = false;
                     model.isView = 0;

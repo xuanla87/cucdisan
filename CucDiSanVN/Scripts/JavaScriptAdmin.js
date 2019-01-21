@@ -136,6 +136,46 @@ function trashFeedback(x) {
         }
     }
 }
+function trashLienKet(x) {
+    var check = confirm('Bạn có chắn chắn muốn xóa không?');
+    if (check) {
+        if (x > 0) {
+            $.ajax({
+                type: "GET",
+                url: "/Admin/LienKet/Trash",
+                data: { Id: x },
+                datatype: "json",
+                success: function (data) {
+                    if (data)
+                        window.location.reload(true);
+                }
+            });
+        }
+        else {
+            alert("Lỗi không thể xóa!");
+        }
+    }
+}
+function trashMenu(x) {
+    var check = confirm('Bạn có chắn chắn muốn xóa không?');
+    if (check) {
+        if (x > 0) {
+            $.ajax({
+                type: "GET",
+                url: "/Admin/Menu/Trash",
+                data: { Id: x },
+                datatype: "json",
+                success: function (data) {
+                    if (data)
+                        window.location.reload(true);
+                }
+            });
+        }
+        else {
+            alert("Lỗi không thể xóa!");
+        }
+    }
+}
 function ApprovalDetail(x) {
     if (x > 0) {
         $.ajax({

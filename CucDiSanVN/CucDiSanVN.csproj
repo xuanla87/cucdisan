@@ -54,10 +54,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Content\ckfinder\bin\Debug\CKFinder.dll</HintPath>
     </Reference>
-    <Reference Include="CucDiSanService, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\CucDiSanService.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -214,6 +210,8 @@
     <Compile Include="Areas\Admin\Controllers\DefaultController.cs" />
     <Compile Include="Areas\Admin\Controllers\DiSanVanHoaController.cs" />
     <Compile Include="Areas\Admin\Controllers\DuThaoVanBanPhapLuatController.cs" />
+    <Compile Include="Areas\Admin\Controllers\LienHeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\LienKetController.cs" />
     <Compile Include="Areas\Admin\Controllers\MenuController.cs" />
     <Compile Include="Areas\Admin\Controllers\NewsController.cs" />
     <Compile Include="Areas\Admin\Controllers\SliderController.cs" />
@@ -1432,6 +1430,9 @@
     <Content Include="Areas\Admin\Views\YKienDongGop\YKienGopY.cshtml" />
     <Content Include="Areas\Admin\Views\Video\CategoryVideo.cshtml" />
     <Content Include="Areas\Admin\Views\Video\DetailCategory.cshtml" />
+    <Content Include="Areas\Admin\Views\LienHe\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\LienKet\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\LienKet\Detail.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\ckeditor\styles.js" />
@@ -1598,6 +1599,10 @@
     <Content Include="Views\Home\VideoDetail.cshtml" />
     <Content Include="Views\Home\ViewVanBan.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
+    <Content Include="Views\Home\TraCuuVanBan.cshtml" />
+    <Content Include="Views\Home\LienHe.cshtml" />
+    <Content Include="Views\Home\LienKetWeb.cshtml" />
+    <Content Include="Views\Home\GetAllAnh.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1615,6 +1620,12 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\CucDiSanService\CucDiSanService.csproj">
+      <Project>{28244215-9218-49f9-8440-fd8123fc3a2f}</Project>
+      <Name>CucDiSanService</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

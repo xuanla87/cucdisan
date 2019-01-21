@@ -22,8 +22,10 @@ namespace CucDiSanVN.Controllers
         IVideoServices _videoServices;
         IFeedbackServices _feedbackServices;
         ICategoryVideoServices _categoryVideoServices;
+        IContactServices _contactServices;
+        ILienketWebServices _lienKetServices;
         int _languageId = 1;
-        public HomeController(ICategoryVideoServices categoryVideoServices, IFeedbackServices feedbackServices, IContentServices services, IMenuServices menuServices, IConfigSystemServices configSystemServices, IVideoServices videoServices, ILanguageServices languageService)
+        public HomeController(ICategoryVideoServices categoryVideoServices, IFeedbackServices feedbackServices, IContentServices services, IMenuServices menuServices, IConfigSystemServices configSystemServices, IVideoServices videoServices, ILanguageServices languageService, IContactServices contactServices, ILienketWebServices lienKetServices)
         {
             this._services = services;
             this._menuServices = menuServices;
@@ -32,6 +34,8 @@ namespace CucDiSanVN.Controllers
             this._languageService = languageService;
             this._feedbackServices = feedbackServices;
             this._categoryVideoServices = categoryVideoServices;
+            this._contactServices = contactServices;
+            this._lienKetServices = lienKetServices;
         }
         public ActionResult Index()
         {
@@ -78,7 +82,7 @@ namespace CucDiSanVN.Controllers
                 int.TryParse(_configSystemServices.GetValueByKey("MenuMain"), out Id);
             else
                 int.TryParse(_configSystemServices.GetValueByKey("MenuMainEn"), out Id);
-            List<Menu> eMenus = _menuServices.GetByParent(Id).OrderBy(x => x.isSort).ToList();
+            List<Menu> eMenus = _menuServices.GetByParent(Id).Where(x => x.isTrash == false).OrderBy(x => x.isSort).ToList();
             return PartialView(eMenus);
         }
 
@@ -101,7 +105,7 @@ namespace CucDiSanVN.Controllers
                 ViewBag.MTitle = entity.menuName;
             else
                 ViewBag.MTitle = "";
-            List<Menu> eMenus = _menuServices.GetByParent(Id).OrderBy(x => x.isSort).ToList();
+            List<Menu> eMenus = _menuServices.GetByParent(Id).Where(x => x.isTrash == false).OrderBy(x => x.isSort).ToList();
             return PartialView(eMenus);
         }
 
@@ -124,7 +128,7 @@ namespace CucDiSanVN.Controllers
                 ViewBag.MTitle = entity.menuName;
             else
                 ViewBag.MTitle = "";
-            List<Menu> eMenus = _menuServices.GetByParent(Id).OrderBy(x => x.isSort).ToList();
+            List<Menu> eMenus = _menuServices.GetByParent(Id).Where(x => x.isTrash == false).OrderBy(x => x.isSort).ToList();
             return PartialView(eMenus);
         }
 
@@ -626,6 +630,27 @@ namespace CucDiSanVN.Controllers
             ViewBag.ListItem = entitys.Contents.ToList();
             return PartialView(entity.Contents);
         }
+        public ActionResult Search(string SearchKey, int? _pageIndex)
+        {
+            try
+            {
+                _languageId = (int)Session["languageId"];
+            }
+            catch
+            {
+            }
+            int _totalRecord = 0;
+            _pageIndex = _pageIndex ?? 1;
+            var entity = new ContentView();
+            if (!string.IsNullOrEmpty(SearchKey))
+                entity = _services.GetAll(SearchKey, null, null, null, "News", _languageId, false, _pageIndex, 20);
+            _totalRecord = entity.TotalRecord;
+            ViewBag.TotalRecord = _totalRecord.ToString();
+            ViewBag.TotalPage = entity.Total;
+            ViewBag.PageIndex = _pageIndex ?? 1;
+            ViewBag.SearchKey = SearchKey;
+            return View(entity.Contents);
+        }
         public ActionResult TraCuuVanBan(string _Name, string _No, string _NgayBanHanh, int? _pageIndex)
         {
             try
@@ -651,6 +676,51 @@ namespace CucDiSanVN.Controllers
             ViewBag._No = _No;
             ViewBag._NgayBanHanh = _NgayBanHanh;
             return View(entity.Contents);
+        }
+
+        public ActionResult LienHe()
+        {
+            Session["CAPTCHA"] = GetRandomText();
+            return View();
+        }
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult LienHe(Contact entity, string txtCaptcha)
+        {
+            if (ModelState.IsValid)
+            {
+                string text = Session["CAPTCHA"].ToString();
+                if (txtCaptcha.ToLower() == text.ToLower())
+                {
+                    var model = new Contact();
+                    model.contactFullName = entity.contactFullName;
+                    model.contactTitle = entity.contactTitle;
+                    model.contactEmail = entity.contactEmail;
+                    model.contactBody = entity.contactBody;
+                    model.createTime = DateTime.Now;
+                    model.isTrash = false;
+                    _contactServices.Add(model);
+                    _contactServices.Save();
+                    return Redirect("/");
+                }
+                return View(entity);
+            }
+            return View(entity);
+        }
+
+        public ActionResult LienKetWeb()
+        {
+            var model = _lienKetServices.All(null, null, false, 1, 30);
+            return PartialView(model.LienKetWebs);
+        }
+
+        public ActionResult GetAllAnh(int? _pageIndex)
+        {
+            var entiys = _services.GetAll(null, null, null, null, "csukienquaanh", 1, false, _pageIndex, 12);
+            ViewBag.TotalRecord = entiys.TotalRecord;
+            ViewBag.TotalPage = entiys.Total;
+            ViewBag.PageIndex = _pageIndex ?? 1;
+            return View(entiys);
         }
     }
 }

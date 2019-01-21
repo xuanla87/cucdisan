@@ -44,13 +44,14 @@
                 }
 
                 <div class="row">
-                    <div class="left col-lg-3 col-md-3 col-xs-3 col-sm-12">
+                    <div class="left col-lg-3 col-md-3 col-xs-12 col-sm-12">
                         @Html.Action("pageLeft", "Home")
+                       
                     </div>
-                    <div class="main-page col-lg-6 col-md-6 col-xs-6 col-sm-12">
+                    <div id="main-page" class="main-page col-lg-6 col-md-6 col-xs-12 col-sm-12">
                         @RenderBody()
                     </div>
-                    <div class="left col-lg-3 col-md-3 col-xs-3 col-sm-12">
+                    <div class="left col-lg-3 col-md-3 col-xs-12 col-sm-12">
                         <div class="anh-video">
                             <ul class="nav nav-tabs">
                                 @if (_languageId == 1)
@@ -77,7 +78,7 @@
                 </div>
             </div>
             @Html.Action("getMenuFooter", "Home")
-            <div class="footer">
+            <div class="footer" id="footer">
                 <div class="row">
                     <div class="col-md-8">
                         @Html.Action("getFooterInfor", "Home")
@@ -116,6 +117,16 @@
             $(".page-to-move").val(page);
             $("#" + formId).submit();
         }
+        $(document).ready(function () {
+            $('html, body').animate({ scrollTop: $('#main-page').offset().top }, 'slow');
+        });
+        $("#lienket").change(function () {
+            var _link = this.value;
+            if (_link.length > 0) {
+                window.open(_link, '_blank');
+            }
+        });
+      
     </script>
     @RenderSection("scripts", required: false)
 </body>

@@ -92,21 +92,26 @@ textarea {
     padding: 0px;
 }
 
+    .main-page table {
+        width: 100% !important;
+    }
+
 .breadcrumb {
-    padding-left: 0px;
     margin-bottom: 0px;
 }
 
     .breadcrumb, .breadcrumb a {
         background: transparent;
         color: #b7250c;
+        text-transform: uppercase;
+        font-weight: 700;
     }
 
 .page-content {
     padding: 15px;
     background: rgba(255,234,212,0.3);
-    color:#000;
-    text-align:justify;
+    color: #000;
+    text-align: justify;
 }
 
 .page-title {
@@ -194,6 +199,10 @@ textarea {
             .chuyen-muc-trang-chu .item .text li a {
                 color: #000;
             }
+
+                .chuyen-muc-trang-chu .item .text li a:hover {
+                    color: #b7250c;
+                }
 
         .chuyen-muc-trang-chu .item .read-more {
             text-align: right;
@@ -476,12 +485,11 @@ img {
 }
 
 .language {
-    width: 32px;
     height: auto;
     position: absolute;
     right: 5px;
     top: 20%;
-    cursor: pointer;
+    font-weight: 500;
 }
 
     .language img {
@@ -635,6 +643,17 @@ ul.sub-menu li ul {
         ul.sub-menu li ul li a:before {
             border: none;
         }
+
 .vanban > thead > tr > th, .vanban > tbody > tr > th, .vanban > tfoot > tr > th, .vanban > thead > tr > td, .vanban > tbody > tr > td, .vanban > tfoot > tr > td {
-    border-color:#b7250c;
+    border-color: #b7250c;
+}
+
+.lien-ket .form-control {
+    border-radius: 0px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.form-control, .btn {
+    border-radius: 0px;
 }

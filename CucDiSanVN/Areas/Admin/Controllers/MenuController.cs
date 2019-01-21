@@ -179,5 +179,14 @@ namespace CucDiSanVN.Areas.Admin.Controllers
             ViewBag.ParentId = category.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
             return View(entity);
         }
+
+        public ActionResult Trash(int Id)
+        {
+            var model = _services.GetById(Id);
+            model.isTrash = true;
+            _services.Update(model);
+            _services.Save();
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
     }
 }

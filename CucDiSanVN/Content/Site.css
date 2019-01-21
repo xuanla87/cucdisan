@@ -92,14 +92,19 @@ textarea {
     padding: 0px;
 }
 
+    .main-page table {
+        width: 100% !important;
+    }
+
 .breadcrumb {
-    padding-left: 0px;
     margin-bottom: 0px;
 }
 
     .breadcrumb, .breadcrumb a {
         background: transparent;
         color: #b7250c;
+        text-transform: uppercase;
+        font-weight: 700;
     }
 
 .page-content {
@@ -480,12 +485,11 @@ img {
 }
 
 .language {
-    width: 32px;
     height: auto;
     position: absolute;
     right: 5px;
     top: 20%;
-    cursor: pointer;
+    font-weight: 500;
 }
 
     .language img {
@@ -642,4 +646,26 @@ ul.sub-menu li ul {
 
 .vanban > thead > tr > th, .vanban > tbody > tr > th, .vanban > tfoot > tr > th, .vanban > thead > tr > td, .vanban > tbody > tr > td, .vanban > tfoot > tr > td {
     border-color: #b7250c;
+}
+
+.lien-ket .form-control {
+    border-radius: 0px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.form-control, .btn {
+    border-radius: 0px;
+}
+
+.su-kien-qua-anh .thumbnail {
+    max-height: 100px;
+    overflow: hidden;
+}
+
+@media only screen and (max-width: 600px) {
+    .su-kien-hinh-anh .thumbnail {
+        max-height: inherit;
+        overflow: hidden;
+    }
 }

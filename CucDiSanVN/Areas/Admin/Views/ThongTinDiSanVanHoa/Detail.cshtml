@@ -88,7 +88,8 @@
                                     </div>
                                 </div>
                                 <div class="col-md-2">
-
+                                    @Html.Label("Thứ tự", new { @class = "control-lable" })
+                                    @Html.TextBoxFor(x => x.Sort, new { @class = "form-control number", @placeholder = "Nhập số.." })
                                 </div>
                                 <div class="col-md-2">
 
@@ -115,12 +116,7 @@
     <script>
         $(function () {
             CKEDITOR.replace('BodyContent', {
-                toolbar: [
-                    ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
-                    ['Bold', 'Italic', 'Underline'],
-                    ['Image', 'Youtube', 'Link', 'Unlink'], ['Styles', 'Format', 'Font', 'FontSize'], ['TextColor', 'BGColor'], ['Maximize', 'Source']
-                ]
-
+              
             });
             CKEDITOR.replace('Note', {
                 toolbar: [

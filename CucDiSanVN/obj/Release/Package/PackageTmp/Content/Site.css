@@ -657,3 +657,77 @@ ul.sub-menu li ul {
 .form-control, .btn {
     border-radius: 0px;
 }
+
+.su-kien-qua-anh .thumbnail {
+    max-height: 100px;
+    overflow: hidden;
+}
+
+#colRightM {
+    display: none;
+}
+
+#MaiMenuM {
+    display: none;
+}
+
+.navbar-inverse .navbar-toggle {
+    border-color: #fff;
+    border-radius: 0px;
+}
+
+.navbar-inverse {
+    background: transparent;
+    border-color: transparent;
+}
+
+    .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+        border-color: transparent;
+    }
+
+@media only screen and (max-width: 600px) {
+    .su-kien-hinh-anh .thumbnail {
+        max-height: inherit;
+        overflow: hidden;
+    }
+
+    #MaiMenuM {
+        display: block;
+    }
+
+    #main-page {
+        padding: 0px 15px;
+    }
+
+    .su-kien-qua-anh {
+        margin-left: -15px;
+        margin-right: -15px;
+    }
+
+    .chuyen-muc-trang-chu .col-lg-4 {
+        padding-right: 15px;
+    }
+
+    #BoxBanner {
+        padding: 0px 15px;
+    }
+
+    .anh-video {
+        margin-left: -15px;
+        margin-right: -15px;
+    }
+
+    #colRightM {
+        display: block;
+        float: left;
+        clear: both;
+    }
+
+        #colRightM .box {
+            padding: 0px 15px;
+        }
+
+    #colLeft {
+        display: none;
+    }
+}

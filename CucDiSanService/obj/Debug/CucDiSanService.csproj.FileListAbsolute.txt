@@ -1,0 +1,16 @@
+D:\CucDiSanVN\CucDiSanService\obj\Debug\CucDiSanService.csprojAssemblyReference.cache
+D:\CucDiSanVN\CucDiSanService\obj\Debug\CucDiSanService.csproj.CoreCompileInputs.cache
+D:\CucDiSanVN\CucDiSanService\bin\Debug\CucDiSanService.dll.config
+D:\CucDiSanVN\CucDiSanService\bin\Debug\CucDiSanService.dll
+D:\CucDiSanVN\CucDiSanService\bin\Debug\CucDiSanService.pdb
+D:\CucDiSanVN\CucDiSanService\bin\Debug\EntityFramework.dll
+D:\CucDiSanVN\CucDiSanService\bin\Debug\EntityFramework.SqlServer.dll
+D:\CucDiSanVN\CucDiSanService\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+D:\CucDiSanVN\CucDiSanService\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+D:\CucDiSanVN\CucDiSanService\bin\Debug\EntityFramework.xml
+D:\CucDiSanVN\CucDiSanService\bin\Debug\EntityFramework.SqlServer.xml
+D:\CucDiSanVN\CucDiSanService\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+D:\CucDiSanVN\CucDiSanService\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+D:\CucDiSanVN\CucDiSanService\obj\Debug\CucDiSanService.csproj.CopyComplete
+D:\CucDiSanVN\CucDiSanService\obj\Debug\CucDiSanService.dll
+D:\CucDiSanVN\CucDiSanService\obj\Debug\CucDiSanService.pdb

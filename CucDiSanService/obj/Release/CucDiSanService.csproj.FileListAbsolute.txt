@@ -1,0 +1,16 @@
+D:\CucDiSanVN\CucDiSanService\bin\Release\CucDiSanService.dll.config
+D:\CucDiSanVN\CucDiSanService\bin\Release\CucDiSanService.dll
+D:\CucDiSanVN\CucDiSanService\bin\Release\CucDiSanService.pdb
+D:\CucDiSanVN\CucDiSanService\bin\Release\EntityFramework.dll
+D:\CucDiSanVN\CucDiSanService\bin\Release\EntityFramework.SqlServer.dll
+D:\CucDiSanVN\CucDiSanService\bin\Release\Microsoft.AspNet.Identity.Core.dll
+D:\CucDiSanVN\CucDiSanService\bin\Release\Microsoft.AspNet.Identity.EntityFramework.dll
+D:\CucDiSanVN\CucDiSanService\bin\Release\EntityFramework.xml
+D:\CucDiSanVN\CucDiSanService\bin\Release\EntityFramework.SqlServer.xml
+D:\CucDiSanVN\CucDiSanService\bin\Release\Microsoft.AspNet.Identity.Core.xml
+D:\CucDiSanVN\CucDiSanService\bin\Release\Microsoft.AspNet.Identity.EntityFramework.xml
+D:\CucDiSanVN\CucDiSanService\obj\Release\CucDiSanService.csproj.CoreCompileInputs.cache
+D:\CucDiSanVN\CucDiSanService\obj\Release\CucDiSanService.csproj.CopyComplete
+D:\CucDiSanVN\CucDiSanService\obj\Release\CucDiSanService.dll
+D:\CucDiSanVN\CucDiSanService\obj\Release\CucDiSanService.pdb
+D:\CucDiSanVN\CucDiSanService\obj\Release\CucDiSanService.csprojAssemblyReference.cache

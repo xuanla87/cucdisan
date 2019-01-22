@@ -96,7 +96,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     MetaTitle = model.contentTitle,
                     Name = model.contentName,
                     Note = model.note,
-                    ParentId = model.parentId
+                    ParentId = model.parentId, Sort =model.isSort
                 };
                 ViewBag.Title = "Cập nhật sự kiện ảnh";
             }
@@ -137,6 +137,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                         model.updateTime = DateTime.ParseExact(entity.CreateTime, "dd/MM/yyyy", CultureInfo.InvariantCulture);
                     model.parentId = entity.ParentId;
                     model.note = entity.Note;
+                    model.isSort = entity.Sort;
                     model.contentName = entity.Name;
                     _services.Update(model);
                     _services.Save();
@@ -158,7 +159,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.note = entity.Note;
                     model.contentName = entity.Name;
                     model.createTime = DateTime.Now;
-                    model.isSort = 0;
+                    model.isSort = entity.Sort;
                     model.isTrash = false;
                     model.isView = 0;
                     model.languageId = entity.LanguageId;

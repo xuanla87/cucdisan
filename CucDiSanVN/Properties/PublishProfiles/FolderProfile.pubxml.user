@@ -235,7 +235,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/14/2019 19:29:24</publishTime>
     </File>
     <File Include="Areas/Admin/Views/AnPhamTaiLieu/Detail.cshtml">
-      <publishTime>01/14/2019 19:29:24</publishTime>
+      <publishTime>01/22/2019 21:40:58</publishTime>
     </File>
     <File Include="Areas/Admin/Views/AnPhamTaiLieu/DetailCategory.cshtml">
       <publishTime>01/14/2019 19:29:24</publishTime>
@@ -286,7 +286,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/14/2019 19:29:25</publishTime>
     </File>
     <File Include="Areas/Admin/Views/DiSanVanHoa/Detail.cshtml">
-      <publishTime>01/20/2019 11:06:40</publishTime>
+      <publishTime>01/22/2019 21:41:08</publishTime>
     </File>
     <File Include="Areas/Admin/Views/DiSanVanHoa/DetailCategory.cshtml">
       <publishTime>01/14/2019 19:29:25</publishTime>
@@ -304,7 +304,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/14/2019 19:29:25</publishTime>
     </File>
     <File Include="Areas/Admin/Views/DuThaoVanBanPhapLuat/Detail.cshtml">
-      <publishTime>01/14/2019 19:29:25</publishTime>
+      <publishTime>01/22/2019 21:41:17</publishTime>
     </File>
     <File Include="Areas/Admin/Views/DuThaoVanBanPhapLuat/DetailCategory.cshtml">
       <publishTime>01/14/2019 19:29:25</publishTime>
@@ -340,7 +340,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/14/2019 19:29:25</publishTime>
     </File>
     <File Include="Areas/Admin/Views/News/Detail.cshtml">
-      <publishTime>01/14/2019 19:29:25</publishTime>
+      <publishTime>01/22/2019 21:41:26</publishTime>
     </File>
     <File Include="Areas/Admin/Views/News/DetailCategory.cshtml">
       <publishTime>01/14/2019 19:29:25</publishTime>
@@ -388,7 +388,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/14/2019 19:29:25</publishTime>
     </File>
     <File Include="Areas/Admin/Views/ThongTinDiSanVanHoa/Detail.cshtml">
-      <publishTime>01/22/2019 18:19:17</publishTime>
+      <publishTime>01/22/2019 21:41:38</publishTime>
     </File>
     <File Include="Areas/Admin/Views/ThongTinDiSanVanHoa/DetailCategory.cshtml">
       <publishTime>01/14/2019 19:29:25</publishTime>
@@ -406,7 +406,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/14/2019 19:29:26</publishTime>
     </File>
     <File Include="Areas/Admin/Views/ThuTucHanhChinh/Detail.cshtml">
-      <publishTime>01/14/2019 19:29:26</publishTime>
+      <publishTime>01/22/2019 21:41:45</publishTime>
     </File>
     <File Include="Areas/Admin/Views/ThuTucHanhChinh/DetailCategory.cshtml">
       <publishTime>01/14/2019 19:29:26</publishTime>
@@ -424,7 +424,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/14/2019 19:29:26</publishTime>
     </File>
     <File Include="Areas/Admin/Views/VanBanPhapLuat/Detail.cshtml">
-      <publishTime>01/14/2019 19:29:26</publishTime>
+      <publishTime>01/22/2019 21:41:56</publishTime>
     </File>
     <File Include="Areas/Admin/Views/VanBanPhapLuat/DetailCategory.cshtml">
       <publishTime>01/14/2019 19:29:26</publishTime>
@@ -469,10 +469,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/08/2018 19:47:42</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>01/22/2019 18:52:07</publishTime>
+      <publishTime>01/22/2019 21:44:12</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>01/22/2019 18:52:06</publishTime>
+      <publishTime>01/22/2019 21:44:12</publishTime>
     </File>
     <File Include="bin/Autofac.dll">
       <publishTime>05/09/2018 11:57:54</publishTime>
@@ -487,19 +487,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/16/2018 17:31:36</publishTime>
     </File>
     <File Include="bin/CucDiSanService.dll">
-      <publishTime>01/22/2019 18:51:51</publishTime>
+      <publishTime>01/22/2019 21:43:56</publishTime>
     </File>
     <File Include="bin/CucDiSanService.dll.config">
       <publishTime>08/14/2018 21:01:05</publishTime>
     </File>
     <File Include="bin/CucDiSanService.pdb">
-      <publishTime>01/22/2019 18:51:51</publishTime>
+      <publishTime>01/22/2019 21:43:56</publishTime>
     </File>
     <File Include="bin/CucDiSanVN.dll">
-      <publishTime>01/22/2019 18:51:52</publishTime>
+      <publishTime>01/22/2019 21:43:57</publishTime>
     </File>
     <File Include="bin/CucDiSanVN.pdb">
-      <publishTime>01/22/2019 18:51:52</publishTime>
+      <publishTime>01/22/2019 21:43:57</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>10/23/2017 13:15:18</publishTime>
@@ -2569,7 +2569,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/11/2018 22:22:16</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>01/22/2019 18:50:23</publishTime>
+      <publishTime>01/22/2019 19:09:52</publishTime>
     </File>
     <File Include="Content/StyleSheetAdmin.css">
       <publishTime>12/14/2018 23:14:06</publishTime>
@@ -2800,7 +2800,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/08/2018 19:47:31</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>01/22/2019 18:52:01</publishTime>
+      <publishTime>01/22/2019 21:44:05</publishTime>
     </File>
     <File Include="Scripts/bootstrap-datepicker.js">
       <publishTime>09/16/2018 13:07:30</publishTime>

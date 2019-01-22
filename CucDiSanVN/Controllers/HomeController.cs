@@ -303,7 +303,7 @@ namespace CucDiSanVN.Controllers
             ViewBag.TotalPage = entity.Total;
             ViewBag.PageIndex = _pageIndex ?? 1;
             ViewBag.CurentUrl = _url;
-            return PartialView(entity.Contents);
+            return PartialView(entity.Contents.OrderBy(x => x.isSort));
         }
         public ActionResult getChildDisplay2(int Id, string _url, int? _pageIndex)
         {
@@ -322,7 +322,7 @@ namespace CucDiSanVN.Controllers
             ViewBag.TotalPage = entity.Total;
             ViewBag.PageIndex = _pageIndex ?? 1;
             ViewBag.CurentUrl = _url;
-            return PartialView(entity.Contents);
+            return PartialView(entity.Contents.OrderBy(x => x.isSort));
         }
 
         public ActionResult getVideoIsHome()
@@ -627,7 +627,7 @@ namespace CucDiSanVN.Controllers
             ViewBag.PageIndex = _pageIndex ?? 1;
             ViewBag.CurentUrl = _url;
             var entitys = _services.GetAll(null, null, null, Id, "cvanbanphapluat", _languageId, false, null, null);
-            ViewBag.ListItem = entitys.Contents.ToList();
+            ViewBag.ListItem = entitys.Contents.OrderBy(x => x.isSort).ToList();
             return PartialView(entity.Contents);
         }
         public ActionResult Search(string SearchKey, int? _pageIndex)

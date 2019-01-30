@@ -33,7 +33,6 @@ function moveToNextPage(currentPage, formId) {
     moveToPage(currentPage + 1, formId);
 }
 function moveToPage(page, formId) {
-    debugger;
     $(".page-to-move").val(page);
     $("#" + formId).submit();
 }
@@ -53,6 +52,20 @@ $("#Img").click(function () {
     var ckfiner = new CKFinder();
     ckfiner.selectActionFunction = function (fileUrl) {
         $("#Img").val(fileUrl);
+    };
+    ckfiner.popup();
+});
+$("#SiteBanner").click(function () {
+    var ckfiner = new CKFinder();
+    ckfiner.selectActionFunction = function (fileUrl) {
+        $("#SiteBanner").val(fileUrl);
+    };
+    ckfiner.popup();
+});
+$("#SiteBannerEn").click(function () {
+    var ckfiner = new CKFinder();
+    ckfiner.selectActionFunction = function (fileUrl) {
+        $("#SiteBannerEn").val(fileUrl);
     };
     ckfiner.popup();
 });

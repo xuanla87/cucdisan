@@ -722,5 +722,23 @@ namespace CucDiSanVN.Controllers
             ViewBag.PageIndex = _pageIndex ?? 1;
             return View(entiys);
         }
+
+        public ActionResult GetBannerMain()
+        {
+            string banner = "";
+            try
+            {
+                _languageId = (int)Session["languageId"];
+            }
+            catch
+            {
+            }
+            banner = _configSystemServices.GetValueByKey("SiteBanner");
+            if (!string.IsNullOrEmpty(banner))
+                ViewBag.BannerMain = "<img src=\"" + banner + "\" alt=\"banner\" />";
+            else
+                ViewBag.BannerMain = "<img src=\"../Content/banner.png\" alt=\"banner\" />";
+            return PartialView();
+        }
     }
 }

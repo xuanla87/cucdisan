@@ -268,7 +268,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/14/2019 19:29:24</publishTime>
     </File>
     <File Include="Areas/Admin/Views/ConfigSystem/Index.cshtml">
-      <publishTime>01/14/2019 19:29:24</publishTime>
+      <publishTime>01/23/2019 18:32:41</publishTime>
     </File>
     <File Include="Areas/Admin/Views/ConfigSystem/SetUpEnglish.cshtml">
       <publishTime>01/14/2019 19:29:24</publishTime>
@@ -361,7 +361,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/14/2019 19:29:25</publishTime>
     </File>
     <File Include="Areas/Admin/Views/SuKienAnh/Detail.cshtml">
-      <publishTime>01/14/2019 19:29:25</publishTime>
+      <publishTime>01/22/2019 21:52:18</publishTime>
     </File>
     <File Include="Areas/Admin/Views/SuKienAnh/DetailCategory.cshtml">
       <publishTime>01/14/2019 19:29:25</publishTime>
@@ -469,10 +469,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/08/2018 19:47:42</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>01/22/2019 21:44:12</publishTime>
+      <publishTime>01/23/2019 18:42:12</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>01/22/2019 21:44:12</publishTime>
+      <publishTime>01/23/2019 18:42:12</publishTime>
     </File>
     <File Include="bin/Autofac.dll">
       <publishTime>05/09/2018 11:57:54</publishTime>
@@ -496,10 +496,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/22/2019 21:43:56</publishTime>
     </File>
     <File Include="bin/CucDiSanVN.dll">
-      <publishTime>01/22/2019 21:43:57</publishTime>
+      <publishTime>01/23/2019 18:41:56</publishTime>
     </File>
     <File Include="bin/CucDiSanVN.pdb">
-      <publishTime>01/22/2019 21:43:57</publishTime>
+      <publishTime>01/23/2019 18:41:56</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>10/23/2017 13:15:18</publishTime>
@@ -2569,7 +2569,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/11/2018 22:22:16</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>01/22/2019 19:09:52</publishTime>
+      <publishTime>01/23/2019 18:31:14</publishTime>
     </File>
     <File Include="Content/StyleSheetAdmin.css">
       <publishTime>12/14/2018 23:14:06</publishTime>
@@ -2800,7 +2800,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/08/2018 19:47:31</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>01/22/2019 21:44:05</publishTime>
+      <publishTime>01/23/2019 18:42:06</publishTime>
     </File>
     <File Include="Scripts/bootstrap-datepicker.js">
       <publishTime>09/16/2018 13:07:30</publishTime>
@@ -3862,7 +3862,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/28/2018 22:25:43</publishTime>
     </File>
     <File Include="Scripts/JavaScriptAdmin.js">
-      <publishTime>01/20/2019 11:22:35</publishTime>
+      <publishTime>01/23/2019 18:34:39</publishTime>
     </File>
     <File Include="Scripts/jquery-3.3.1.js">
       <publishTime>08/08/2018 19:47:32</publishTime>
@@ -4218,6 +4218,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Home/getBannerLeft.cshtml">
       <publishTime>10/21/2018 13:21:43</publishTime>
     </File>
+    <File Include="Views/Home/GetBannerMain.cshtml">
+      <publishTime>01/23/2019 18:39:08</publishTime>
+    </File>
     <File Include="Views/Home/getBannerRight.cshtml">
       <publishTime>10/21/2018 13:12:20</publishTime>
     </File>
@@ -4333,7 +4336,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/08/2018 19:47:38</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>01/22/2019 18:41:39</publishTime>
+      <publishTime>01/23/2019 18:40:43</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
       <publishTime>08/08/2018 19:47:38</publishTime>

@@ -1,5 +1,6 @@
 ﻿body {
     background: url(bg.jpg) repeat;
+    font-size:13px !important;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -60,7 +61,7 @@ textarea {
         .main-nav li > a {
             text-transform: uppercase;
             color: #000;
-            font: 14px/20px Arial;
+            font: 13px/20px Arial;
             font-weight: 600;
         }
 
@@ -73,7 +74,7 @@ textarea {
 }
 
 .box-title {
-    font: 14px/26px Arial;
+    font: 13px/26px Arial;
     font-weight: 600;
     color: #fff;
     background: #9a4912;
@@ -306,10 +307,11 @@ img {
             position: absolute;
             bottom: 0px;
             background: rgba(0,0,0,0.4);
-            color: #fff;
+            color: #fff !important;
             text-align: left;
             font-weight: 500;
         }
+		
 
 .bodySukien {
     padding-bottom: 10px;
@@ -483,6 +485,8 @@ img {
 .date-page {
     padding: 10px 0px;
     text-align: right;
+    font-size:11px;
+    font-style:italic;
 }
 
 .language {
@@ -619,7 +623,7 @@ li li.hassub > a:after {
     position: absolute;
     right: 2px;
     bottom: 15px;
-    font: normal normal normal 14px/1 FontAwesome;
+    font: normal normal normal 13px/1 FontAwesome;
     color: #b7250c;
 }
 
@@ -646,7 +650,7 @@ ul.sub-menu li ul {
         }
 
 .vanban > thead > tr > th, .vanban > tbody > tr > th, .vanban > tfoot > tr > th, .vanban > thead > tr > td, .vanban > tbody > tr > td, .vanban > tfoot > tr > td {
-    border-color: #b7250c;
+    border-color: #313030;
 }
 
 .lien-ket .form-control {
@@ -667,7 +671,9 @@ ul.sub-menu li ul {
 #colRightM {
     display: none;
 }
-
+#MaiMenuM{
+    margin-bottom:0px;
+}
 #MaiMenuM {
     display: none;
 }
@@ -687,6 +693,10 @@ ul.sub-menu li ul {
     }
 
 @media only screen and (max-width: 600px) {
+    .container {
+        padding-left: 5px !important;
+        padding-right: 5px !important;
+    }
     .su-kien-hinh-anh .thumbnail {
         max-height: inherit;
         overflow: hidden;
@@ -732,4 +742,21 @@ ul.sub-menu li ul {
     #colLeft {
         display: none;
     }
+	.su-kien-qua-anh
+	{
+        display: none;
+    }
+	.hit-counter
+	{
+        display: none;
+    }
+}
+.hit-counter{
+	float: right;
+}
+.chuyen-muc-trang-chu .item .text ul {
+  	float: left;
+}
+.chuyen-muc-trang-chu .item .read-more{
+		float: left;
 }

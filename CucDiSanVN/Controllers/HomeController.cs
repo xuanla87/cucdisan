@@ -102,7 +102,7 @@ namespace CucDiSanVN.Controllers
                 int.TryParse(_configSystemServices.GetValueByKey("MenuLeft1En"), out Id);
             var entity = _menuServices.GetById(Id);
             if (entity != null)
-                ViewBag.MTitle = entity.menuName;
+                ViewBag.MTitle = "<a href=\"" + entity.menuUrl + "\">" + entity.menuName + "</a>";
             else
                 ViewBag.MTitle = "";
             List<Menu> eMenus = _menuServices.GetByParent(Id).Where(x => x.isTrash == false).OrderBy(x => x.isSort).ToList();
@@ -125,7 +125,7 @@ namespace CucDiSanVN.Controllers
                 int.TryParse(_configSystemServices.GetValueByKey("MenuLeft2En"), out Id);
             var entity = _menuServices.GetById(Id);
             if (entity != null)
-                ViewBag.MTitle = entity.menuName;
+                ViewBag.MTitle = "<a href=\"" + entity.menuUrl + "\">" + entity.menuName + "</a>";
             else
                 ViewBag.MTitle = "";
             List<Menu> eMenus = _menuServices.GetByParent(Id).Where(x => x.isTrash == false).OrderBy(x => x.isSort).ToList();
@@ -735,9 +735,9 @@ namespace CucDiSanVN.Controllers
             }
             banner = _configSystemServices.GetValueByKey("SiteBanner");
             if (!string.IsNullOrEmpty(banner))
-                ViewBag.BannerMain = "<img src=\"" + banner + "\" alt=\"banner\" />";
+                ViewBag.BannerMain = "<a href=\"/\"><img src=\"" + banner + "\" alt=\"banner\" /></a>";
             else
-                ViewBag.BannerMain = "<img src=\"../Content/banner.png\" alt=\"banner\" />";
+                ViewBag.BannerMain = "<a href=\"/\"><img src=\"../Content/banner.png\" alt=\"banner\" /></a>";
             return PartialView();
         }
     }

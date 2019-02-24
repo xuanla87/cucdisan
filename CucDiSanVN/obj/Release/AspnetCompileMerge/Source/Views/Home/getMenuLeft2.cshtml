@@ -4,7 +4,7 @@
 {
     <div class="box">
         <div class="box-title">
-            @ViewBag.MTitle
+            @Html.Raw(ViewBag.MTitle)
         </div>
         <ul class="main-nav nav">
             @foreach (var item in Model)

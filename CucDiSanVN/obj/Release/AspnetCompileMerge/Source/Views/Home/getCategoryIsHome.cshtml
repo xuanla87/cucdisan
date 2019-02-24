@@ -75,7 +75,7 @@
                     <div class="text">
                         <div class="title">
                             <div class="title2">
-                                @item.contentName <em>Mới</em>
+                                <a title="@item.contentName" href="@item.contentAlias">@item.contentName <em>Mới</em></a>
                             </div>
                         </div>
                         @Html.Action("getContentInCategoryHomeId", "Home", new { Id = item.contentId, Total = 5 })

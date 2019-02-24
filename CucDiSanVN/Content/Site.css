@@ -1,6 +1,6 @@
 ﻿body {
     background: url(bg.jpg) repeat;
-    font-size:13px !important;
+    font-size: 13px !important;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -73,7 +73,7 @@ textarea {
     border-top: 2px solid #9a4912;
 }
 
-.box-title {
+.box-title, .box-title a {
     font: 13px/26px Arial;
     font-weight: 600;
     color: #fff;
@@ -289,7 +289,7 @@ p {
 
 img {
     max-width: 100%;
-    height:auto !important;
+    height: auto !important;
 }
 
 #BoxSuKien {
@@ -311,7 +311,7 @@ img {
             text-align: left;
             font-weight: 500;
         }
-		
+
 
 .bodySukien {
     padding-bottom: 10px;
@@ -485,8 +485,8 @@ img {
 .date-page {
     padding: 10px 0px;
     text-align: right;
-    font-size:11px;
-    font-style:italic;
+    font-size: 11px;
+    font-style: italic;
 }
 
 .language {
@@ -511,6 +511,10 @@ img {
     float: left;
     position: relative;
 }
+
+    .title2 a:hover {
+        text-decoration: none;
+    }
 
 .item .title2 em {
     color: #ff0000;
@@ -606,7 +610,6 @@ ul.main-nav {
 
 .item a {
     color: #000;
-    font-weight: 600;
 }
 
 a {
@@ -671,9 +674,11 @@ ul.sub-menu li ul {
 #colRightM {
     display: none;
 }
-#MaiMenuM{
-    margin-bottom:0px;
+
+#MaiMenuM {
+    margin-bottom: 0px;
 }
+
 #MaiMenuM {
     display: none;
 }
@@ -697,6 +702,7 @@ ul.sub-menu li ul {
         padding-left: 5px !important;
         padding-right: 5px !important;
     }
+
     .su-kien-hinh-anh .thumbnail {
         max-height: inherit;
         overflow: hidden;
@@ -732,7 +738,7 @@ ul.sub-menu li ul {
         display: block;
         float: left;
         clear: both;
-		width:100%;
+        width: 100%;
     }
 
         #colRightM .box {
@@ -742,21 +748,25 @@ ul.sub-menu li ul {
     #colLeft {
         display: none;
     }
-	.su-kien-qua-anh
-	{
+
+    .su-kien-qua-anh {
         display: none;
     }
-	.hit-counter
-	{
+
+    .hit-counter {
         display: none;
     }
 }
-.hit-counter{
-	float: right;
+
+.hit-counter {
+    float: right;
 }
+
 .chuyen-muc-trang-chu .item .text ul {
-  	float: left;
+    float: left;
 }
-.chuyen-muc-trang-chu .item .read-more{
-		float: left;
+
+.chuyen-muc-trang-chu .item .read-more {
+    float: left;
+    width:100%;
 }

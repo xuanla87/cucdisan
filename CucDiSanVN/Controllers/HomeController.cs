@@ -280,7 +280,7 @@ namespace CucDiSanVN.Controllers
                 var model = _services.GetById(entity.parentId.Value);
                 if (model != null)
                 {
-                    ViewBag.PTitle = "<a href=\"" + model.contentAlias + "\">" + model.contentName + "</a> > ";
+                    ViewBag.PTitle = "<a href=\"" + model.contentAlias + "\">" + model.contentName + "</a>";
                 }
             }
             return PartialView();

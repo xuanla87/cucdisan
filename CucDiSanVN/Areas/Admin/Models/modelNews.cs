@@ -24,6 +24,6 @@ namespace CucDiSanVN.Areas.Admin.Models
         public string MetaDescription { get; set; }
         public string CreateTime { get; set; }
         public int Sort { get; set; }
-
+        public string TacGia { get; set; }
     }
 }

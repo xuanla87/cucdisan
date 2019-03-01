@@ -31,6 +31,7 @@
         public bool? isHome { get; set; }
         public bool? isNew { get; set; }
         public string ngayBanHanh { get; set; }
+        public string tacGia { get; set; }
     }
     [Table("Contact")]
     public partial class Contact

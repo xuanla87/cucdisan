@@ -87,15 +87,13 @@
                                             @Html.ValidationMessageFor(x => x.CreateTime, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
+                                    <div class="col-md-4">
+                                        @Html.Label("Tác giả", new { @class = "control-lable" })
+                                        @Html.TextBoxFor(x => x.TacGia, new { @class = "form-control", @placeholder = "Nhập tác giả.." })
+                                    </div>
                                     <div class="col-md-2">
                                         @Html.Label("Thứ tự", new { @class = "control-lable" })
                                         @Html.TextBoxFor(x => x.Sort, new { @class = "form-control number", @placeholder = "Nhập số.." })
-                                    </div>
-                                    <div class="col-md-2">
-
-                                    </div>
-                                    <div class="col-md-2">
-
                                     </div>
                                     @Html.HiddenFor(x => x.Alias)
                                     @Html.HiddenFor(x => x.Id)

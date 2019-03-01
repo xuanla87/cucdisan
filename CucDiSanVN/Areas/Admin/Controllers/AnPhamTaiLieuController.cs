@@ -284,7 +284,8 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     Name = model.contentName,
                     Note = model.note,
                     ParentId = model.parentId,
-                    Sort =model.isSort
+                    Sort =model.isSort,
+                    TacGia = model.tacGia
                 };
                 ViewBag.Title = "Cập nhật ấn phẩm tài liệu";
             }
@@ -326,6 +327,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.note = entity.Note;
                     model.contentName = entity.Name;
                     model.isSort = entity.Sort;
+                    model.tacGia = entity.TacGia;
                     _services.Update(model);
                     _services.Save();
                 }
@@ -349,6 +351,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.isSort = entity.Sort;
                     model.isTrash = false;
                     model.isView = 0;
+                    model.tacGia = entity.TacGia;
                     model.languageId = entity.LanguageId;
                     model.contentKey = "AnPhamTaiLieu";
                     _services.Add(model);

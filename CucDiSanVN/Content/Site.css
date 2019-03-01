@@ -712,6 +712,32 @@ ul.sub-menu li ul {
         display: block;
     }
 
+    .navbar {
+        min-height: 0px;
+    }
+
+    .navbar-toggle {
+        position: absolute;
+        padding: 9px 10px;
+        margin-top: 8px;
+        margin-right: 15px;
+        margin-bottom: 8px;
+        background-color: transparent;
+        background-image: none;
+        border: 1px solid #000;
+        border-radius: 4px;
+        right: 0px;
+        z-index: 999999;
+    }
+
+        .navbar-toggle .icon-bar {
+            display: block;
+            width: 22px;
+            height: 2px;
+            border-radius: 1px;
+            background: #000;
+        }
+
     #main-page {
         padding: 0px 15px;
     }
@@ -768,5 +794,5 @@ ul.sub-menu li ul {
 
 .chuyen-muc-trang-chu .item .read-more {
     float: left;
-    width:100%;
+    width: 100%;
 }

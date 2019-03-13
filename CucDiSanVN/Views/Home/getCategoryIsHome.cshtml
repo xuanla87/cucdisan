@@ -1,73 +1,154 @@
 ﻿@{
+    /**/
+
     List<Content> _list = (List<Content>)ViewBag.ListNew;
+    int count = 0;
 }
 @using CucDiSanService.Models
 @model IEnumerable<Content>
 @*@if (_list != null && _list.Count > 0)
-{
-    <div class="item">
-        <div class="row">
-            <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12 box-news">
-                <div class="thumbnail">
-                    <img alt="@_list[0].contentName" src="@_list[0].contentThumbnail" />
+    {
+        <div class="item">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12 box-news">
+                    <div class="thumbnail">
+                        <img alt="@_list[0].contentName" src="@_list[0].contentThumbnail" />
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-8 col-md-8 col-xs-12 col-sm-12 box-news">
-                <ul class="nav nav-tabs">
-                    @for (var i = 0; i < _list.Count; i++)
-                    {
-                        if (i == 0)
+                <div class="col-lg-8 col-md-8 col-xs-12 col-sm-12 box-news">
+                    <ul class="nav nav-tabs">
+                        @for (var i = 0; i < _list.Count; i++)
                         {
-                            <li class="active"><a data-toggle="tab" href="#_list@_list[i].contentId">@_list[i].contentName<em>Mới</em></a></li>
+                            if (i == 0)
+                            {
+                                <li class="active"><a data-toggle="tab" href="#_list@_list[i].contentId">@_list[i].contentName<em>Mới</em></a></li>
+                            }
+                            else if (i < 2)
+                            {
+                                <li><a data-toggle="tab" href="#_list@_list[i].contentId">@_list[i].contentName<em>Mới</em></a></li>
+                            }
                         }
-                        else if (i < 2)
+                    </ul>
+                    <div class="tab-content">
+                        @for (var j = 0; j < _list.Count; j++)
                         {
-                            <li><a data-toggle="tab" href="#_list@_list[i].contentId">@_list[i].contentName<em>Mới</em></a></li>
+                            if (j == 0)
+                            {
+                                <div id="_list@_list[j].contentId" class="tab-pane fade in active">
+                                    <div class="text">
+                                        @Html.Action("getContentInCategoryHomeId", "Home", new { Id = _list[j].contentId, Total = 5 })
+                                    </div>
+                                    <div class="read-more">
+                                        <a title="@_list[j].contentName" href="@_list[j].contentAlias">Xem tiếp >>>></a>
+                                    </div>
+                                </div>
+                            }
+                            else if (j < 3)
+                            {
+                                <div id="_list@_list[j].contentId" class="tab-pane fade">
+                                    <div class="text">
+                                        @Html.Action("getContentInCategoryHomeId", "Home", new { Id = _list[j].contentId, Total = 5 })
+                                    </div>
+                                    <div class="read-more">
+                                        <a title="@_list[j].contentName" href="@_list[j].contentAlias">Xem tiếp >>>></a>
+                                    </div>
+                                </div>
+                            }
                         }
-                    }
-                </ul>
-                <div class="tab-content">
-                    @for (var j = 0; j < _list.Count; j++)
-                    {
-                        if (j == 0)
-                        {
-                            <div id="_list@_list[j].contentId" class="tab-pane fade in active">
-                                <div class="text">
-                                    @Html.Action("getContentInCategoryHomeId", "Home", new { Id = _list[j].contentId, Total = 5 })
-                                </div>
-                                <div class="read-more">
-                                    <a title="@_list[j].contentName" href="@_list[j].contentAlias">Xem tiếp >>>></a>
-                                </div>
-                            </div>
-                        }
-                        else if (j < 3)
-                        {
-                            <div id="_list@_list[j].contentId" class="tab-pane fade">
-                                <div class="text">
-                                    @Html.Action("getContentInCategoryHomeId", "Home", new { Id = _list[j].contentId, Total = 5 })
-                                </div>
-                                <div class="read-more">
-                                    <a title="@_list[j].contentName" href="@_list[j].contentAlias">Xem tiếp >>>></a>
-                                </div>
-                            </div>
-                        }
-                    }
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-}*@
+    }*@
 @if (Model != null && Model.Count() > 0)
 {
     foreach (var item in Model)
+    {
+        count++;
+        if (count == 1)
+        {
+            <div class="item tin-mb">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
+                        <div class="thumbnail">
+                            @if (!string.IsNullOrEmpty(item.contentThumbnail))
+                            {
+                                <img alt="@item.contentName" src="@item.contentThumbnail" />
+                            }
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-xs-12 col-sm-12">
+                        <div class="text">
+                            <div class="title">
+                                <div class="title2">
+                                    <a title="@item.contentName" href="@item.contentAlias">@item.contentName <em>Mới</em></a>
+                                </div>
+                            </div>
+                            @Html.Action("getContentInCategoryHomeId", "Home", new { Id = item.contentId, Total = 5 })
+                        </div>
+                        <div class="read-more">
+                            <a title="@item.contentName" href="@item.contentAlias">Xem tiếp >>>></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="item">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
+                        <div class="thumbnail">
+                            @if (!string.IsNullOrEmpty(item.contentThumbnail))
+                            {
+                                <img alt="@item.contentName" src="@item.contentThumbnail" />
+                            }
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-xs-12 col-sm-12">
+                        <div class="text">
+                            <div class="title">
+                                <div class="title2">
+                                    <a title="@item.contentName" href="@item.contentAlias">@item.contentName <em>Mới</em></a>
+                                </div>
+                            </div>
+                            @Html.Action("getContentInCategoryHomeId", "Home", new { Id = item.contentId, Total = 5 })
+                        </div>
+                        <div class="read-more">
+                            <a title="@item.contentName" href="@item.contentAlias">Xem tiếp >>>></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+    }
+}
+
+/**/
+
+#line default
+#line hidden
+
+#line 16 "E:\cucdisan\CucDiSanVN\Views\Home\getCategoryIsHome.cshtml"
+/**/
+
+/**/
+
+#line default
+#line hidden
+}
+}
+}
+@*@if (_list.Count == 3)
     {
         <div class="item">
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
                     <div class="thumbnail">
-                        @if (!string.IsNullOrEmpty(item.contentThumbnail))
+                        @if (!string.IsNullOrEmpty(_list[2].contentThumbnail))
                         {
-                            <img alt="@item.contentName" src="@item.contentThumbnail" />
+                            <img alt="@_list[2].contentName" src="@_list[2].contentThumbnail" />
                         }
                     </div>
                 </div>
@@ -75,44 +156,15 @@
                     <div class="text">
                         <div class="title">
                             <div class="title2">
-                                <a title="@item.contentName" href="@item.contentAlias">@item.contentName <em>Mới</em></a>
+                                @_list[2].contentName <em>Mới</em>
                             </div>
                         </div>
-                        @Html.Action("getContentInCategoryHomeId", "Home", new { Id = item.contentId, Total = 5 })
+                        @Html.Action("getContentInCategoryHomeId", "Home", new { Id = _list[2].contentId, Total = 5 })
                     </div>
                     <div class="read-more">
-                        <a title="@item.contentName" href="@item.contentAlias">Xem tiếp >>>></a>
+                        <a title="@_list[2].contentName" href="@_list[2].contentAlias">Xem tiếp >>>></a>
                     </div>
                 </div>
             </div>
         </div>
-    }
-}
-@*@if (_list.Count == 3)
-{
-    <div class="item">
-        <div class="row">
-            <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
-                <div class="thumbnail">
-                    @if (!string.IsNullOrEmpty(_list[2].contentThumbnail))
-                    {
-                        <img alt="@_list[2].contentName" src="@_list[2].contentThumbnail" />
-                    }
-                </div>
-            </div>
-            <div class="col-lg-8 col-md-8 col-xs-12 col-sm-12">
-                <div class="text">
-                    <div class="title">
-                        <div class="title2">
-                            @_list[2].contentName <em>Mới</em>
-                        </div>
-                    </div>
-                    @Html.Action("getContentInCategoryHomeId", "Home", new { Id = _list[2].contentId, Total = 5 })
-                </div>
-                <div class="read-more">
-                    <a title="@_list[2].contentName" href="@_list[2].contentAlias">Xem tiếp >>>></a>
-                </div>
-            </div>
-        </div>
-    </div>
-}*@
+    }*@

@@ -1,4 +1,15 @@
-﻿<div class="su-kien-qua-anh">
+﻿@using (Html.BeginForm("Search", "Home"))
+{
+    <div class="form-group tim-kiem-mb">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="tìm kiếm..." name="SearchKey" id="SearchKey" />
+            <span class="input-group-btn">
+                <button type="submit" class="btn btn-danger"><i class="fa fa-search"></i></button>
+            </span>
+        </div>
+    </div>
+}
+<div class="su-kien-qua-anh">
     <div class="title"></div>
     @Html.Action("suKienQuaAnh", "Home")
 </div>

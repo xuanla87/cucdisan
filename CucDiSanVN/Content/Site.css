@@ -696,6 +696,7 @@ ul.sub-menu li ul {
     .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
         border-color: transparent;
     }
+
 .navbar-toggle {
     position: absolute;
     padding: 9px 10px;
@@ -745,8 +746,7 @@ ul.sub-menu li ul {
         margin-bottom: 8px;
         background-color: transparent;
         background-image: none;
-        border: 1px solid #000;
-        border-radius: 4px;
+        border: none;
         right: 0px;
         z-index: 999999;
     }
@@ -756,7 +756,7 @@ ul.sub-menu li ul {
             width: 22px;
             height: 2px;
             border-radius: 1px;
-            background: #000;
+            background: #376c86;
         }
 
     #main-page {
@@ -796,19 +796,30 @@ ul.sub-menu li ul {
         display: none;
     }
 
-    .su-kien-qua-anh {
-        display: none;
-    }
 
     .hit-counter {
         display: none;
     }
+
     .chuyen-muc-trang-chu .item {
         margin-top: 0px;
     }
+
     .date-page {
         padding: 5px 0px;
     }
+
+    .chuyen-muc-trang-chu .item:first-child .thumbnail {
+        display: none;
+    }
+
+    .tim-kiem-mb {
+        display: block;
+    }
+}
+
+.tim-kiem-mb {
+    display: block;
 }
 
 .hit-counter {

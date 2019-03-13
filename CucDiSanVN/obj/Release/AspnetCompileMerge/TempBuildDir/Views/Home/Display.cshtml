@@ -17,7 +17,7 @@
             </div>
         </div>
     }
-    else if (Model.contentKey== "cvanbanphapluat")
+    else if (Model.contentKey == "cvanbanphapluat")
     {
         <div class="page-content">
             @Html.Action("ViewVanBan", "Home", new { Id = Model.contentId, _url = Model.contentAlias })
@@ -49,6 +49,13 @@
             </div>
             @Html.Raw(Model.note)
             @Html.Raw(Model.contentBody)
+            <div class="text-right">
+                @if (string.IsNullOrEmpty(Model.tacGia))
+                {
+                    <div>Tác Giả</div>
+                }
+                @Html.Raw(Model.tacGia)
+            </div>
         </div>
     }
 }

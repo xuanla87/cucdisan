@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27703.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CucDiSanVN", "CucDiSanVN\CucDiSanVN.csproj", "{4BA5C67C-FB34-4336-8AD2-F9061D9CB2A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CucDiSanService", "..\CucDiSanService\CucDiSanService.csproj", "{28244215-9218-49F9-8440-FD8123FC3A2F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CucDiSanService", "CucDiSanService\CucDiSanService.csproj", "{28244215-9218-49F9-8440-FD8123FC3A2F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

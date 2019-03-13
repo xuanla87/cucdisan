@@ -1623,7 +1623,7 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\CucDiSanService\CucDiSanService.csproj">
+    <ProjectReference Include="..\CucDiSanService\CucDiSanService.csproj">
       <Project>{28244215-9218-49f9-8440-fd8123fc3a2f}</Project>
       <Name>CucDiSanService</Name>
     </ProjectReference>

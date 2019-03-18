@@ -44,15 +44,22 @@
                 @Html.Action("_getLanguage", "Home")
             </div>
             <div class="body-content">
+
                 @if (_languageId == 1)
                 {
                     <div class="date-page">
+                        <div class="tim-kiem-mb">
+                            <a href="/tim-kiem" class="btn btn-default" title="Tìm kiếm"><i class="fa fa-search"></i></a>
+                        </div>
                         Ngày @_date.Day tháng @_date.Month năm @_date.Year
                     </div>
                 }
                 else
                 {
                     <div class="date-page">
+                        <div class="tim-kiem-mb">
+                            <a href="/tim-kiem" class="btn btn-default" title="Search"><i class="fa fa-search"></i></a>
+                        </div>
                         Day @_date.Day Month @_date.Month Year @_date.Year
                     </div>
                 }

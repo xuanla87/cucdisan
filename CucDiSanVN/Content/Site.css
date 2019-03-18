@@ -807,6 +807,9 @@ ul.sub-menu li ul {
 
     .date-page {
         padding: 5px 0px;
+        float: left;
+        width: 100%;
+        line-height: 34px;
     }
 
     .chuyen-muc-trang-chu .tin-mb .thumbnail {
@@ -815,11 +818,12 @@ ul.sub-menu li ul {
 
     .tim-kiem-mb {
         display: block;
+        float:left;
     }
 }
 
 .tim-kiem-mb {
-    display: block;
+    display: none;
 }
 
 .hit-counter {

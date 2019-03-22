@@ -719,6 +719,10 @@ ul.sub-menu li ul {
         background: #000;
     }
 
+.tim-kiem-mb {
+    display: none;
+}
+
 @media only screen and (max-width: 600px) {
     .container {
         padding-left: 5px !important;
@@ -810,6 +814,7 @@ ul.sub-menu li ul {
         float: left;
         width: 100%;
         line-height: 34px;
+        text-align: left;
     }
 
     .chuyen-muc-trang-chu .tin-mb .thumbnail {
@@ -818,13 +823,16 @@ ul.sub-menu li ul {
 
     .tim-kiem-mb {
         display: block;
-        float:left;
+        float: right;
     }
+
+        .tim-kiem-mb a {
+            cursor: pointer;
+            font-size: 16px;
+        }
 }
 
-.tim-kiem-mb {
-    display: none;
-}
+
 
 .hit-counter {
     float: right;

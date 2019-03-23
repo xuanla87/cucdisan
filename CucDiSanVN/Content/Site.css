@@ -830,6 +830,19 @@ ul.sub-menu li ul {
             cursor: pointer;
             font-size: 16px;
         }
+
+    .su-kien-qua-anh {
+        height: 210px !important;
+        min-height: 210px !important;
+    }
+
+    #BoxSuKien {
+        max-height: 200px !important;
+    }
+
+        #BoxSuKien .item {
+            max-height: 200px !important;
+        }
 }
 
 

@@ -180,8 +180,9 @@ namespace CucDiSanVN.Controllers
             catch
             {
             }
-            var entity = _services.getSuKienQuaAnhIsHome(_languageId);
-            return PartialView(entity);
+            var entity = _services.GetAll(null, null, null, null, "SuKienQuaAnh", _languageId, false, null, null);
+            //var entity = _services.getSuKienQuaAnhIsHome(_languageId);
+            return PartialView(entity.Contents);
         }
 
         public ActionResult suKienQuaAnhItem(int Id)

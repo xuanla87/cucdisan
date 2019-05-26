@@ -186,7 +186,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                 }
 
                 entity.No = model.isSort;
-                ViewBag.Title = "Cập nhật chuyên mục ấn phẩm tài liệu";
+                ViewBag.Title = "Cập nhật chuyên mục văn bản pháp luật";
             }
             else
             {
@@ -194,7 +194,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                 {
                     LanguageId = _languageId
                 };
-                ViewBag.Title = "Thêm mới chuyên mục ấn phẩm tài liệu";
+                ViewBag.Title = "Thêm mới chuyên mục văn bản pháp luật";
             }
             IEnumerable<DropdownModel> category = _services.Dropdownlist(0, entity.Id, "cvanbanphapluat", _languageId);
             ViewBag.ParentId = category.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });

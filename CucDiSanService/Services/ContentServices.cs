@@ -22,6 +22,8 @@
 
         ContentView GetAll(string _keyWords, DateTime? _fromDate, DateTime? _toDate, int? _parentId, string _contentKey, int? _languageId, bool? _isTrash, int? _pageIndex, int? _pageSize);
 
+        IEnumerable<Content> GetOldById(int _id, int? _parentId, string _contentKey, int? _languageId, int? _pageSize);
+
         ContentView TraCuuVanBan(string _name, string _no, DateTime? _ngayBanHanh, int? _languageId, int? _pageIndex, int? _pageSize);
 
         Content GetById(int _id);
@@ -143,7 +145,33 @@
             }
             return new ContentView { Contents = enContent, Total = totalPage, TotalRecord = totalRecord };
         }
+        public IEnumerable<Content> GetOldById(int _id, int? _parentId, string _contentKey, int? _languageId, int? _pageSize)
+        {
+            var enContent = _Repository.GetAll();
+            enContent = enContent.Where(x => x.contentId < _id);
+            if (!string.IsNullOrEmpty(_contentKey))
+            {
+                enContent = enContent.Where(x => x.contentKey.ToLower() == _contentKey.ToLower().Trim());
+            }
+            if (_parentId.HasValue)
+            {
 
+                enContent = enContent.Where(x => x.parentId == _parentId);
+            }
+            if (_languageId.HasValue)
+            {
+                enContent = enContent.Where(x => x.languageId == _languageId.Value);
+            }
+            enContent = enContent.OrderByDescending(x => x.updateTime);
+            int totalRecord = enContent.Count();
+            var totalPage = 0;
+            if (_pageSize != null)
+            {
+                totalPage = (int)Math.Ceiling(1.0 * totalRecord / _pageSize.Value);
+                enContent = enContent.Take(_pageSize.Value);
+            }
+            return enContent;
+        }
         public Content Trash(int _id)
         {
             var enContent = _Repository.GetSingleById(_id);

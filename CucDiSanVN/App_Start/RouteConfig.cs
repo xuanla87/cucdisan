@@ -37,7 +37,7 @@ namespace CucDiSanVN
           url: "tra-cuu-van-ban",
           defaults: new { controller = "Home", action = "TraCuuVanBan", id = UrlParameter.Optional }
          );
-            
+
             routes.MapRoute(
           name: "VIDEOALL",
           url: "video-clip/{id}",

@@ -11,7 +11,7 @@ namespace CucDiSanService.Data
     using CucDiSanService.Models;
     public class CucDiSanDbContext : DbContext
     {
-        public CucDiSanDbContext() : base("CucDiSanConnection")
+        public CucDiSanDbContext() : base("DefaultConnection")
         {
             this.Configuration.LazyLoadingEnabled = false;
         }

@@ -52,7 +52,12 @@ namespace CucDiSanVN.Controllers
         {
             var entity = _services.GetByAlias(pageUrl);
             if (entity != null)
+            {
                 ViewBag.Title = entity.contentName;
+                entity.isView += 1;
+                _services.Update(entity);
+                _services.Save();
+            }
             else
                 ViewBag.Title = _configSystemServices.GetValueByKey("SiteTitle");
             return View(entity);
@@ -243,7 +248,7 @@ namespace CucDiSanVN.Controllers
                 int.TryParse(_configSystemServices.GetValueByKey("BoxHinhAnhEn"), out Id);
             var entity = _services.GetAll(null, null, null, Id, "SuKienQuaAnh", _languageId, false, null, null);
             var model = _services.GetById(Id);
-            ViewBag.Url = model.contentAlias;
+            ViewBag.Url = model.note;
             return PartialView(entity.Contents.ToList());
         }
 

@@ -14,10 +14,13 @@ namespace CucDiSanVN.Areas.Admin.Controllers
     {
         private IContentServices _services;
         private ILanguageServices _languageService;
-        public DuThaoVanBanPhapLuatController(IContentServices services, ILanguageServices languageService)
+        private IActionLogServices _serviceLog;
+
+        public DuThaoVanBanPhapLuatController(IContentServices services, ILanguageServices languageService, IActionLogServices serviceLog)
         {
             _services = services;
             _languageService = languageService;
+            _serviceLog = serviceLog;
         }
         public ActionResult Index(string _searchKey, int? _parentId, DateTime? _fromDate, DateTime? _toDate, int? _pageIndex)
         {
@@ -225,6 +228,8 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.isSort = entity.No.GetValueOrDefault();
                     _services.Update(model);
                     _services.Save();
+                    _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Cập nhật chuyên mục dự thảo văn bản pháp luật Id:" + model.contentId, userIp = "", userName = User.Identity.Name });
+                    _serviceLog.Save();
                 }
                 else
                 {
@@ -252,6 +257,8 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.contentAlias = model.contentAlias + "-" + model.contentId;
                     _services.Update(model);
                     _services.Save();
+                    _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Thêm mới chuyên mục dự thảo văn bản pháp luật Id:" + model.contentId, userIp = "", userName = User.Identity.Name });
+                    _serviceLog.Save();
                 }
                 return RedirectToAction("Category", new { _parentId = entity.ParentId });
             }
@@ -338,6 +345,8 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.tacGia = entity.TacGia;
                     _services.Update(model);
                     _services.Save();
+                    _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Cập nhật dự thảo văn bản pháp luật Id:" + model.contentId, userIp = "", userName = User.Identity.Name });
+                    _serviceLog.Save();
                 }
                 else
                 {
@@ -374,6 +383,8 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.contentAlias = model.contentAlias + "-" + model.contentId;
                     _services.Update(model);
                     _services.Save();
+                    _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Thêm mới dự thảo văn bản pháp luật Id:" + model.contentId, userIp = "", userName = User.Identity.Name });
+                    _serviceLog.Save();
                 }
                 return RedirectToAction("Index", new { _parentId = entity.ParentId });
             }

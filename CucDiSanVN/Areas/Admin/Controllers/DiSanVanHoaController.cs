@@ -14,10 +14,12 @@ namespace CucDiSanVN.Areas.Admin.Controllers
     {
         private IContentServices _services;
         private ILanguageServices _languageService;
-        public DiSanVanHoaController(IContentServices services, ILanguageServices languageService)
+        private IActionLogServices _serviceLog;
+        public DiSanVanHoaController(IContentServices services, ILanguageServices languageService, IActionLogServices serviceLog)
         {
             _services = services;
             _languageService = languageService;
+            _serviceLog = serviceLog;
         }
         public ActionResult Index(string _searchKey, int? _parentId, DateTime? _fromDate, DateTime? _toDate, int? _pageIndex)
         {
@@ -66,25 +68,20 @@ namespace CucDiSanVN.Areas.Admin.Controllers
             }
         }
 
-        public ActionResult Category(string _searchKey, int? _parentId, int? _pageIndex)
+        public ActionResult Category(int? _parentId)
         {
-            ContentView result;
             string cookieLanguage = "1";
             if (Request.Cookies["cookieLanguage"] != null)
             {
                 cookieLanguage = Request.Cookies["cookieLanguage"].Value.ToString();
             }
             int.TryParse(cookieLanguage, out int _languageId);
-            result = _services.GetAll(_searchKey, null, null, _parentId, "cdisanvanhoa", _languageId, false, _pageIndex, 20);
-            int totalPage = result?.Total ?? 0;
-            ViewBag.TotalPage = totalPage;
-            ViewBag.PageIndex = _pageIndex ?? 1;
-            ViewBag.SearchKey = string.IsNullOrWhiteSpace(_searchKey) ? string.Empty : _searchKey;
+            var result = _services.GetCategoryAdmin(_parentId, "cdisanvanhoa", _languageId, false);
             IEnumerable<DropdownModel> category = _services.Dropdownlist(0, null, "cdisanvanhoa", _languageId);
             ViewBag._parentId = category.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
-            if (result != null && result.Contents.Count() > 0)
+            if (result != null && result.Count() > 0)
             {
-                IEnumerable<modelCategories> model = result.Contents.Select(x => new modelCategories
+                IEnumerable<modelCategories> model = result.Select(x => new modelCategories
                 {
                     Alias = x.contentAlias,
                     Id = x.contentId,
@@ -100,6 +97,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     ParentName = _services.GetNameById(x.parentId)
                 });
                 return View(model);
+              
             }
             else
             {
@@ -226,6 +224,8 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.isSort = entity.No.GetValueOrDefault();
                     _services.Update(model);
                     _services.Save();
+                    _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Cập nhật chuyên mục di sản văn hóa Id:" + model.contentId, userIp = "", userName = User.Identity.Name });
+                    _serviceLog.Save();
                 }
                 else
                 {
@@ -253,6 +253,8 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.contentAlias = model.contentAlias + "-" + model.contentId;
                     _services.Update(model);
                     _services.Save();
+                    _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Thêm mới chuyên mục di sản văn hóa Id:" + model.contentId, userIp = "", userName = User.Identity.Name });
+                    _serviceLog.Save();
                 }
                 return RedirectToAction("Category", new { _parentId = entity.ParentId });
             }
@@ -339,6 +341,8 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.tacGia = entity.TacGia;
                     _services.Update(model);
                     _services.Save();
+                    _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Cập nhật di sản văn hóa Id:" + model.contentId, userIp = "", userName = User.Identity.Name });
+                    _serviceLog.Save();
                 }
                 else
                 {
@@ -375,6 +379,8 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.contentAlias = model.contentAlias + "-" + model.contentId;
                     _services.Update(model);
                     _services.Save();
+                    _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Thêm mới di sản văn hóa Id:" + model.contentId, userIp = "", userName = User.Identity.Name });
+                    _serviceLog.Save();
                 }
                 return RedirectToAction("Index", new { _parentId = entity.ParentId });
             }

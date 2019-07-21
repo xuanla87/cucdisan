@@ -859,3 +859,9 @@ ul.sub-menu li ul {
     float: left;
     width: 100%;
 }
+
+p, p span, p span span {
+    font-size: initial !important;
+    font-family: initial !important;
+    background: none !important;
+}

@@ -17,9 +17,11 @@ namespace CucDiSanVN.Areas.Admin.Controllers
     public class LienKetController : Controller
     {
         ILienketWebServices _services;
-        public LienKetController(ILienketWebServices services)
+        private IActionLogServices _serviceLog;
+        public LienKetController(ILienketWebServices services, IActionLogServices serviceLog)
         {
             this._services = services;
+            this._serviceLog = serviceLog;
         }
         public ActionResult Index(string _searchKey, int? _pageIndex)
         {
@@ -67,6 +69,8 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.isSort = entity.isSort;
                     _services.Update(model);
                     _services.Save();
+                    _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Cập nhật liên kết website Id:" + model.lienKetId, userIp = "", userName = User.Identity.Name });
+                    _serviceLog.Save();
                 }
                 else
                 {
@@ -78,6 +82,8 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.isTrash = false;
                     _services.Add(model);
                     _services.Save();
+                    _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Thêm mới liên kết website Id:" + model.lienKetId, userIp = "", userName = User.Identity.Name });
+                    _serviceLog.Save();
                 }
                 return RedirectToAction("Index");
             }
@@ -90,6 +96,8 @@ namespace CucDiSanVN.Areas.Admin.Controllers
             model.isTrash = true;
             _services.Update(model);
             _services.Save();
+            _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Xóa liên kết website Id:" + model.lienKetId, userIp = "", userName = User.Identity.Name });
+            _serviceLog.Save();
             return Json(true, JsonRequestBehavior.AllowGet);
         }
     }

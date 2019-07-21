@@ -18,10 +18,12 @@ namespace CucDiSanVN.Areas.Admin.Controllers
     {
         IMenuServices _services;
         ILanguageServices _languageService;
-        public MenuController(IMenuServices services, ILanguageServices languageService)
+        private IActionLogServices _serviceLog;
+        public MenuController(IMenuServices services, ILanguageServices languageService, IActionLogServices serviceLog)
         {
             this._services = services;
             this._languageService = languageService;
+            this._serviceLog = serviceLog;
         }
         public ActionResult Index(string _searchKey, int? _parentId, int? _pageIndex)
         {
@@ -158,6 +160,8 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.isTaget = entity.isTaget;
                     _services.Update(model);
                     _services.Save();
+                    _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Cập nhật danh mục Id:" + model.menuId, userIp = "", userName = User.Identity.Name });
+                    _serviceLog.Save();
                 }
                 else
                 {
@@ -172,6 +176,8 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.languageId = entity.languageId;
                     _services.Add(model);
                     _services.Save();
+                    _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Thêm mới danh mục Id:" + model.menuId, userIp = "", userName = User.Identity.Name });
+                    _serviceLog.Save();
                 }
                 return RedirectToAction("Index", new { _parentId = entity.parentId });
             }
@@ -186,6 +192,8 @@ namespace CucDiSanVN.Areas.Admin.Controllers
             model.isTrash = true;
             _services.Update(model);
             _services.Save();
+            _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Xóa danh mục Id:" + model.menuId, userIp = "", userName = User.Identity.Name });
+            _serviceLog.Save();
             return Json(true, JsonRequestBehavior.AllowGet);
         }
     }

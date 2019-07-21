@@ -17,12 +17,14 @@ namespace CucDiSanVN.Areas.Admin.Controllers
     public class AnPhamTaiLieuController : Controller
     {
         IContentServices _services;
+        IActionLogServices _serviceLog;
         ILanguageServices _languageService;
         int _languageId = 1;
-        public AnPhamTaiLieuController(IContentServices services, ILanguageServices languageService)
+        public AnPhamTaiLieuController(IContentServices services, ILanguageServices languageService, IActionLogServices serviceLog)
         {
             this._services = services;
             this._languageService = languageService;
+            this._serviceLog = serviceLog;
         }
 
         public ActionResult Index(string _searchKey, int? _parentId, DateTime? _fromDate, DateTime? _toDate, int? _pageIndex)
@@ -224,6 +226,8 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.contentName = entity.Name;
                     _services.Update(model);
                     _services.Save();
+                    _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Cập nhật chuyên mục Ấn phẩm tài liệu Id:" + model.contentId, userIp = "", userName = User.Identity.Name });
+                    _serviceLog.Save();
                 }
                 else
                 {
@@ -249,6 +253,8 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.contentAlias = model.contentAlias + "-" + model.contentId;
                     _services.Update(model);
                     _services.Save();
+                    _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Thêm mới chuyên mục Ấn phẩm tài liệu Id:" + model.contentId, userIp = "", userName = User.Identity.Name });
+                    _serviceLog.Save();
                 }
                 return RedirectToAction("Category", new { _parentId = entity.ParentId });
             }
@@ -284,7 +290,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     Name = model.contentName,
                     Note = model.note,
                     ParentId = model.parentId,
-                    Sort =model.isSort,
+                    Sort = model.isSort,
                     TacGia = model.tacGia
                 };
                 ViewBag.Title = "Cập nhật ấn phẩm tài liệu";
@@ -330,6 +336,8 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.tacGia = entity.TacGia;
                     _services.Update(model);
                     _services.Save();
+                    _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Cấp nhật Ấn phẩm tài liệu Id:" + model.contentId, userIp = "", userName = User.Identity.Name });
+                    _serviceLog.Save();
                 }
                 else
                 {
@@ -359,6 +367,8 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.contentAlias = model.contentAlias + "-" + model.contentId;
                     _services.Update(model);
                     _services.Save();
+                    _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Thêm mới Ấn phẩm tài liệu Id:" + model.contentId, userIp = "", userName = User.Identity.Name });
+                    _serviceLog.Save();
                 }
                 return RedirectToAction("Index", new { _parentId = entity.ParentId });
             }

@@ -20,11 +20,13 @@ namespace CucDiSanVN.Areas.Admin.Controllers
         IContentServices _services;
         IVideoServices _videoService;
         ICategoryVideoServices _categoryVideoService;
-        public VideoController(ICategoryVideoServices categoryVideoService, IContentServices services, IVideoServices videoService)
+        private IActionLogServices _serviceLog;
+        public VideoController(ICategoryVideoServices categoryVideoService, IContentServices services, IVideoServices videoService, IActionLogServices serviceLog)
         {
             this._services = services;
             this._videoService = videoService;
             this._categoryVideoService = categoryVideoService;
+            this._serviceLog = serviceLog;
         }
         public ActionResult Index(string searchKey, DateTime? fromDate, DateTime? toDate, int? pageIndex)
         {
@@ -67,7 +69,8 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                         model.videoBody = _fileName;
                         _videoService.Add(model);
                         _videoService.Save();
-                        return RedirectToAction("Index");
+                        _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Thêm mới video Id:" + model.videoId, userIp = "", userName = User.Identity.Name });
+                        _serviceLog.Save(); return RedirectToAction("Index");
                     }
                 }
                 catch (Exception ex)
@@ -109,6 +112,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                         model.updateTime = DateTime.Now;
                         _videoService.Update(model);
                         _videoService.Save();
+                        _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Cập nhật video Id:" + model.videoId, userIp = "", userName = User.Identity.Name });
                         return RedirectToAction("Index");
                     }
                     else
@@ -137,6 +141,8 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                 model.isTrash = true;
                 _videoService.Update(model);
                 _videoService.Save();
+                _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Xóa video Id:" + model.videoId, userIp = "", userName = User.Identity.Name });
+                _serviceLog.Save();
             }
             return Json(true, JsonRequestBehavior.AllowGet);
         }
@@ -172,8 +178,22 @@ namespace CucDiSanVN.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                _categoryVideoService.Add(model);
-                _categoryVideoService.Save();
+                if (model.categoryId > 0)
+                {
+                    _categoryVideoService.Update(model);
+                    _categoryVideoService.Save();
+                    _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Cập nhật chuyên mục viedeo Id:" + model.categoryId, userIp = "", userName = User.Identity.Name });
+                    _serviceLog.Save();
+                }
+                else
+                {
+                    _categoryVideoService.Add(model);
+                    _categoryVideoService.Save();
+                    _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Thêm mới chuyên mục video Id:" + model.categoryId, userIp = "", userName = User.Identity.Name });
+                    _serviceLog.Save();
+                }
+
+
                 return RedirectToAction("CategoryVideo");
             }
             var category = _videoService.Dropdownlist(0, model.parentId);

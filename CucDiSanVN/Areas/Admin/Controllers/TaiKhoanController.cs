@@ -9,6 +9,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using CucDiSanVN.Models;
+using CucDiSanService.Services;
+using CucDiSanService.Models;
 
 namespace CucDiSanVN.Areas.Admin.Controllers
 {
@@ -17,6 +19,11 @@ namespace CucDiSanVN.Areas.Admin.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private IActionLogServices _serviceLog;
+        public TaiKhoanController(IActionLogServices serviceLog)
+        {
+            _serviceLog = serviceLog;
+        }
         public ActionResult Index()
         {
             ApplicationDbContext db = new ApplicationDbContext();
@@ -39,6 +46,8 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Thêm mới người dùng:" + model.Email, userIp = "", userName = User.Identity.Name });
+                    _serviceLog.Save();
                     return RedirectToAction("Index");
                 }
                 AddErrors(result);
@@ -67,6 +76,8 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                 var result = await UserManager.ChangePasswordAsync(model.UserId, model.OldPassword, model.NewPassword);
                 if (result.Succeeded)
                 {
+                    _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Đổi mật khẩu người dùng Id:" + model.UserId, userIp = "", userName = User.Identity.Name });
+                    _serviceLog.Save();
                     return RedirectToAction("Index");
                 }
             }

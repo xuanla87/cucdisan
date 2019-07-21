@@ -17,9 +17,11 @@ namespace CucDiSanVN.Areas.Admin.Controllers
     public class YKienDongGopController : Controller
     {
         IFeedbackServices _services;
-        public YKienDongGopController(IFeedbackServices services)
+        private IActionLogServices _serviceLog;
+        public YKienDongGopController(IFeedbackServices services, IActionLogServices serviceLog)
         {
             this._services = services;
+            this._serviceLog = serviceLog;
         }
         public ActionResult Index(string searchKey, DateTime? toDate, DateTime? fromDate, DateTime? startDate, DateTime? endDate, int? _pageIndex)
         {
@@ -104,6 +106,8 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                         model.endDate = DateTime.ParseExact(entity.endDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
                     _services.Update(model);
                     _services.Save();
+                    _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Cập nhật ý kiến dóng góp Id:" + model.feedbackId, userIp = "", userName = User.Identity.Name });
+                    _serviceLog.Save();
                 }
                 else
                 {
@@ -125,6 +129,8 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.isTrash = false;
                     _services.Add(model);
                     _services.Save();
+                    _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Thêm mới ý kiến dóng góp Id:" + model.feedbackId, userIp = "", userName = User.Identity.Name });
+                    _serviceLog.Save();
                 }
                 return RedirectToAction("Index");
             }
@@ -139,6 +145,8 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                 entity.isTrash = true;
                 _services.Update(entity);
                 _services.Save();
+                _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Xóa ý kiến dóng góp Id:" + Id, userIp = "", userName = User.Identity.Name });
+                _serviceLog.Save();
             }
             return Json(true, JsonRequestBehavior.AllowGet);
         }
@@ -151,6 +159,8 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                 entity.isTrash = true;
                 _services.UpdateDetail(entity);
                 _services.Save();
+                _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Xóa chi tiết ý kiến dóng góp Id:" + Id, userIp = "", userName = User.Identity.Name });
+                _serviceLog.Save();
             }
             return Json(true, JsonRequestBehavior.AllowGet);
         }
@@ -174,6 +184,8 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                 entity.isApproval = true;
                 _services.UpdateDetail(entity);
                 _services.Save();
+                _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Duyệt ý kiến dóng góp Id:" + Id, userIp = "", userName = User.Identity.Name });
+                _serviceLog.Save();
             }
             return Json(true, JsonRequestBehavior.AllowGet);
         }
@@ -186,6 +198,8 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                 entity.isApproval = false;
                 _services.UpdateDetail(entity);
                 _services.Save();
+                _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Hủy duyệt ý kiến dóng góp Id:" + Id, userIp = "", userName = User.Identity.Name });
+                _serviceLog.Save();
             }
             return Json(true, JsonRequestBehavior.AllowGet);
         }

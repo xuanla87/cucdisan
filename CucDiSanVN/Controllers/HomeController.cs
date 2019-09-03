@@ -114,7 +114,52 @@ namespace CucDiSanVN.Controllers
             return PartialView(eMenus);
         }
 
+        public ActionResult getMenuLeft3()
+        {
+            try
+            {
+                _languageId = (int)Session["languageId"];
+            }
+            catch
+            {
+            }
+            int Id = 0;
+            if (_languageId == 1)
+                int.TryParse(_configSystemServices.GetValueByKey("MenuLeft1"), out Id);
+            else
+                int.TryParse(_configSystemServices.GetValueByKey("MenuLeft1En"), out Id);
+            var entity = _menuServices.GetById(Id);
+            if (entity != null)
+                ViewBag.MTitle = "<a href=\"" + entity.menuUrl + "\">" + entity.menuName + "</a>";
+            else
+                ViewBag.MTitle = "";
+            List<Menu> eMenus = _menuServices.GetByParent(Id).Where(x => x.isTrash == false).OrderBy(x => x.isSort).ToList();
+            return PartialView(eMenus);
+        }
         public ActionResult getMenuLeft2()
+        {
+            try
+            {
+                _languageId = (int)Session["languageId"];
+            }
+            catch
+            {
+            }
+            int Id = 0;
+            if (_languageId == 1)
+                int.TryParse(_configSystemServices.GetValueByKey("MenuLeft2"), out Id);
+            else
+                int.TryParse(_configSystemServices.GetValueByKey("MenuLeft2En"), out Id);
+            var entity = _menuServices.GetById(Id);
+            if (entity != null)
+                ViewBag.MTitle = "<a href=\"" + entity.menuUrl + "\">" + entity.menuName + "</a>";
+            else
+                ViewBag.MTitle = "";
+            List<Menu> eMenus = _menuServices.GetByParent(Id).Where(x => x.isTrash == false).OrderBy(x => x.isSort).ToList();
+            return PartialView(eMenus);
+        }
+
+        public ActionResult getMenuLeft4()
         {
             try
             {
@@ -144,6 +189,12 @@ namespace CucDiSanVN.Controllers
         }
 
         public ActionResult getSubMenu(int Id)
+        {
+            List<Menu> eMenus = _menuServices.GetByParent(Id).OrderBy(x => x.isSort).ToList();
+            return PartialView(eMenus);
+        }
+
+        public ActionResult getSubMenu2(int Id)
         {
             List<Menu> eMenus = _menuServices.GetByParent(Id).OrderBy(x => x.isSort).ToList();
             return PartialView(eMenus);
@@ -745,6 +796,24 @@ namespace CucDiSanVN.Controllers
             else
                 ViewBag.BannerMain = "<a href=\"/\"><img src=\"../Content/banner.png\" alt=\"banner\" /></a>";
             return PartialView();
+        }
+
+        public ActionResult SoDoWebsite()
+        {
+            try
+            {
+                _languageId = (int)Session["languageId"];
+            }
+            catch
+            {
+            }
+            int Id = 0;
+            if (_languageId == 1)
+                int.TryParse(_configSystemServices.GetValueByKey("MenuMain"), out Id);
+            else
+                int.TryParse(_configSystemServices.GetValueByKey("MenuMainEn"), out Id);
+            List<Menu> eMenus = _menuServices.GetByParent(Id).Where(x => x.isTrash == false).OrderBy(x => x.isSort).ToList();
+            return View(eMenus);
         }
     }
 }

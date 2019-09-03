@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "Sơ đồ website";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using CucDiSanService.Models
+@model List<Menu>
+<div class="so-do-website">
+    @if (Model != null && Model.Count > 0)
+    {
+        <ul>
+            @foreach (var item in Model)
+            {
+                <li>
+                    <a href="@item.menuUrl">@item.menuName</a>
+                    @Html.Action("getSubMenu2", "Home", new { Id = item.menuId })
+                </li>
+            }
+            @Html.Action("getMenuLeft3", "Home")
+            @Html.Action("getMenuLeft4", "Home")
+        </ul>
+    }
+</div>
+

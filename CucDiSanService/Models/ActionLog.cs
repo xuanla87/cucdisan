@@ -18,4 +18,11 @@
         public Byte actionLogType { get; set; }
         public string actionNote { get; set; }
     }
+
+    public class ActionLogView
+    {
+        public int Total { set; get; }
+        public int TotalRecord { set; get; }
+        public IEnumerable<ActionLog> ActionLogs { set; get; }
+    }
 }

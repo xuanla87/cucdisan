@@ -697,6 +697,32 @@ ul.sub-menu li ul {
         border-color: transparent;
     }
 
+.navbar-toggle {
+    position: absolute;
+    padding: 9px 10px;
+    margin-top: 8px;
+    margin-right: 15px;
+    margin-bottom: 8px;
+    background-color: transparent;
+    background-image: none;
+    border: 1px solid #000;
+    border-radius: 4px;
+    right: 0px;
+    z-index: 999999;
+}
+
+    .navbar-toggle .icon-bar {
+        display: block;
+        width: 22px;
+        height: 2px;
+        border-radius: 1px;
+        background: #000;
+    }
+
+.tim-kiem-mb {
+    display: none;
+}
+
 @media only screen and (max-width: 600px) {
     .container {
         padding-left: 5px !important;
@@ -724,8 +750,7 @@ ul.sub-menu li ul {
         margin-bottom: 8px;
         background-color: transparent;
         background-image: none;
-        border: 1px solid #000;
-        border-radius: 4px;
+        border: none;
         right: 0px;
         z-index: 999999;
     }
@@ -735,7 +760,7 @@ ul.sub-menu li ul {
             width: 22px;
             height: 2px;
             border-radius: 1px;
-            background: #000;
+            background: #376c86;
         }
 
     #main-page {
@@ -775,14 +800,52 @@ ul.sub-menu li ul {
         display: none;
     }
 
-    .su-kien-qua-anh {
-        display: none;
-    }
 
     .hit-counter {
         display: none;
     }
+
+    .chuyen-muc-trang-chu .item {
+        margin-top: 0px;
+    }
+
+    .date-page {
+        padding: 5px 0px;
+        float: left;
+        width: 100%;
+        line-height: 34px;
+        text-align: left;
+    }
+
+    .chuyen-muc-trang-chu .tin-mb .thumbnail {
+        display: none;
+    }
+
+    .tim-kiem-mb {
+        display: block;
+        float: right;
+    }
+
+        .tim-kiem-mb a {
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+    .su-kien-qua-anh {
+        height: 210px !important;
+        min-height: 210px !important;
+    }
+
+    #BoxSuKien {
+        max-height: 200px !important;
+    }
+
+        #BoxSuKien .item {
+            max-height: 200px !important;
+        }
 }
+
+
 
 .hit-counter {
     float: right;
@@ -796,3 +859,29 @@ ul.sub-menu li ul {
     float: left;
     width: 100%;
 }
+
+p, p span, p span span {
+    font-size: 13px !important;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    background: none !important;
+}
+
+.description {
+    margin-bottom: 10px;
+}
+
+.so-do-website ul li {
+    list-style: upper-roman;
+}
+
+    .so-do-website ul li li {
+        list-style: decimal;
+    }
+
+        .so-do-website ul li li li {
+            list-style: disc;
+        }
+
+            .so-do-website ul li li li li {
+                list-style: circle;
+            }

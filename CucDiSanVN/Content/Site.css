@@ -861,7 +861,27 @@ ul.sub-menu li ul {
 }
 
 p, p span, p span span {
-    font-size: initial !important;
-    font-family: initial !important;
+    font-size: 13px !important;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
     background: none !important;
 }
+
+.description {
+    margin-bottom: 10px;
+}
+
+.so-do-website ul li {
+    list-style: upper-roman;
+}
+
+    .so-do-website ul li li {
+        list-style: decimal;
+    }
+
+        .so-do-website ul li li li {
+            list-style: disc;
+        }
+
+            .so-do-website ul li li li li {
+                list-style: circle;
+            }

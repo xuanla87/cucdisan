@@ -24,8 +24,8 @@
 <section class="content-header">
     <h1 class="title text-uppercase text-bold">@ViewBag.Title</h1>
     <ol class="breadcrumb">
-        <li><a href="/"><i class="fa fa-dashboard"></i> Admin</a></li>
-        <li><a href="/News">Quản lý văn bản pháp luật</a></li>
+        <li><a href="/Admin"><i class="fa fa-dashboard"></i> Admin</a></li>
+        <li><a href="/Admin/VanBanPhapLuat">Quản lý văn bản pháp luật</a></li>
         <li class="active">@ViewBag.Title</li>
     </ol>
 </section>
@@ -87,7 +87,7 @@
                                             <td>@item.ParentName</td>
                                             <td>
                                                 <a title="Cập nhật" class="btn btn-warning btn-flat" href="@Url.Action("Detail", "VanBanPhapLuat", new { Id = item.Id })"><i class="fa fa-pencil"></i></a>
-                                                <button type="button" class="btn btn-danger btn-flat" title="Xóa" onclick="trash('@item.Id')"><i class="fa fa-trash"></i></button>
+                                                <button type="button" class="btn btn-danger btn-flat" title="Xóa" onclick="trash('@item.Id','VanBanPhapLuat')"><i class="fa fa-trash"></i></button>
                                             </td>
                                         </tr>
                                     }

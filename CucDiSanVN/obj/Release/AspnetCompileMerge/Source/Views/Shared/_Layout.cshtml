@@ -44,57 +44,67 @@
                 @Html.Action("_getLanguage", "Home")
             </div>
             <div class="body-content">
+
                 @if (_languageId == 1)
                 {
                     <div class="date-page">
+                        <div class="tim-kiem-mb">
+                            <a href="/tim-kiem" title="Tìm kiếm"><i class="fa fa-search"></i></a>
+                        </div>
                         Ngày @_date.Day tháng @_date.Month năm @_date.Year
                     </div>
                 }
                 else
                 {
                     <div class="date-page">
+                        <div class="tim-kiem-mb">
+                            <a href="/tim-kiem" class="btn btn-default" title="Search"><i class="fa fa-search"></i></a>
+                        </div>
                         Day @_date.Day Month @_date.Month Year @_date.Year
                     </div>
                 }
 
-                <div class="row">
-                    <div id="colLeft" class="left col-lg-3 col-md-3 col-xs-12 col-sm-12">
-                        @Html.Action("pageLeft", "Home")
-                    </div>
-                    <div id="main-page" class="main-page col-lg-6 col-md-6 col-xs-12 col-sm-12">
-                        @RenderBody()
-                    </div>
-                    <div class="left col-lg-3 col-md-3 col-xs-12 col-sm-12">
-                        <div class="anh-video">
-                            <ul class="nav nav-tabs">
-                                @if (_languageId == 1)
-                                {
-                                    <li class="active"><a class="image" data-toggle="tab" href="#images">Ảnh</a></li>
-                                }
-                                else
-                                {
-                                    <li class="active"><a class="image" data-toggle="tab" href="#images">Image</a></li>
-                                }
-                                <li><a class="video" data-toggle="tab" href="#videos">Video</a></li>
-                            </ul>
-                            <div class="tab-content">
-                                <div id="images" class="tab-pane fade in active">
-                                    @Html.Action("getAnh", "Home")
-                                </div>
-                                <div id="videos" class="tab-pane fade">
-                                    @Html.Action("getVideoIsHome", "Home")
-                                </div>
+            <div class="row">
+
+                <div id="colLeft" class="left col-lg-3 col-md-3 col-xs-12 col-sm-12">
+                    @Html.Action("pageLeft", "Home")
+                </div>
+                <div id="main-page" class="main-page col-lg-6 col-md-6 col-xs-12 col-sm-12">
+                    @RenderBody()
+                </div>
+                <div id="colRightM">
+                    @Html.Action("getMenuLeft1", "Home")
+                    @Html.Action("getMenuLeft2", "Home")
+                </div>
+                <div class="left col-lg-3 col-md-3 col-xs-12 col-sm-12">
+                    <div class="anh-video">
+                        <ul class="nav nav-tabs">
+                            @if (_languageId == 1)
+                            {
+                                <li class="active"><a class="image" data-toggle="tab" href="#images">Ảnh</a></li>
+                            }
+                            else
+                            {
+                                <li class="active"><a class="image" data-toggle="tab" href="#images">Image</a></li>
+                            }
+                            <li><a class="video" data-toggle="tab" href="#videos">Video</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="images" class="tab-pane fade in active">
+                                @Html.Action("getAnh", "Home")
+                            </div>
+                            <div id="videos" class="tab-pane fade">
+                                @Html.Action("getVideoIsHome", "Home")
                             </div>
                         </div>
-                        @Html.Action("getBannerRight", "Home")
                     </div>
-                    <div id="colRightM">
-                        @Html.Action("getMenuLeft1", "Home")
-                        @Html.Action("getMenuLeft2", "Home")
-                        @Html.Action("LienKetWeb", "Home")
-                        @Html.Action("getBannerLeft", "Home")
-                    </div>
+                    @Html.Action("getBannerRight", "Home")
                 </div>
+                <div id="colRightM">
+                    @Html.Action("LienKetWeb", "Home")
+                    @Html.Action("getBannerLeft", "Home")
+                </div>
+            </div>
             </div>
             @Html.Action("getMenuFooter", "Home")
             <div class="footer" id="footer">

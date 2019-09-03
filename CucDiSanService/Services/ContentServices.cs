@@ -22,6 +22,8 @@
 
         ContentView GetAll(string _keyWords, DateTime? _fromDate, DateTime? _toDate, int? _parentId, string _contentKey, int? _languageId, bool? _isTrash, int? _pageIndex, int? _pageSize);
 
+        IEnumerable<Content> GetCategoryAdmin(int? _parentId, string _contentKey, int? _languageId, bool? _isTrash);
+
         IEnumerable<Content> GetOldById(int _id, int? _parentId, string _contentKey, int? _languageId, int? _pageSize);
 
         ContentView TraCuuVanBan(string _name, string _no, DateTime? _ngayBanHanh, int? _languageId, int? _pageIndex, int? _pageSize);
@@ -68,7 +70,7 @@
             enContent = enContent.Where(x => x.contentKey == "Document");
             if (!string.IsNullOrEmpty(_name))
             {
-                enContent = enContent.Where(x => x.contentName.ToLower().Contains(_name.ToLower().Trim()) || x.contentAlias.Contains(_name.ToLower().Trim()));
+                enContent = enContent.Where(x => x.contentName.ToLower().Contains(_name.ToLower().Trim()) || x.contentAlias.Contains(_name.ToLower().Trim()) || x.tacGia.Contains(_name.ToLower().Trim()));
             }
             if (!string.IsNullOrEmpty(_no))
             {
@@ -105,7 +107,7 @@
             }
             if (!string.IsNullOrEmpty(_keyWords))
             {
-                enContent = enContent.Where(x => x.contentName.ToLower().Contains(_keyWords.ToLower().Trim()) || x.contentAlias.Contains(_keyWords.ToLower().Trim()));
+                enContent = enContent.Where(x => x.contentName.ToLower().Contains(_keyWords.ToLower().Trim()) ||( x.tacGia != null && x.tacGia.ToLower().Contains(_keyWords.ToLower().Trim())));
             }
             if (_isTrash.HasValue)
             {
@@ -144,6 +146,26 @@
                 enContent = enContent.Take(_pageSize.Value);
             }
             return new ContentView { Contents = enContent, Total = totalPage, TotalRecord = totalRecord };
+        }
+
+        public IEnumerable<Content> GetCategoryAdmin(int? _parentId, string _contentKey, int? _languageId, bool? _isTrash)
+        {
+            var enContent = _Repository.GetAll();
+            if (!string.IsNullOrEmpty(_contentKey))
+            {
+                enContent = enContent.Where(x => x.contentKey.ToLower() == _contentKey.ToLower().Trim());
+            }
+            enContent = enContent.Where(x => x.parentId == _parentId);
+            if (_languageId.HasValue)
+            {
+                enContent = enContent.Where(x => x.languageId == _languageId.Value);
+            }
+            if (_isTrash.HasValue)
+            {
+                enContent = enContent.Where(x => x.isTrash == _isTrash);
+            }
+            enContent = enContent.OrderBy(x => x.isSort);
+            return enContent;
         }
         public IEnumerable<Content> GetOldById(int _id, int? _parentId, string _contentKey, int? _languageId, int? _pageSize)
         {

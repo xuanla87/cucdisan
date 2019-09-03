@@ -1,0 +1,15 @@
+﻿
+@using CucDiSanService.Models
+@model List<Menu>
+@if (Model != null && Model.Count > 0)
+{
+    foreach (var item in Model)
+    {
+        <li>
+            <a href="@item.menuUrl">@item.menuName</a>
+            @Html.Action("getSubMenu2", "Home", new { Id = item.menuId })
+        </li>
+    }
+}
+
+

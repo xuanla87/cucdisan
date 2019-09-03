@@ -33,6 +33,11 @@ namespace CucDiSanVN
           defaults: new { controller = "Home", action = "LienHe", id = UrlParameter.Optional }
          );
             routes.MapRoute(
+        name: "SODOWEBSITE",
+        url: "so-do-website",
+        defaults: new { controller = "Home", action = "SoDoWebsite", id = UrlParameter.Optional }
+       );
+            routes.MapRoute(
           name: "TRACUUVANBAN",
           url: "tra-cuu-van-ban",
           defaults: new { controller = "Home", action = "TraCuuVanBan", id = UrlParameter.Optional }

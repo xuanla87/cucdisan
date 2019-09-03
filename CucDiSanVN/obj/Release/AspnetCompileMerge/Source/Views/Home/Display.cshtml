@@ -47,7 +47,9 @@
             <div class="date-post text-left">
                 <i class="fa fa-clock-o"></i> @Model.createTime.ToString("dd-MM-yyyy HH-mm")
             </div>
-            @Html.Raw(Model.note)
+            <div class="description">
+                @Html.Raw(Model.note)
+            </div>
             @Html.Raw(Model.contentBody)
             <div class="text-right">
                 @if (string.IsNullOrEmpty(Model.tacGia))

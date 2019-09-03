@@ -19,6 +19,8 @@
 
         IEnumerable<ActionLog> GetAll();
 
+        ActionLogView GetaAdmin(DateTime? _fromDate, DateTime? _toDate, int? _pageIndex, int? _pageSize);
+
         IEnumerable<ActionLog> GetAllByUserName(string _userName);
 
         IEnumerable<ActionLog> GetAllByTime(DateTime _fromDate, DateTime _toDate);
@@ -55,6 +57,31 @@
         public IEnumerable<ActionLog> GetAllByUserName(string _userName)
         {
             return _Repository.GetByUserName(_userName);
+        }
+        public ActionLogView GetaAdmin(DateTime? _fromDate, DateTime? _toDate, int? _pageIndex, int? _pageSize)
+        {
+            var enContent = _Repository.GetAll();
+            if (_fromDate.HasValue)
+            {
+                enContent = enContent.Where(x => x.actionLogTime >= _fromDate.Value.Date);
+            }
+            if (_toDate.HasValue)
+            {
+                enContent = enContent.Where(x => x.actionLogTime <= _toDate.Value.Date);
+            }
+            enContent = enContent.OrderByDescending(x => x.actionLogTime);
+            int totalRecord = enContent.Count();
+            if (_pageIndex != null && _pageSize != null)
+            {
+                enContent = enContent.Skip((_pageIndex.Value - 1) * _pageSize.Value);
+            }
+            var totalPage = 0;
+            if (_pageSize != null)
+            {
+                totalPage = (int)Math.Ceiling(1.0 * totalRecord / _pageSize.Value);
+                enContent = enContent.Take(_pageSize.Value);
+            }
+            return new ActionLogView {  ActionLogs = enContent, Total = totalPage, TotalRecord = totalRecord };
         }
 
         public IEnumerable<ActionLog> GetAllByTime(DateTime _fromDate, DateTime _toDate)

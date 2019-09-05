@@ -9,6 +9,7 @@ namespace CucDiSanVN.Areas.Admin.Models
     {
         public int Nam { get; set; }
         public int Tin { get; set; }
+        public int Anh { get; set; }
         public int Logo { get; set; }
         public int Video { get; set; }
         public int VanBan { get; set; }

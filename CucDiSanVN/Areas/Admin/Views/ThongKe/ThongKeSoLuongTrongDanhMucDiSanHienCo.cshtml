@@ -5,16 +5,6 @@
 }
 @using CucDiSanVN.Areas.Admin.Models
 @model  IEnumerable<modelThongKeSoLuongDanhMucDiSanVanHoa>
-<section class="content-header">
-    <h1>
-        @ViewBag.Title
-    </h1>
-    <ol class="breadcrumb">
-        <li><a href="/Admin"><i class="fa fa-dashboard"></i>Admin</a></li>
-        <li><a href="/Admin/ThongKe">Thống kê</a></li>
-        <li class="active">@ViewBag.Title</li>
-    </ol>
-</section>
 <section class="content">
     <div class="row">
         <div class="col-md-12">
@@ -51,7 +41,7 @@
                                             <tr>
                                                 <td style="text-align:center;">@_count</td>
                                                 <td style="text-align:left;">@item.Name</td>
-                                                <td style="text-align:center;">@item.SoLuong</td>
+                                                <td style="text-align:center; font-weight:bold;">@item.SoLuong</td>
                                             </tr>
                                         }
                                     }

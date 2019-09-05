@@ -22,6 +22,8 @@
 
         ContentView GetAll(string _keyWords, DateTime? _fromDate, DateTime? _toDate, int? _parentId, string _contentKey, int? _languageId, bool? _isTrash, int? _pageIndex, int? _pageSize);
 
+        IEnumerable<Content> All();
+
         IEnumerable<Content> GetCategoryAdmin(int? _parentId, string _contentKey, int? _languageId, bool? _isTrash);
 
         IEnumerable<Content> GetOldById(int _id, int? _parentId, string _contentKey, int? _languageId, int? _pageSize);
@@ -107,7 +109,7 @@
             }
             if (!string.IsNullOrEmpty(_keyWords))
             {
-                enContent = enContent.Where(x => x.contentName.ToLower().Contains(_keyWords.ToLower().Trim()) ||( x.tacGia != null && x.tacGia.ToLower().Contains(_keyWords.ToLower().Trim())));
+                enContent = enContent.Where(x => x.contentName.ToLower().Contains(_keyWords.ToLower().Trim()) || (x.tacGia != null && x.tacGia.ToLower().Contains(_keyWords.ToLower().Trim())));
             }
             if (_isTrash.HasValue)
             {
@@ -148,6 +150,11 @@
             return new ContentView { Contents = enContent, Total = totalPage, TotalRecord = totalRecord };
         }
 
+        public IEnumerable<Content> All()
+        {
+            var enContent = _Repository.GetAll();
+            return enContent;
+        }
         public IEnumerable<Content> GetCategoryAdmin(int? _parentId, string _contentKey, int? _languageId, bool? _isTrash)
         {
             var enContent = _Repository.GetAll();

@@ -17,10 +17,14 @@ namespace CucDiSanVN.Areas.Admin.Controllers
     public class ThongKeController : Controller
     {
         IVisitorServices _visitorServices;
+        IContentServices _contentServices;
+        IVideoServices _videoServices;
 
-        public ThongKeController(IVisitorServices visitorServices)
+        public ThongKeController(IVisitorServices visitorServices, IContentServices contentServices, IVideoServices videoServices)
         {
             _visitorServices = visitorServices;
+            _contentServices = contentServices;
+            _videoServices = videoServices;
         }
         public ActionResult Index()
         {
@@ -32,9 +36,51 @@ namespace CucDiSanVN.Areas.Admin.Controllers
             return View();
         }
 
-        public ActionResult ThongKeTheoTungNam(string _namBatDau, string _namKetThuc)
+        public ActionResult ThongKeTheoTungNam(int? fromYear, int? toYear)
         {
-            return View();
+            List<int> _listYear = new List<int>();
+            for (int i = DateTime.Now.Year - 10; i <= DateTime.Now.Year; i++)
+            {
+                _listYear.Add(i);
+            }
+            ViewBag.fromYear = _listYear.Select(x => new SelectListItem { Text = x.ToString(), Value = x.ToString() });
+            ViewBag.toYear = _listYear.Select(x => new SelectListItem { Text = x.ToString(), Value = x.ToString() });
+            List<modelThongKeSoLuongTinTheoCacNam> _List = new List<modelThongKeSoLuongTinTheoCacNam>();
+            var model = _contentServices.All();
+            var modelVideo = _videoServices.GetAll();
+            modelVideo = modelVideo.Where(x => x.isTrash == false);
+            model = model.Where(x => x.isTrash == false);
+            if (fromYear.HasValue && toYear.HasValue)
+            {
+                if (toYear > fromYear)
+                {
+                    for (int i = fromYear.Value; i <= toYear.Value; i++)
+                    {
+                        model = model.Where(x => x.createTime.Year == i);
+                        modelThongKeSoLuongTinTheoCacNam _item = new modelThongKeSoLuongTinTheoCacNam();
+                        _item.Nam = i;
+                        _item.Tin = model.Where(x => x.contentKey == "News" || x.contentKey == "DiSanVanHoa" || x.contentKey == "Thongtindisanvanhoa").Count();
+                        _item.Video = modelVideo.Where(x => x.createTime.Year == i).Count();
+                        _item.Logo = _item.VanBan = model.Where(x => x.contentKey == "Banner").Count();
+                        _item.VanBan = model.Where(x => x.contentKey == "AnPhamTaiLieu" || x.contentKey == "Duthaovanbanphapluat" || x.contentKey == "TTHC" || x.contentKey == "Document").Count(); ;
+                        _item.Khac = 0;
+                        _item.Toatal = _item.Tin + _item.Video + _item.Logo + _item.VanBan + _item.Khac;
+                        _List.Add(_item);
+                    }
+                }
+                else
+                {
+                    for (int i = toYear.Value; i <= fromYear.Value; i++)
+                    {
+                        model = model.Where(x => x.createTime.Year == i);
+                        modelThongKeSoLuongTinTheoCacNam _item = new modelThongKeSoLuongTinTheoCacNam();
+                        _item.Nam = i;
+                        _item.Toatal = model.Count();
+                        _List.Add(_item);
+                    }
+                }
+            }
+            return View(_List);
         }
 
         public ActionResult ThongKeTheoChuyenMuc(string _thang, string _quy, string _nam)

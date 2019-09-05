@@ -1,0 +1,82 @@
+﻿@{
+    ViewBag.Title = "Thống kê số lượng trong danh mục di sản văn hóa hiện có";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    int _count = 0;
+}
+@using CucDiSanVN.Areas.Admin.Models
+@model  IEnumerable<modelThongKeSoLuongDanhMucDiSanVanHoa>
+<section class="content-header">
+    <h1>
+        @ViewBag.Title
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/Admin"><i class="fa fa-dashboard"></i>Admin</a></li>
+        <li><a href="/Admin/ThongKe">Thống kê</a></li>
+        <li class="active">@ViewBag.Title</li>
+    </ol>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-body">
+                    @using (Html.BeginForm("ThongKeSoLuongTrongDanhMucDiSanHienCo", "ThongKe", FormMethod.Get, new { @id = "thong-ke-list" }))
+                    {
+                        <div class="form-group">
+                            <button type="button" class="btn btn-primary btn-flat" onclick="XuatFile()"><i class="fa fa-print"></i> In</button>
+                        </div>
+                        <div class="table-responsive" id="thongkecacnam">
+                            <div class="form-group text-center text-uppercase" style="font-size:24px;font-weight:bold; text-align:center; text-transform:uppercase;">
+                                Thống kê số lượng trong danh mục di sản văn hóa hiện có
+                            </div>
+                            <table class="table table-bordered table-striped" border="1" style="border-collapse:collapse; width:100%;">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align:center;">STT</th>
+                                        <th style="text-align:center;">Tên danh mục</th>
+                                        <th style="text-align:center;">Số lượng</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="text-align:center;">(1)</td>
+                                        <td style="text-align:center;">(2)</td>
+                                        <td style="text-align:center;">(3)</td>
+                                    </tr>
+                                    @if (Model.Count() > 0)
+                                    {
+                                        foreach (var item in Model)
+                                        {
+                                            _count++;
+                                            <tr>
+                                                <td style="text-align:center;">@_count</td>
+                                                <td style="text-align:left;">@item.Name</td>
+                                                <td style="text-align:center;">@item.SoLuong</td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@section scriptAs {
+    <script>
+        function XuatFile() {
+            var panel = document.getElementById("thongkecacnam");
+            var printWindow = window.open();
+            printWindow.document.write('<html><head><title>Thống kê số lượng trong danh mục di sản văn hóa hiện có</title>');
+            printWindow.document.write('</head><body >');
+            printWindow.document.write(panel.innerHTML);
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();
+            setTimeout(function () {
+                printWindow.print();
+            }, 100);
+        }
+    </script>
+}

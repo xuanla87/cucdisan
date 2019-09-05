@@ -300,7 +300,14 @@ namespace CucDiSanVN.Areas.Admin.Controllers
 
         public ActionResult ThongKeSoLuongTrongDanhMucDiSanHienCo()
         {
-            return View();
+            var model = _contentServices.All();
+            var model2 = model.Where(x => x.contentKey == "cdisanvanhoa" || x.contentKey == "cthongtindisanvanhoa");
+            IEnumerable<modelThongKeSoLuongDanhMucDiSanVanHoa> _list = model2.Select(x => new modelThongKeSoLuongDanhMucDiSanVanHoa
+            {
+                Name = x.contentName,
+                SoLuong = model.Where(y => y.parentId == x.contentId && (y.contentKey == "Thongtindisanvanhoa" || x.contentKey == "DiSanVanHoa")).Count()
+            });
+            return View(_list);
         }
     }
 }

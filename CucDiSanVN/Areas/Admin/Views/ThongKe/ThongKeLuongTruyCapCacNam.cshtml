@@ -1,0 +1,157 @@
+﻿@{
+    ViewBag.Title = "Thống kê truy cập theo năm";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@using CucDiSanVN.Areas.Admin.Models
+@model List<modelThongKeTruyCapCacNam>
+<section class="content-header">
+    <h1>
+        @ViewBag.Title
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/Admin"><i class="fa fa-dashboard"></i>Admin</a></li>
+        <li><a href="/Admin/ThongKe">Thống kê</a></li>
+        <li class="active">@ViewBag.Title</li>
+    </ol>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-body">
+                    @using (Html.BeginForm("ThongKeLuongTruyCapCacNam", "ThongKe", FormMethod.Get, new { @id = "thong-ke-list" }))
+                    {
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    @Html.DropDownList("fromYear", null, "--Từ năm--", new { @class = "form-control" })
+                                </div>
+                                <div class="col-md-2">
+                                    @Html.DropDownList("toYear", null, "--Đến năm--", new { @class = "form-control" })
+                                </div>
+                                <div class="col-md-4">
+                                    <button type="button" class="btn btn-danger search btn-flat"><i class="fa fa-filter"></i> Lọc</button>
+                                    <button type="button" class="btn btn-info btn-flat" onclick="refresh('ThongKe/ThongKeLuongTruyCapCacNam')"><i class="fa fa-refresh"></i> Hủy</button>
+                                </div>
+                                <div class="col-md-4 text-right">
+                                    <a href="javascript:LoadDataExcel();" class="btn btn-primary btn-flat"><i class="fa fa-print"></i> In</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive" id="thongketruycapcacnam">
+                            <div class="form-group text-center text-uppercase" style="font-size:24px;font-weight:bold; text-align:center; text-transform:uppercase;">
+                                Thống kê truy cập
+                            </div>
+                            <table class="table table-bordered table-striped" border="1" style="border-collapse:collapse; width:100%;">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align:center;">Năm</th>
+                                        <th style="text-align:center;">Tháng <br />1</th>
+                                        <th style="text-align:center;">Tháng <br />2</th>
+                                        <th style="text-align:center;">Tháng <br />3</th>
+                                        <th style="text-align:center;">Tháng <br />4</th>
+                                        <th style="text-align:center;">Tháng <br />5</th>
+                                        <th style="text-align:center;">Tháng <br />6</th>
+                                        <th style="text-align:center;">Tháng <br />7</th>
+                                        <th style="text-align:center;">Tháng <br />8</th>
+                                        <th style="text-align:center;">Tháng <br />9</th>
+                                        <th style="text-align:center;">Tháng <br />10</th>
+                                        <th style="text-align:center;">Tháng <br />11</th>
+                                        <th style="text-align:center;">Tháng <br />12</th>
+                                        <th style="text-align:center;">Tổng</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="text-align:center;">(1)</td>
+                                        <td style="text-align:center;">(2)</td>
+                                        <td style="text-align:center;">(3)</td>
+                                        <td style="text-align:center;">(4)</td>
+                                        <td style="text-align:center;">(5)</td>
+                                        <td style="text-align:center;">(6)</td>
+                                        <td style="text-align:center;">(7)</td>
+                                        <td style="text-align:center;">(8)</td>
+                                        <td style="text-align:center;">(9)</td>
+                                        <td style="text-align:center;">(10)</td>
+                                        <td style="text-align:center;">(11)</td>
+                                        <td style="text-align:center;">(12)</td>
+                                        <td style="text-align:center;">(13)</td>
+                                        <td style="text-align:center;">(14)</td>
+                                    </tr>
+                                    @if (Model.Count > 0)
+                                    {
+                                        foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td style="text-align:center;">@item.Nam</td>
+                                                <td style="text-align:center;">@item.Thang1</td>
+                                                <td style="text-align:center;">@item.Thang2</td>
+                                                <td style="text-align:center;">@item.Thang3</td>
+                                                <td style="text-align:center;">@item.Thang4</td>
+                                                <td style="text-align:center;">@item.Thang5</td>
+                                                <td style="text-align:center;">@item.Thang6</td>
+                                                <td style="text-align:center;">@item.Thang7</td>
+                                                <td style="text-align:center;">@item.Thang8</td>
+                                                <td style="text-align:center;">@item.Thang9</td>
+                                                <td style="text-align:center;">@item.Thang10</td>
+                                                <td style="text-align:center;">@item.Thang11</td>
+                                                <td style="text-align:center;">@item.Thang12</td>
+                                                <td style="text-align:center;">@item.Toatal</td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@section scriptAs {
+    <script>
+        function LoadDataExcel() {
+            var panel = document.getElementById("thongketruycapcacnam");
+            var printWindow = window.open();
+            printWindow.document.write('<html><head><title>In thống kê truy cập các năm</title>');
+            printWindow.document.write('</head><body >');
+            printWindow.document.write(panel.innerHTML);
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();
+            setTimeout(function () {
+                printWindow.print();
+            }, 500);
+            return false;
+            //var tab_text = "";
+            //var tab = document.getElementById('thongketruycapcacnam');
+            //tab_text = tab.innerHTML;
+            //var ua = window.navigator.userAgent;
+            //var msie = ua.indexOf("MSIE ");
+            //if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) {
+            //    var postfix = day + "." + month + "." + year + "_" + hour + "." + mins;
+            //    txtArea1.document.open("txt/html", "replace");
+            //    txtArea1.document.AddHeader("content-disposition", "attachment; filename=Thong_Ke_Truy_Cap_Cac_Nam" + postfix + ".doc");
+            //    txtArea1.document.write(tab_text);
+            //    txtArea1.document.close();
+            //    txtArea1.focus();
+            //    sa = txtArea1.document.execCommand("SaveAs", true, "KiemKeQuy.xls");
+            //    return (sa);
+            //}
+            //else {
+            //    var dt = new Date();
+            //    var day = dt.getDate();
+            //    var month = dt.getMonth() + 1;
+            //    var year = dt.getFullYear();
+            //    var hour = dt.getHours();
+            //    var mins = dt.getMinutes();
+            //    var postfix = day + "." + month + "." + year + "_" + hour + "." + mins;
+            //    var a = document.createElement('a');
+            //    a.href = 'data:application/vnd.ms-excel,' + encodeURIComponent(tab_text);
+            //    a.download = 'Thong_Ke_Truy_Cap_Cac_Nam' + postfix + '.doc';
+            //    a.click();
+            //    e.preventDefault();
+            //}
+        }
+    </script>
+}

@@ -20,6 +20,7 @@
     <link href="~/Scripts/ckeditor/contents.css" rel="stylesheet" />
     <link href="~/Content/StyleSheetAdmin.css" rel="stylesheet" />
     <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
 </head>
 <body class="skin-blue sidebar-mini wysihtml5-supported">
     <div class="wrapper">
@@ -284,6 +285,19 @@
                         <ul class="treeview-menu">
                             <li><a href="@Url.Action("Index","LienKet")"><i class="fa fa-circle-o"></i> Danh sách liên kết</a></li>
                             <li><a href="@Url.Action("Detail","LienKet")"><i class="fa fa-circle-o"></i> Thêm mới</a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-ticket"></i> <span>Quản lý thống kê</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="@Url.Action("ThongKeTheoThangTrongNam","ThongKe")"><i class="fa fa-circle-o"></i> Thống kê tin trong năm</a></li>
+                            <li><a href="@Url.Action("ThongKeLuongTruyCapCacNam","ThongKe")"><i class="fa fa-circle-o"></i> Thống kê truy cập</a></li>
+                            <li><a href="@Url.Action("ThongKeTheoMotChuyenMuc","ThongKe")"><i class="fa fa-circle-o"></i> Thống kê tin theo chuyên mục</a></li>
                         </ul>
                     </li>
                     <li><a href="@Url.Action("Index","ConfigSystem")"><i class="fa fa-gears"></i> <span>Cấu hình</span></a></li>

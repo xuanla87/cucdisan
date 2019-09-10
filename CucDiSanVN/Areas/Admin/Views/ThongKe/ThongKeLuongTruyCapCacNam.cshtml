@@ -34,7 +34,7 @@
                                     <button type="button" class="btn btn-info btn-flat" onclick="refresh('ThongKe/ThongKeLuongTruyCapCacNam')"><i class="fa fa-refresh"></i> Hủy</button>
                                 </div>
                                 <div class="col-md-4 text-right">
-                                    <a href="javascript:LoadDataExcel();" class="btn btn-primary btn-flat"><i class="fa fa-print"></i> In</a>
+                                    <a href="javascript:LoadDataExcel();" class="btn btn-primary btn-flat"><i class="fa fa-print"></i> Xuất File</a>
                                 </div>
                             </div>
                         </div>
@@ -112,46 +112,19 @@
 @section scriptAs {
     <script>
         function LoadDataExcel() {
-            var panel = document.getElementById("thongketruycapcacnam");
-            var printWindow = window.open();
-            printWindow.document.write('<html><head><title>In thống kê truy cập các năm</title>');
-            printWindow.document.write('</head><body >');
-            printWindow.document.write(panel.innerHTML);
-            printWindow.document.write('</body></html>');
-            printWindow.document.close();
-            setTimeout(function () {
-                printWindow.print();
-            }, 100);
-            //var tab_text = "";
-            //var tab = document.getElementById('thongketruycapcacnam');
-            //tab_text = tab.innerHTML;
-            //var ua = window.navigator.userAgent;
-            //var msie = ua.indexOf("MSIE ");
-            //if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) {
-            //    var postfix = day + "." + month + "." + year + "_" + hour + "." + mins;
-            //    txtArea1.document.open("txt/html", "replace");
-            //    txtArea1.document.AddHeader("content-disposition", "attachment; filename=Thong_Ke_Truy_Cap_Cac_Nam" + postfix + ".doc");
-            //    txtArea1.document.write(tab_text);
-            //    txtArea1.document.close();
-            //    txtArea1.focus();
-
-            //}
-            //else {
-            //    sa = txtArea1.document.execCommand("SaveAs", true, "Thong_Ke_Truy_Cap_Cac_Nam" + postfix + ".doc");
-            //    return (sa);
-            //    //var dt = new Date();
-            //    //var day = dt.getDate();
-            //    //var month = dt.getMonth() + 1;
-            //    //var year = dt.getFullYear();
-            //    //var hour = dt.getHours();
-            //    //var mins = dt.getMinutes();
-            //    //var postfix = day + "." + month + "." + year + "_" + hour + "." + mins;
-            //    //var a = document.createElement('a');
-            //    //a.href = 'data:application/vnd.ms-excel,' + encodeURIComponent(tab_text);
-            //    //a.download = 'Thong_Ke_Truy_Cap_Cac_Nam' + postfix + '.doc';
-            //    //a.click();
-            //    //e.preventDefault();
-            //}
+            var dt = new Date();
+            var day = dt.getDate();
+            var month = dt.getMonth() + 1;
+            var year = dt.getFullYear();
+            var hour = dt.getHours();
+            var mins = dt.getMinutes();
+            var postfix = day + "." + month + "." + year + "_" + hour + "." + mins;
+            var result = 'data:application/msword,' + encodeURIComponent($('div[id$=thongketruycapcacnam]').html());
+            var link = document.createElement("a");
+            document.body.appendChild(link); 
+            link.download = 'Thong_Ke_Truy_Cap_Cac_Nam' + postfix + '.doc';
+            link.href = result;
+            link.click();
         }
     </script>
 }

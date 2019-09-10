@@ -13,7 +13,7 @@
                     @using (Html.BeginForm("ThongKeSoLuongTrongDanhMucDiSanHienCo", "ThongKe", FormMethod.Get, new { @id = "thong-ke-list" }))
                     {
                         <div class="form-group">
-                            <button type="button" class="btn btn-primary btn-flat" onclick="XuatFile()"><i class="fa fa-print"></i> In</button>
+                            <button type="button" class="btn btn-primary btn-flat" onclick="XuatFile()"><i class="fa fa-print"></i> Xuất File</button>
                         </div>
                         <div class="table-responsive" id="thongkecacnam">
                             <div class="form-group text-center text-uppercase" style="font-size:24px;font-weight:bold; text-align:center; text-transform:uppercase;">
@@ -57,16 +57,29 @@
 @section scriptAs {
     <script>
         function XuatFile() {
-            var panel = document.getElementById("thongkecacnam");
-            var printWindow = window.open();
-            printWindow.document.write('<html><head><title>Thống kê số lượng trong danh mục di sản văn hóa hiện có</title>');
-            printWindow.document.write('</head><body >');
-            printWindow.document.write(panel.innerHTML);
-            printWindow.document.write('</body></html>');
-            printWindow.document.close();
-            setTimeout(function () {
-                printWindow.print();
-            }, 100);
+            //var panel = document.getElementById("thongkecacnam");
+            //var printWindow = window.open();
+            //printWindow.document.write('<html><head><title>Thống kê số lượng trong danh mục di sản văn hóa hiện có</title>');
+            //printWindow.document.write('</head><body >');
+            //printWindow.document.write(panel.innerHTML);
+            //printWindow.document.write('</body></html>');
+            //printWindow.document.close();
+            //setTimeout(function () {
+            //    printWindow.print();
+            //}, 100);
+            var dt = new Date();
+            var day = dt.getDate();
+            var month = dt.getMonth() + 1;
+            var year = dt.getFullYear();
+            var hour = dt.getHours();
+            var mins = dt.getMinutes();
+            var postfix = day + "." + month + "." + year + "_" + hour + "." + mins;
+            var result = 'data:application/msword,' + encodeURIComponent($('div[id$=thongkecacnam]').html());
+            var link = document.createElement("a");
+            document.body.appendChild(link);
+            link.download = 'Thong_Ke_So_luong_danh_muc_di_san_hien_co' + postfix + '.doc';
+            link.href = result;
+            link.click();
         }
     </script>
 }

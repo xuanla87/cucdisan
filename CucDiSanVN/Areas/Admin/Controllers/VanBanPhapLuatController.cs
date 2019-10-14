@@ -57,7 +57,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     Note = x.no ?? x.note,
                     ParentId = x.parentId,
                     ParentName = _services.GetNameById(x.parentId),
-                    CreateTime = x.ngayBanHanh
+                    CreateTime = x.ngayBanHanh.Value.ToString("dd/MM/yyyy")
                 });
                 return View(model);
             }
@@ -285,7 +285,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     Id = model.contentId,
                     Alias = model.contentAlias,
                     BodyContent = model.contentBody,
-                    CreateTime = model.ngayBanHanh,
+                    CreateTime = model.ngayBanHanh.Value.ToString("dd/MM/yyyy"),
                     Img = model.contentThumbnail,
                     LanguageId = model.languageId,
                     MetaDescription = model.contentDescription,
@@ -362,17 +362,18 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     if (string.IsNullOrEmpty(entity.CreateTime))
                     {
                         model.updateTime = DateTime.Now;
+                        model.ngayBanHanh = DateTime.Now;
                     }
                     else
                     {
                         model.updateTime = DateTime.ParseExact(entity.CreateTime, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                        model.ngayBanHanh = DateTime.ParseExact(entity.CreateTime, "dd/MM/yyyy", CultureInfo.InvariantCulture);
                     }
 
                     model.parentId = entity.ParentId;
                     model.note = entity.Note;
                     model.contentName = entity.Name;
                     model.createTime = DateTime.Now;
-                    model.ngayBanHanh = entity.CreateTime;
                     model.isSort = entity.Sort;
                     model.isTrash = false;
                     model.isView = 0;

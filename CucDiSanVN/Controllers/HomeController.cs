@@ -684,7 +684,7 @@ namespace CucDiSanVN.Controllers
             ViewBag.PageIndex = _pageIndex ?? 1;
             ViewBag.CurentUrl = _url;
             var entitys = _services.GetAll(null, null, null, Id, "cvanbanphapluat", _languageId, false, null, null);
-            ViewBag.ListItem = entitys.Contents.OrderBy(x => x.isSort).ToList();
+            ViewBag.ListItem = entitys.Contents.OrderByDescending(x => x.ngayBanHanh).ToList();
             return PartialView(entity.Contents);
         }
         public ActionResult Search(string SearchKey, int? _pageIndex)
@@ -814,6 +814,12 @@ namespace CucDiSanVN.Controllers
                 int.TryParse(_configSystemServices.GetValueByKey("MenuMainEn"), out Id);
             List<Menu> eMenus = _menuServices.GetByParent(Id).Where(x => x.isTrash == false).OrderBy(x => x.isSort).ToList();
             return View(eMenus);
+        }
+
+        public ActionResult ThongBao(int? Id)
+        {
+            var entity = _services.GetAll(null, null, null, Id, "News", _languageId, false, null, null);
+            return PartialView(entity.Contents.Take(10));
         }
     }
 }

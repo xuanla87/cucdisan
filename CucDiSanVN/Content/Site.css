@@ -885,3 +885,13 @@ p, p span, p span span {
             .so-do-website ul li li li li {
                 list-style: circle;
             }
+
+.thong-bao .box-body .item {
+    border-bottom: 1px solid #b7250c;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+}
+
+    .thong-bao .box-body .item a:hover {
+        color: #b7250c;
+    }

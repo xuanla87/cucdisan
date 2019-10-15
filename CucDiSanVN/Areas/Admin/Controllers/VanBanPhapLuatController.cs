@@ -332,10 +332,12 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     if (string.IsNullOrEmpty(entity.CreateTime))
                     {
                         model.updateTime = DateTime.Now;
+                        model.ngayBanHanh = DateTime.Now;
                     }
                     else
                     {
                         model.updateTime = DateTime.ParseExact(entity.CreateTime, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                        model.ngayBanHanh = DateTime.ParseExact(entity.CreateTime, "dd/MM/yyyy", CultureInfo.InvariantCulture);
                     }
 
                     model.parentId = entity.ParentId;

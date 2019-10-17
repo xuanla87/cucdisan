@@ -296,7 +296,8 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     Note = model.note,
                     ParentId = model.parentId,
                     Sort = model.isSort,
-                    TacGia = model.tacGia
+                    TacGia = model.tacGia,
+                    IsHome = (model.isHome ?? false)
                 };
                 ViewBag.Title = "Cập nhật tin tức";
             }
@@ -344,6 +345,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.tacGia = entity.TacGia;
                     model.contentName = entity.Name;
                     model.isSort = entity.Sort;
+                    model.isHome = entity.IsHome;
                     _services.Update(model);
                     _services.Save();
                     _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Cập nhật tin tức Id:" + model.contentId, userIp = "", userName = User.Identity.Name });
@@ -379,6 +381,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.isView = 0;
                     model.languageId = entity.LanguageId;
                     model.contentKey = "News";
+                    model.isHome = entity.IsHome;
                     _services.Add(model);
                     _services.Save();
                     model.contentAlias = model.contentAlias + "-" + model.contentId;

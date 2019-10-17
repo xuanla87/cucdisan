@@ -685,7 +685,7 @@ namespace CucDiSanVN.Controllers
             ViewBag.CurentUrl = _url;
             var entitys = _services.GetAll(null, null, null, Id, "cvanbanphapluat", _languageId, false, null, null);
             ViewBag.ListItem = entitys.Contents.OrderByDescending(x => x.ngayBanHanh).ToList();
-            return PartialView(entity.Contents);
+            return PartialView(entity.Contents.OrderByDescending(x => x.ngayBanHanh));
         }
         public ActionResult Search(string SearchKey, int? _pageIndex)
         {

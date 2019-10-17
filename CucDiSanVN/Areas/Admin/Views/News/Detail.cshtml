@@ -95,10 +95,6 @@
                                     @Html.Label("Thứ tự", new { @class = "control-lable" })
                                     @Html.TextBoxFor(x => x.Sort, new { @class = "form-control number", @placeholder = "Nhập số.." })
                                 </div>
-                                <div class="col-md-2">
-                                    @Html.Label("Thông báo", new { @class = "control-lable" })
-                                    @Html.CheckBoxFor(x => x.IsHome)
-                                </div>
                                 @Html.HiddenFor(x => x.Alias)
                                 @Html.HiddenFor(x => x.Id)
                                 @Html.HiddenFor(x => x.LanguageId)

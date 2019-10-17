@@ -39,18 +39,18 @@
 
         @foreach (var item in Model)
         {
-        <tr>
-            @if (!string.IsNullOrEmpty(item.no))
-            {
-                <td class="text-left" valign="middle">@item.no</td>
-            }
-            else
-            {
-                <td class="text-left" valign="middle">@item.note</td>
-            }
-            <td class="text-center" valign="middle">@item.ngayBanHanh</td>
-            <td class="text-left"><a href="@item.contentAlias">@item.contentName</a></td>
-        </tr>
+            <tr>
+                @if (!string.IsNullOrEmpty(item.no))
+                {
+                    <td class="text-left" valign="middle">@item.no</td>
+                }
+                else
+                {
+                    <td class="text-left" valign="middle">@item.note</td>
+                }
+                <td class="text-center" valign="middle">@item.ngayBanHanh.ToString("dd/MM/yyyy")</td>
+                <td class="text-left"><a href="@item.contentAlias">@item.contentName</a></td>
+            </tr>
         }
     </table>
     <div class="row">

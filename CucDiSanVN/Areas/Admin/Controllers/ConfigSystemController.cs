@@ -44,6 +44,8 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                 model.BannerLeft = int.Parse(_services.GetValueByKey("BannerLeft"));
             if (!string.IsNullOrEmpty(_services.GetValueByKey("BannerRight")))
                 model.BannerRight = int.Parse(_services.GetValueByKey("BannerRight"));
+            if (!string.IsNullOrEmpty(_services.GetValueByKey("ThongBao")))
+                model.ThongBao = int.Parse(_services.GetValueByKey("ThongBao"));
             model.SiteBanner = _services.GetValueByKey("SiteBanner");
             model.SiteContact = _services.GetValueByKey("SiteContact");
             model.SiteDescription = _services.GetValueByKey("SiteDescription");
@@ -55,12 +57,14 @@ namespace CucDiSanVN.Areas.Admin.Controllers
             var enHinhAnh = _contentService.Dropdownlist(0, null, "csukienquaanh", 1);
             var enBannerLeft = _contentService.Dropdownlist(0, null, "cbanner", 1);
             var enBannerRight = _contentService.Dropdownlist(0, null, "cbanner", 1);
+            var enThongBao = _contentService.Dropdownlist(0, null, "cnews", 1);
             ViewBag.MenuMain = enMenu.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
             ViewBag.MenuLeft1 = enMenu.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
             ViewBag.MenuLeft2 = enMenu.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
             ViewBag.BoxHinhAnh = enHinhAnh.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
             ViewBag.BannerLeft = enBannerLeft.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
             ViewBag.BannerRight = enBannerRight.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
+            ViewBag.ThongBao = enThongBao.Select(x => new SelectListItem { Text = x.Text, Value = x.Value.ToString() });
             return View(model);
         }
         [HttpPost]
@@ -84,6 +88,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                 _services.SaveData("SiteTitle", model.SiteTitle);
                 _services.SaveData("BannerLeft", model.BannerLeft.ToString());
                 _services.SaveData("BannerRight", model.BannerRight.ToString());
+                _services.SaveData("ThongBao", model.ThongBao.ToString());
                 return RedirectToAction("Index");
             }
             return RedirectToAction("Index");

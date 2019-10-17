@@ -246,6 +246,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                         note = entity.Note,
                         contentName = entity.Name,
                         createTime = DateTime.Now,
+                        ngayBanHanh = DateTime.Now,
                         isSort = entity.No.GetValueOrDefault(),
                         isHome = entity.IsHome,
                         isTrash = false,
@@ -296,8 +297,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     Note = model.note,
                     ParentId = model.parentId,
                     Sort = model.isSort,
-                    TacGia = model.tacGia,
-                    IsHome = (model.isHome ?? false)
+                    TacGia = model.tacGia
                 };
                 ViewBag.Title = "Cập nhật tin tức";
             }
@@ -345,7 +345,6 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.tacGia = entity.TacGia;
                     model.contentName = entity.Name;
                     model.isSort = entity.Sort;
-                    model.isHome = entity.IsHome;
                     _services.Update(model);
                     _services.Save();
                     _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Cập nhật tin tức Id:" + model.contentId, userIp = "", userName = User.Identity.Name });
@@ -375,13 +374,12 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.tacGia = entity.TacGia;
                     model.note = entity.Note;
                     model.contentName = entity.Name;
-                    model.createTime = DateTime.Now;
+                     model.createTime = DateTime.Now; model.ngayBanHanh = DateTime.Now;
                     model.isSort = entity.Sort;
                     model.isTrash = false;
                     model.isView = 0;
                     model.languageId = entity.LanguageId;
                     model.contentKey = "News";
-                    model.isHome = entity.IsHome;
                     _services.Add(model);
                     _services.Save();
                     model.contentAlias = model.contentAlias + "-" + model.contentId;

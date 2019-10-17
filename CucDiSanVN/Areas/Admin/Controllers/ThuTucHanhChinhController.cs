@@ -235,6 +235,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                         note = entity.Note,
                         contentName = entity.Name,
                         createTime = DateTime.Now,
+                        ngayBanHanh = DateTime.Now,
                         isSort = entity.No.GetValueOrDefault(),
                         isHome = entity.IsHome,
                         isTrash = false,
@@ -361,7 +362,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.parentId = entity.ParentId;
                     model.note = entity.Note;
                     model.contentName = entity.Name;
-                    model.createTime = DateTime.Now;
+                     model.createTime = DateTime.Now; model.ngayBanHanh = DateTime.Now;
                     model.isSort = entity.Sort;
                     model.tacGia = entity.TacGia;
                     model.isTrash = false;

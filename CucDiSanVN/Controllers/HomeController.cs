@@ -677,15 +677,15 @@ namespace CucDiSanVN.Controllers
             }
             int _totalRecord = 0;
             _pageIndex = _pageIndex ?? 1;
-            var entity = _services.GetAll(null, null, null, Id, "Document", _languageId, false, _pageIndex, 10);
+            var entity = _services.GetVanBan(null, null, null, Id, "Document", _languageId, false, _pageIndex, 10);
             _totalRecord = entity.TotalRecord;
             ViewBag.TotalRecord = _totalRecord.ToString();
             ViewBag.TotalPage = entity.Total;
             ViewBag.PageIndex = _pageIndex ?? 1;
             ViewBag.CurentUrl = _url;
-            var entitys = _services.GetAll(null, null, null, Id, "cvanbanphapluat", _languageId, false, null, null);
-            ViewBag.ListItem = entitys.Contents.OrderByDescending(x => x.ngayBanHanh).ToList();
-            return PartialView(entity.Contents.OrderByDescending(x => x.ngayBanHanh));
+            var entitys = _services.GetVanBan(null, null, null, Id, "cvanbanphapluat", _languageId, false, null, null);
+            ViewBag.ListItem = entitys.Contents.ToList();
+            return PartialView(entity.Contents);
         }
         public ActionResult Search(string SearchKey, int? _pageIndex)
         {
@@ -754,7 +754,7 @@ namespace CucDiSanVN.Controllers
                     model.contactTitle = entity.contactTitle;
                     model.contactEmail = entity.contactEmail;
                     model.contactBody = entity.contactBody;
-                    model.createTime = DateTime.Now;
+                     model.createTime = DateTime.Now; 
                     model.isTrash = false;
                     _contactServices.Add(model);
                     _contactServices.Save();
@@ -816,9 +816,11 @@ namespace CucDiSanVN.Controllers
             return View(eMenus);
         }
 
-        public ActionResult ThongBao(int? Id)
+        public ActionResult ThongBao()
         {
-            var entity = _services.GetThongBao(null, null, null, Id, "News", _languageId, false, null, null);
+            int Id = 0;
+            int.TryParse(_configSystemServices.GetValueByKey("ThongBao"), out Id);
+            var entity = _services.GetAll(null, null, null, Id, "News", _languageId, false, null, null);
             return PartialView(entity.Contents.Take(10));
         }
     }

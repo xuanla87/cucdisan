@@ -21,6 +21,7 @@ namespace CucDiSanVN.Areas.Admin.Models
         public int? BoxHinhAnh { get; set; }
         public int? BannerLeft { get; set; }
         public int? BannerRight { get; set; }
+        public int? ThongBao { get; set; }
 
         public int? MenuMainEn { get; set; }
         public int? MenuFooterEn { get; set; }

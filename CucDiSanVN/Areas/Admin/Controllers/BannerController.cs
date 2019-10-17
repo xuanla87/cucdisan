@@ -233,7 +233,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.parentId = entity.ParentId;
                     model.note = entity.Note;
                     model.contentName = entity.Name;
-                    model.createTime = DateTime.Now;
+                     model.createTime = DateTime.Now; model.ngayBanHanh = DateTime.Now;
                     model.isSort = entity.No.GetValueOrDefault();
                     model.isHome = entity.IsHome;
                     model.isTrash = false;
@@ -331,7 +331,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.updateTime = DateTime.Now;
                     model.parentId = entity.ParentId;
                     model.contentName = entity.Name;
-                    model.createTime = DateTime.Now;
+                     model.createTime = DateTime.Now; model.ngayBanHanh = DateTime.Now;
                     model.isSort = entity.IsSort;
                     model.isTrash = false;
                     model.isView = 0;

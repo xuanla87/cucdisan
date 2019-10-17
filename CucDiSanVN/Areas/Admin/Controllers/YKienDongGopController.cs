@@ -123,7 +123,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                         model.endDate = DateTime.Now;
                     else
                         model.endDate = DateTime.ParseExact(entity.endDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                    model.createTime = DateTime.Now;
+                     model.createTime = DateTime.Now; 
                     model.updateTime = DateTime.Now;
                     model.isEnd = false;
                     model.isTrash = false;

@@ -46,7 +46,7 @@
                                 </div>
                                 <div class="form-group">
                                     @Html.Label("Banner phải", new { @class = "control-lable" })
-                                    @Html.DropDownListFor(x => x.BannerRight, null, "---Chọn danh mục sự baner---", new { @class = "form-control" })
+                                    @Html.DropDownListFor(x => x.BannerRight, null, "---Chọn danh mục baner---", new { @class = "form-control" })
                                     @Html.ValidationMessageFor(x => x.BannerRight, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -71,7 +71,11 @@
                                     @Html.DropDownListFor(x => x.BoxHinhAnh, null, "---Chọn danh mục sự kiện---", new { @class = "form-control" })
                                     @Html.ValidationMessageFor(x => x.BoxHinhAnh, "", new { @class = "text-danger" })
                                 </div>
-                               
+                                <div class="form-group">
+                                    @Html.Label("Thông báo", new { @class = "control-lable" })
+                                    @Html.DropDownListFor(x => x.ThongBao, null, "---Chọn danh mục thông báo---", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(x => x.ThongBao, "", new { @class = "text-danger" })
+                                </div>
                             </div>
                         </div>
                         <div class="form-group">

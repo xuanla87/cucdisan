@@ -97,7 +97,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     ParentName = _services.GetNameById(x.parentId)
                 });
                 return View(model);
-              
+
             }
             else
             {
@@ -241,6 +241,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                         note = entity.Note,
                         contentName = entity.Name,
                         createTime = DateTime.Now,
+                        ngayBanHanh = DateTime.Now,
                         isSort = entity.No.GetValueOrDefault(),
                         isTrash = false,
                         isView = 0,
@@ -367,7 +368,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.parentId = entity.ParentId;
                     model.note = entity.Note;
                     model.contentName = entity.Name;
-                    model.createTime = DateTime.Now;
+                    model.createTime = DateTime.Now; model.ngayBanHanh = DateTime.Now;
                     model.isSort = entity.Sort;
                     model.isTrash = false;
                     model.isView = 0;

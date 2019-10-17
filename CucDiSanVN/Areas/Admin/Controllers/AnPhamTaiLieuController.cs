@@ -224,6 +224,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.isTrash = false;
                     model.isSort = entity.No.GetValueOrDefault();
                     model.contentName = entity.Name;
+
                     _services.Update(model);
                     _services.Save();
                     _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Cập nhật chuyên mục Ấn phẩm tài liệu Id:" + model.contentId, userIp = "", userName = User.Identity.Name });
@@ -241,7 +242,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.parentId = entity.ParentId;
                     model.note = entity.Note;
                     model.contentName = entity.Name;
-                    model.createTime = DateTime.Now;
+                     model.createTime = DateTime.Now; model.ngayBanHanh = DateTime.Now;
                     model.isSort = entity.No.GetValueOrDefault();
                     model.isHome = entity.IsHome;
                     model.isTrash = false;
@@ -355,7 +356,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.parentId = entity.ParentId;
                     model.note = entity.Note;
                     model.contentName = entity.Name;
-                    model.createTime = DateTime.Now;
+                     model.createTime = DateTime.Now; model.ngayBanHanh = DateTime.Now;
                     model.isSort = entity.Sort;
                     model.isTrash = false;
                     model.isView = 0;

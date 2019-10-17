@@ -818,7 +818,7 @@ namespace CucDiSanVN.Controllers
 
         public ActionResult ThongBao(int? Id)
         {
-            var entity = _services.GetAll(null, null, null, Id, "News", _languageId, false, null, null);
+            var entity = _services.GetThongBao(null, null, null, Id, "News", _languageId, false, null, null);
             return PartialView(entity.Contents.Take(10));
         }
     }

@@ -21,8 +21,9 @@
         Content UnTrash(int _id);
 
         ContentView GetAll(string _keyWords, DateTime? _fromDate, DateTime? _toDate, int? _parentId, string _contentKey, int? _languageId, bool? _isTrash, int? _pageIndex, int? _pageSize);
+        ContentView GetVanBan(string _keyWords, DateTime? _fromDate, DateTime? _toDate, int? _parentId, string _contentKey, int? _languageId, bool? _isTrash, int? _pageIndex, int? _pageSize);
 
-        ContentView GetThongBao(string _keyWords, DateTime? _fromDate, DateTime? _toDate, int? _parentId, string _contentKey, int? _languageId, bool? _isTrash, int? _pageIndex, int? _pageSize);
+        ContentView GetThongBao(string _keyWords, DateTime? _fromDate, DateTime? _toDate, int? _parentId, int? _languageId, bool? _isTrash, int? _pageIndex, int? _pageSize);
 
         IEnumerable<Content> All();
 
@@ -88,7 +89,7 @@
             {
                 enContent = enContent.Where(x => x.createTime.Date == _ngayBanHanh.Value.Date);
             }
-            enContent = enContent.OrderByDescending(x => x.updateTime);
+            enContent = enContent.OrderByDescending(x => x.ngayBanHanh);
             int totalRecord = enContent.Count();
             if (_pageIndex != null && _pageSize != null)
             {
@@ -151,8 +152,7 @@
             }
             return new ContentView { Contents = enContent, Total = totalPage, TotalRecord = totalRecord };
         }
-
-        public ContentView GetThongBao(string _keyWords, DateTime? _fromDate, DateTime? _toDate, int? _parentId, string _contentKey, int? _languageId, bool? _isTrash, int? _pageIndex, int? _pageSize)
+        public ContentView GetVanBan(string _keyWords, DateTime? _fromDate, DateTime? _toDate, int? _parentId, string _contentKey, int? _languageId, bool? _isTrash, int? _pageIndex, int? _pageSize)
         {
             var enContent = _Repository.GetAll();
             if (!string.IsNullOrEmpty(_contentKey))
@@ -183,7 +183,49 @@
             {
                 enContent = enContent.Where(x => x.languageId == _languageId.Value);
             }
-            enContent = enContent.Where(x => x.isHome == true);
+            enContent = enContent.OrderByDescending(x => x.ngayBanHanh);
+            int totalRecord = enContent.Count();
+            if (_pageIndex != null && _pageSize != null)
+            {
+                enContent = enContent.Skip((_pageIndex.Value - 1) * _pageSize.Value);
+            }
+            var totalPage = 0;
+            if (_pageSize != null)
+            {
+                totalPage = (int)Math.Ceiling(1.0 * totalRecord / _pageSize.Value);
+                enContent = enContent.Take(_pageSize.Value);
+            }
+            return new ContentView { Contents = enContent, Total = totalPage, TotalRecord = totalRecord };
+        }
+
+        public ContentView GetThongBao(string _keyWords, DateTime? _fromDate, DateTime? _toDate, int? _parentId, int? _languageId, bool? _isTrash, int? _pageIndex, int? _pageSize)
+        {
+            var enContent = _Repository.GetAll();
+            enContent = enContent.Where(x => x.contentKey == "News" && x.isNew == true);
+            if (!string.IsNullOrEmpty(_keyWords))
+            {
+                enContent = enContent.Where(x => x.contentName.ToLower().Contains(_keyWords.ToLower().Trim()) || (x.tacGia != null && x.tacGia.ToLower().Contains(_keyWords.ToLower().Trim())));
+            }
+            if (_isTrash.HasValue)
+            {
+                enContent = enContent.Where(x => x.isTrash == _isTrash);
+            }
+            if (_parentId.HasValue)
+            {
+                enContent = enContent.Where(x => x.parentId == _parentId);
+            }
+            if (_fromDate.HasValue)
+            {
+                enContent = enContent.Where(x => x.updateTime.Date >= _fromDate.Value.Date);
+            }
+            if (_toDate.HasValue)
+            {
+                enContent = enContent.Where(x => x.updateTime.Date <= _toDate.Value.Date);
+            }
+            if (_languageId.HasValue)
+            {
+                enContent = enContent.Where(x => x.languageId == _languageId.Value);
+            }
             enContent = enContent.OrderByDescending(x => x.updateTime);
             int totalRecord = enContent.Count();
             if (_pageIndex != null && _pageSize != null)

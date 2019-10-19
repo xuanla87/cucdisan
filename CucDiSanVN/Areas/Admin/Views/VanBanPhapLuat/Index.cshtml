@@ -66,6 +66,7 @@
                                     <tr>
                                         <th width="50">STT</th>
                                         <th width="90">Số kí hiệu</th>
+                                        <th>Ngày tạo</th>
                                         <th>Ngày ban hành</th>
                                         <th width="350">Tên văn bản</th>
                                         <th width="150">Link</th>
@@ -78,18 +79,19 @@
                                     foreach (var item in Model)
                                     {
                                         count++;
-                                        <tr>
-                                            <td class="text-center">@count</td>
-                                            <td>@item.Note</td>
-                                            <td>@item.CreateTime</td>
-                                            <td>@item.Name</td>
-                                            <td>@item.Alias</td>
-                                            <td>@item.ParentName</td>
-                                            <td>
-                                                <a title="Cập nhật" class="btn btn-warning btn-flat" href="@Url.Action("Detail", "VanBanPhapLuat", new { Id = item.Id })"><i class="fa fa-pencil"></i></a>
-                                                <button type="button" class="btn btn-danger btn-flat" title="Xóa" onclick="trash('@item.Id','VanBanPhapLuat')"><i class="fa fa-trash"></i></button>
-                                            </td>
-                                        </tr>
+                            <tr>
+                                <td class="text-center">@count</td>
+                                <td>@item.Note</td>
+                                <td>@item.CreateTime</td>
+                                <td>@item.NgayBanHanh</td>
+                                <td>@item.Name</td>
+                                <td>@item.Alias</td>
+                                <td>@item.ParentName</td>
+                                <td>
+                                    <a title="Cập nhật" class="btn btn-warning btn-flat" href="@Url.Action("Detail", "VanBanPhapLuat", new { Id = item.Id })"><i class="fa fa-pencil"></i></a>
+                                    <button type="button" class="btn btn-danger btn-flat" title="Xóa" onclick="trash('@item.Id','VanBanPhapLuat')"><i class="fa fa-trash"></i></button>
+                                </td>
+                            </tr>
                                     }
                                 }
                             </table>

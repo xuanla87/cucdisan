@@ -23,6 +23,7 @@ namespace CucDiSanVN.Areas.Admin.Models
         public string MetaKeywords { get; set; }
         public string MetaDescription { get; set; }
         public string CreateTime { get; set; }
+        public string NgayBanHanh { get; set; }
         public int Sort { get; set; }
         public string TacGia { get; set; }
 

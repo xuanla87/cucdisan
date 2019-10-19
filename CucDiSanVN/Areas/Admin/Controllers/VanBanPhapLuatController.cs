@@ -57,7 +57,8 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     Note = x.no ?? x.note,
                     ParentId = x.parentId,
                     ParentName = _services.GetNameById(x.parentId),
-                    CreateTime = x.ngayBanHanh.ToString("dd/MM/yyyy")
+                    CreateTime = x.createTime.ToString("dd/MM/yyyy"),
+                    NgayBanHanh = x.ngayBanHanh.ToString("dd/MM/yyyy")
                 });
                 return View(model);
             }

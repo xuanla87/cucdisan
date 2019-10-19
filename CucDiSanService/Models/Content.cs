@@ -30,7 +30,7 @@
         public string no { get; set; }
         public bool? isHome { get; set; }
         public bool? isNew { get; set; }
-        public DateTime? ngayBanHanh { get; set; }
+        public DateTime ngayBanHanh { get; set; }
         public string tacGia { get; set; }
     }
     [Table("Contact")]

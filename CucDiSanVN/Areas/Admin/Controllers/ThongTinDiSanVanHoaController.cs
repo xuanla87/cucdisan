@@ -338,6 +338,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.contentName = entity.Name;
                     model.isSort = entity.Sort;
                     model.tacGia = entity.TacGia;
+                    model.contentKey = "Thongtindisanvanhoa";
                     _services.Update(model);
                     _services.Save();
                     _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Cập nhật thông tin di sản văn hóa Id:" + model.contentId, userIp = "", userName = User.Identity.Name });

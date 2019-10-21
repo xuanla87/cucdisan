@@ -333,6 +333,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.parentId = entity.ParentId;
                     model.note = entity.Note;
                     model.contentName = entity.Name;
+                    model.contentKey = "TTHC";
                     model.isSort = entity.Sort;
                     _services.Update(model);
                     _services.Save();

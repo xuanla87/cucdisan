@@ -342,6 +342,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.parentId = entity.ParentId;
                     model.note = entity.Note;
                     model.contentName = entity.Name;
+                    model.contentKey = "Duthaovanbanphapluat";
                     model.isSort = entity.Sort;
                     model.tacGia = entity.TacGia;
                     _services.Update(model);

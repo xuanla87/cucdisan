@@ -346,6 +346,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.tacGia = entity.TacGia;
                     model.note = entity.Note;
                     model.contentName = entity.Name;
+                    model.contentKey = "Document";
                     model.isSort = entity.Sort;
                     _services.Update(model);
                     _services.Save();

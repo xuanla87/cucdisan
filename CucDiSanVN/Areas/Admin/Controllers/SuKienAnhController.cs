@@ -143,6 +143,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.tacGia = entity.TacGia;
                     model.isSort = entity.Sort;
                     model.contentName = entity.Name;
+                    model.contentKey = "SuKienQuaAnh";
                     _services.Update(model);
                     _services.Save();
                     _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Cập nhật sựa kiên qua ảnh Id:" + model.contentId, userIp = "", userName = User.Identity.Name });

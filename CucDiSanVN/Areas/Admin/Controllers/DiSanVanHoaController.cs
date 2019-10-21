@@ -336,6 +336,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     }
 
                     model.parentId = entity.ParentId;
+                    model.contentKey = "DiSanVanHoa";
                     model.note = entity.Note;
                     model.contentName = entity.Name;
                     model.isSort = entity.Sort;

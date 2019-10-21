@@ -895,3 +895,8 @@ p, p span, p span span {
     .thong-bao .box-body .item a:hover {
         color: #b7250c;
     }
+
+
+.page-content table, .page-content table td {
+    border-color: #333 !important;
+}

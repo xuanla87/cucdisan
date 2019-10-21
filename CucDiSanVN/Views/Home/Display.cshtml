@@ -51,13 +51,13 @@
                 @Html.Raw(Model.note)
             </div>
             @Html.Raw(Model.contentBody)
-            <div class="text-right">
-                @if (string.IsNullOrEmpty(Model.tacGia))
-                {
+            @if (!string.IsNullOrEmpty(Model.tacGia))
+            {
+                <div class="text-right">
                     <div>Tác Giả</div>
-                }
-                @Html.Raw(Model.tacGia)
-            </div>
+                    @Html.Raw(Model.tacGia)
+                </div>
+            }
         </div>
     }
 }

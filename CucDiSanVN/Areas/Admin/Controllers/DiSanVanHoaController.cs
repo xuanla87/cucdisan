@@ -209,7 +209,10 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                 if (entity.Id > 0)
                 {
                     Content model = _services.GetById(entity.Id);
-                    model.contentAlias = entity.Alias;
+                    if (entity.Alias.Contains("-" + entity.Id))
+                        model.contentAlias = entity.Alias;
+                    else
+                        model.contentAlias = entity.Alias + "-" + entity.Id;
                     model.contentDescription = entity.MetaDescription;
                     model.contentId = entity.Id;
                     model.contentThumbnail = entity.Img;
@@ -320,7 +323,10 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                 if (entity.Id > 0)
                 {
                     Content model = _services.GetById(entity.Id);
-                    model.contentAlias = entity.Alias;
+                    if (entity.Alias.Contains("-" + entity.Id))
+                        model.contentAlias = entity.Alias;
+                    else
+                        model.contentAlias = entity.Alias + "-" + entity.Id;
                     model.contentBody = entity.BodyContent;
                     model.contentDescription = entity.MetaDescription;
                     model.contentId = entity.Id;

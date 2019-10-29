@@ -123,21 +123,19 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                 if (entity.Id > 0)
                 {
                     Content model = _services.GetById(entity.Id);
-                    model.contentAlias = entity.Alias;
+                    if (entity.Alias.Contains("-" + entity.Id))
+                        model.contentAlias = entity.Alias;
+                    else
+                        model.contentAlias = entity.Alias + "-" + entity.Id;
                     model.contentBody = entity.BodyContent;
                     model.contentDescription = entity.MetaDescription;
                     model.contentId = entity.Id;
                     model.contentThumbnail = entity.Img;
                     model.contentTitle = entity.MetaTitle;
                     if (string.IsNullOrEmpty(entity.CreateTime))
-                    {
                         model.updateTime = DateTime.Now;
-                    }
                     else
-                    {
                         model.updateTime = DateTime.ParseExact(entity.CreateTime, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                    }
-
                     model.parentId = entity.ParentId;
                     model.note = entity.Note;
                     model.tacGia = entity.TacGia;
@@ -385,7 +383,10 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                 if (entity.Id > 0)
                 {
                     Content model = _services.GetById(entity.Id);
-                    model.contentAlias = entity.Alias;
+                    if (entity.Alias.Contains("-" + entity.Id))
+                        model.contentAlias = entity.Alias;
+                    else
+                        model.contentAlias = entity.Alias + "-" + entity.Id;
                     model.contentDescription = entity.MetaDescription;
                     model.contentId = entity.Id;
                     model.contentThumbnail = entity.Img;

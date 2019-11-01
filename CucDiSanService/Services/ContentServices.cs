@@ -79,7 +79,7 @@
             }
             if (!string.IsNullOrEmpty(_no))
             {
-                enContent = enContent.Where(x => x.no.ToLower().Contains(_no.ToLower().Trim()));
+                enContent = enContent.Where(x => x.no != null && x.no.ToLower().Contains(_no.ToLower().Trim()));
             }
             if (_languageId.HasValue)
             {

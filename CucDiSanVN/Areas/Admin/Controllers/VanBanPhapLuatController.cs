@@ -350,7 +350,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
 
                     model.parentId = entity.ParentId;
                     model.tacGia = entity.TacGia;
-                    model.note = entity.Note;
+                    model.no = entity.Note;
                     model.contentName = entity.Name;
                     model.contentKey = "Document";
                     model.isSort = entity.Sort;
@@ -382,7 +382,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     }
 
                     model.parentId = entity.ParentId;
-                    model.note = entity.Note;
+                    model.no = entity.Note;
                     model.contentName = entity.Name;
                     model.createTime = DateTime.Now; model.ngayBanHanh = DateTime.Now;
                     model.isSort = entity.Sort;

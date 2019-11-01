@@ -75,7 +75,7 @@
             enContent = enContent.Where(x => x.contentKey == "Document");
             if (!string.IsNullOrEmpty(_name))
             {
-                enContent = enContent.Where(x => x.contentName.ToLower().Contains(_name.ToLower().Trim()) || x.contentAlias.Contains(_name.ToLower().Trim()) || x.tacGia.Contains(_name.ToLower().Trim()));
+                enContent = enContent.Where(x => x.contentName.ToLower().Contains(_name.ToLower().Trim()));
             }
             if (!string.IsNullOrEmpty(_no))
             {
@@ -330,7 +330,8 @@
         public IEnumerable<Content> getCategoryIsHome(int _languageId)
         {
             var enContent = _Repository.GetAll();
-            enContent = enContent.Where(x => x.languageId == _languageId && x.isHome == true && x.isTrash == false && x.contentKey != "csukienquaanh" && x.contentKey != "cbanner");
+            enContent = enContent.Where(x => x.languageId == _languageId && x.isHome == true && x.contentKey != "csukienquaanh" && x.contentKey != "cbanner");
+            enContent = enContent.Where(x => x.isTrash == false);
             return enContent;
         }
 

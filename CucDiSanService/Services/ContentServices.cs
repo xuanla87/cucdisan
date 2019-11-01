@@ -74,27 +74,18 @@
             var enContent = _Repository.GetAll();
             enContent = enContent.Where(x => x.contentKey == "Document");
             if (!string.IsNullOrEmpty(_name))
-            {
                 enContent = enContent.Where(x => x.contentName.ToLower().Contains(_name.ToLower().Trim()));
-            }
             if (!string.IsNullOrEmpty(_no))
-            {
                 enContent = enContent.Where(x => x.no != null && x.no.ToLower().Contains(_no.ToLower().Trim()));
-            }
             if (_languageId.HasValue)
-            {
                 enContent = enContent.Where(x => x.languageId == _languageId.Value);
-            }
             if (_ngayBanHanh.HasValue)
-            {
                 enContent = enContent.Where(x => x.createTime.Date == _ngayBanHanh.Value.Date);
-            }
+            enContent = enContent.Where(x => x.isTrash == false);
             enContent = enContent.OrderByDescending(x => x.ngayBanHanh);
             int totalRecord = enContent.Count();
             if (_pageIndex != null && _pageSize != null)
-            {
                 enContent = enContent.Skip((_pageIndex.Value - 1) * _pageSize.Value);
-            }
             var totalPage = 0;
             if (_pageSize != null)
             {

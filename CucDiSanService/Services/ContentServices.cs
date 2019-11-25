@@ -71,8 +71,7 @@
         }
         public ContentView TraCuuVanBan(string _name, string _no, DateTime? _ngayBanHanh, int? _languageId, int? _pageIndex, int? _pageSize)
         {
-            var enContent = _Repository.GetAll();
-            enContent = enContent.Where(x => x.contentKey == "Document");
+            var enContent = _Repository.GetMulti(x => x.contentKey == "Document");
             if (!string.IsNullOrEmpty(_name))
                 enContent = enContent.Where(x => x.contentName.ToLower().Contains(_name.ToLower().Trim()));
             if (!string.IsNullOrEmpty(_no))
@@ -96,11 +95,7 @@
         }
         public ContentView GetAll(string _keyWords, DateTime? _fromDate, DateTime? _toDate, int? _parentId, string _contentKey, int? _languageId, bool? _isTrash, int? _pageIndex, int? _pageSize)
         {
-            var enContent = _Repository.GetAll();
-            if (!string.IsNullOrEmpty(_contentKey))
-            {
-                enContent = enContent.Where(x => x.contentKey.ToLower() == _contentKey.ToLower().Trim());
-            }
+            var enContent = _Repository.GetMulti(x => x.contentKey.ToLower() == _contentKey.ToLower().Trim());
             if (!string.IsNullOrEmpty(_keyWords))
             {
                 enContent = enContent.Where(x => x.contentName.ToLower().Contains(_keyWords.ToLower().Trim()) || (x.tacGia != null && x.tacGia.ToLower().Contains(_keyWords.ToLower().Trim())));
@@ -111,11 +106,7 @@
             }
             if (_parentId.HasValue)
             {
-                //var _list = ListChild(_parentId.Value);
-                //foreach (var item in _list)
-                //{
                 enContent = enContent.Where(x => x.parentId == _parentId);
-                //}
             }
             if (_fromDate.HasValue)
             {
@@ -145,11 +136,7 @@
         }
         public ContentView GetVanBan(string _keyWords, DateTime? _fromDate, DateTime? _toDate, int? _parentId, string _contentKey, int? _languageId, bool? _isTrash, int? _pageIndex, int? _pageSize)
         {
-            var enContent = _Repository.GetAll();
-            if (!string.IsNullOrEmpty(_contentKey))
-            {
-                enContent = enContent.Where(x => x.contentKey.ToLower() == _contentKey.ToLower().Trim());
-            }
+            var enContent = _Repository.GetMulti(x => x.contentKey.ToLower() == _contentKey.ToLower().Trim());
             if (!string.IsNullOrEmpty(_keyWords))
             {
                 enContent = enContent.Where(x => x.contentName.ToLower().Contains(_keyWords.ToLower().Trim()) || (x.tacGia != null && x.tacGia.ToLower().Contains(_keyWords.ToLower().Trim())));
@@ -191,8 +178,7 @@
 
         public ContentView GetThongBao(string _keyWords, DateTime? _fromDate, DateTime? _toDate, int? _parentId, int? _languageId, bool? _isTrash, int? _pageIndex, int? _pageSize)
         {
-            var enContent = _Repository.GetAll();
-            enContent = enContent.Where(x => x.contentKey == "News" && x.isNew == true);
+            var enContent = _Repository.GetMulti(x => x.contentKey == "News" && x.isNew == true);
             if (!string.IsNullOrEmpty(_keyWords))
             {
                 enContent = enContent.Where(x => x.contentName.ToLower().Contains(_keyWords.ToLower().Trim()) || (x.tacGia != null && x.tacGia.ToLower().Contains(_keyWords.ToLower().Trim())));
@@ -239,11 +225,7 @@
         }
         public IEnumerable<Content> GetCategoryAdmin(int? _parentId, string _contentKey, int? _languageId, bool? _isTrash)
         {
-            var enContent = _Repository.GetAll();
-            if (!string.IsNullOrEmpty(_contentKey))
-            {
-                enContent = enContent.Where(x => x.contentKey.ToLower() == _contentKey.ToLower().Trim());
-            }
+            var enContent = _Repository.GetMulti(x => x.contentKey.ToLower() == _contentKey.ToLower().Trim());
             enContent = enContent.Where(x => x.parentId == _parentId);
             if (_languageId.HasValue)
             {
@@ -258,15 +240,9 @@
         }
         public IEnumerable<Content> GetOldById(int _id, int? _parentId, string _contentKey, int? _languageId, int? _pageSize)
         {
-            var enContent = _Repository.GetAll();
-            enContent = enContent.Where(x => x.contentId < _id);
-            if (!string.IsNullOrEmpty(_contentKey))
-            {
-                enContent = enContent.Where(x => x.contentKey.ToLower() == _contentKey.ToLower().Trim());
-            }
+            var enContent = _Repository.GetMulti(x => x.contentKey.ToLower() == _contentKey.ToLower().Trim() && x.contentId < _id);
             if (_parentId.HasValue)
             {
-
                 enContent = enContent.Where(x => x.parentId == _parentId);
             }
             if (_languageId.HasValue)
@@ -313,16 +289,13 @@
 
         public IEnumerable<Content> getSuKienQuaAnhIsHome(int _languageId)
         {
-            var enContent = _Repository.GetAll();
-            enContent = enContent.Where(x => x.contentKey == "csukienquaanh" && x.isTrash == false && x.isHome == true);
+            var enContent = _Repository.GetMulti(x => x.contentKey == "csukienquaanh" && x.isTrash == false && x.isHome == true);
             return enContent;
         }
 
         public IEnumerable<Content> getCategoryIsHome(int _languageId)
         {
-            var enContent = _Repository.GetAll();
-            enContent = enContent.Where(x => x.languageId == _languageId && x.isHome == true && x.contentKey != "csukienquaanh" && x.contentKey != "cbanner");
-            enContent = enContent.Where(x => x.isTrash == false);
+            var enContent = _Repository.GetMulti(x => x.languageId == _languageId && x.isTrash == false && x.isHome == true && x.contentKey != "csukienquaanh" && x.contentKey != "cbanner");
             return enContent;
         }
 
@@ -335,11 +308,11 @@
                 List<Content> _listContent = new List<Content>();
                 foreach (var item in _list)
                 {
-                    var enContent = _Repository.GetAll();
-                    enContent = enContent.Where(x => x.parentId == item && x.isTrash == false);
-                    enContent = enContent.Where(x => x.contentKey != eCurent.contentKey);
+                    var enContent = _Repository.GetMulti(x => x.parentId == item && x.isTrash == false && x.contentKey != eCurent.contentKey);
                     enContent = enContent.OrderByDescending(x => x.updateTime);
-                    _listContent.AddRange(enContent);
+                    var _entity = enContent.ToList();
+                    if (_entity.Count > 0)
+                        _listContent.Add(_entity[0]);
                 }
 
                 if (_total > 0)
@@ -356,8 +329,7 @@
             var eCurent = GetById(_id);
             if (eCurent != null)
             {
-                var enContent = _Repository.GetAll();
-                enContent = enContent.Where(x => x.parentId == _id && x.contentKey == eCurent.contentKey).ToList();
+                var enContent = _Repository.GetMulti(x => x.parentId == _id && x.contentKey == eCurent.contentKey).ToList();
                 if (enContent.Count() > 0)
                 {
                     foreach (var item in enContent)
@@ -382,7 +354,7 @@
             var eCurent = GetById(_id);
             if (eCurent != null)
             {
-                var enContent = _Repository.GetAll();
+                var enContent = _Repository.GetMulti(x => x.contentKey == eCurent.contentKey && x.parentId == _id).ToList();
                 enContent = enContent.Where(x => x.parentId == _id && x.contentKey == eCurent.contentKey).ToList();
                 if (enContent.Count() > 0)
                 {

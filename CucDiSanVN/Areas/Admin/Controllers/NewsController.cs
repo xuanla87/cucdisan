@@ -58,7 +58,8 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     ParentId = x.parentId,
                     ParentName = _services.GetNameById(x.parentId),
                     CreateTime = x.updateTime.ToString("dd/MM/yyyy"),
-                    Approval = (x.approval ?? false)
+                    Approval = (x.approval ?? false),
+                    IsHome = (x.isHome ?? false)
                 });
                 return View(model);
             }
@@ -301,7 +302,8 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     Note = model.note,
                     ParentId = model.parentId,
                     Sort = model.isSort,
-                    TacGia = model.tacGia
+                    TacGia = model.tacGia,
+                    IsHome = (model.isHome ?? false)
                 };
                 ViewBag.Title = "Cập nhật tin tức";
             }
@@ -338,6 +340,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.contentId = entity.Id;
                     model.contentThumbnail = entity.Img;
                     model.contentTitle = entity.MetaTitle;
+                    model.isHome = entity.IsHome;
                     if (string.IsNullOrEmpty(entity.CreateTime))
                     {
                         model.updateTime = DateTime.Now;
@@ -377,7 +380,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     {
                         model.updateTime = DateTime.ParseExact(entity.CreateTime, "dd/MM/yyyy", CultureInfo.InvariantCulture);
                     }
-
+                    model.isHome = entity.IsHome;
                     model.parentId = entity.ParentId;
                     model.tacGia = entity.TacGia;
                     model.note = entity.Note;

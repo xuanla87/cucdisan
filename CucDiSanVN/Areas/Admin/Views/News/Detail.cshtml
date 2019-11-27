@@ -78,6 +78,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-4">
@@ -95,12 +96,22 @@
                                     @Html.Label("Thứ tự", new { @class = "control-lable" })
                                     @Html.TextBoxFor(x => x.Sort, new { @class = "form-control number", @placeholder = "Nhập số.." })
                                 </div>
+                                <div class="col-md-2">
+                                    @Html.Label("Home", new { @class = "control-lable" })
+                                    @Html.CheckBoxFor(x => x.IsHome)
+                                </div>
                                 @Html.HiddenFor(x => x.Alias)
                                 @Html.HiddenFor(x => x.Id)
                                 @Html.HiddenFor(x => x.LanguageId)
-                                <div class="col-md-2 text-right">
-                                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Lưu dữ liệu</button>
-                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-2">
+                                @Html.Label("Home", new { @class = "control-lable" })
+                                @Html.CheckBoxFor(x => x.IsHome)
+                            </div>
+                            <div class="col-md-10 text-right">
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Lưu dữ liệu</button>
                             </div>
                         </div>
                     </div>

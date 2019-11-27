@@ -25,6 +25,7 @@
         Content UnApproval(int _id);
 
         ContentView GetAll(string _keyWords, DateTime? _fromDate, DateTime? _toDate, int? _parentId, string _contentKey, int? _languageId, bool? _isTrash, int? _pageIndex, int? _pageSize);
+        ContentView GetAll2(string _keyWords, DateTime? _fromDate, DateTime? _toDate, int? _parentId, string _contentKey, int? _languageId, bool? _isTrash, bool? _approval, int? _pageIndex, int? _pageSize);
         ContentView GetVanBan(string _keyWords, DateTime? _fromDate, DateTime? _toDate, int? _parentId, string _contentKey, int? _languageId, bool? _isTrash, int? _pageIndex, int? _pageSize);
 
         ContentView GetThongBao(string _keyWords, DateTime? _fromDate, DateTime? _toDate, int? _parentId, int? _languageId, bool? _isTrash, int? _pageIndex, int? _pageSize);
@@ -138,6 +139,45 @@
             }
             return new ContentView { Contents = enContent, Total = totalPage, TotalRecord = totalRecord };
         }
+
+        public ContentView GetAll2(string _keyWords, DateTime? _fromDate, DateTime? _toDate, int? _parentId, string _contentKey, int? _languageId, bool? _isTrash, bool? _approval, int? _pageIndex, int? _pageSize)
+        {
+            var enContent = _Repository.GetMulti(x => x.contentKey.ToLower() == _contentKey.ToLower().Trim() && x.approval == true && x.isTrash == false);
+            if (!string.IsNullOrEmpty(_keyWords))
+            {
+                enContent = enContent.Where(x => x.contentName.ToLower().Contains(_keyWords.ToLower().Trim()) || (x.tacGia != null && x.tacGia.ToLower().Contains(_keyWords.ToLower().Trim())));
+            }
+            if (_parentId.HasValue)
+            {
+                enContent = enContent.Where(x => x.parentId == _parentId);
+            }
+            if (_fromDate.HasValue)
+            {
+                enContent = enContent.Where(x => x.updateTime.Date >= _fromDate.Value.Date);
+            }
+            if (_toDate.HasValue)
+            {
+                enContent = enContent.Where(x => x.updateTime.Date <= _toDate.Value.Date);
+            }
+            if (_languageId.HasValue)
+            {
+                enContent = enContent.Where(x => x.languageId == _languageId.Value);
+            }
+            enContent = enContent.OrderByDescending(x => x.updateTime);
+            int totalRecord = enContent.Count();
+            if (_pageIndex != null && _pageSize != null)
+            {
+                enContent = enContent.Skip((_pageIndex.Value - 1) * _pageSize.Value);
+            }
+            var totalPage = 0;
+            if (_pageSize != null)
+            {
+                totalPage = (int)Math.Ceiling(1.0 * totalRecord / _pageSize.Value);
+                enContent = enContent.Take(_pageSize.Value);
+            }
+            return new ContentView { Contents = enContent, Total = totalPage, TotalRecord = totalRecord };
+        }
+
         public ContentView GetVanBan(string _keyWords, DateTime? _fromDate, DateTime? _toDate, int? _parentId, string _contentKey, int? _languageId, bool? _isTrash, int? _pageIndex, int? _pageSize)
         {
             var enContent = _Repository.GetMulti(x => x.contentKey.ToLower() == _contentKey.ToLower().Trim());
@@ -330,11 +370,11 @@
                 List<Content> _listContent = new List<Content>();
                 foreach (var item in _list)
                 {
-                    var enContent = _Repository.GetMulti(x => x.parentId == item && x.isTrash == false && x.contentKey != eCurent.contentKey);
+                    var enContent = _Repository.GetMulti(x => x.parentId == item && x.isTrash == false && x.contentKey != eCurent.contentKey && x.isHome == true && x.approval == true);
                     enContent = enContent.OrderByDescending(x => x.updateTime);
                     var _entity = enContent.ToList();
                     if (_entity.Count > 0)
-                        _listContent.Add(_entity[0]);
+                        _listContent.AddRange(_entity);
                 }
 
                 if (_total > 0)

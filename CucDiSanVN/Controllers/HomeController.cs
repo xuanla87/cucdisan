@@ -239,13 +239,13 @@ namespace CucDiSanVN.Controllers
             catch
             {
             }
-            var entity = _services.GetAll(null, null, null, null, "SuKienQuaAnh", _languageId, false, null, null);
+            var entity = _services.GetAll2(null, null, null, null, "SuKienQuaAnh", _languageId, false, true, null, null);
             return PartialView(entity.Contents);
         }
         [OutputCache(Duration = 60, Location = OutputCacheLocation.Client)]
         public ActionResult suKienQuaAnhItem(int Id)
         {
-            var entity = _services.GetAll(null, null, null, Id, "SuKienQuaAnh", _languageId, false, null, null);
+            var entity = _services.GetAll2(null, null, null, Id, "SuKienQuaAnh", _languageId, false, true, null, null);
             return PartialView(entity.Contents);
         }
         [OutputCache(Duration = 60, Location = OutputCacheLocation.Client)]
@@ -299,7 +299,7 @@ namespace CucDiSanVN.Controllers
                 int.TryParse(_configSystemServices.GetValueByKey("BoxHinhAnh"), out Id);
             else
                 int.TryParse(_configSystemServices.GetValueByKey("BoxHinhAnhEn"), out Id);
-            var entity = _services.GetAll(null, null, null, Id, "SuKienQuaAnh", _languageId, false, null, null);
+            var entity = _services.GetAll2(null, null, null, Id, "SuKienQuaAnh", _languageId, false,true, null, null);
             var model = _services.GetById(Id);
             ViewBag.Url = model.note;
             return PartialView(entity.Contents.ToList());
@@ -309,7 +309,7 @@ namespace CucDiSanVN.Controllers
         {
             return PartialView();
         }
-        [OutputCache(Duration = 60,Location = OutputCacheLocation.Client)]
+        [OutputCache(Duration = 60, Location = OutputCacheLocation.Client)]
         public ActionResult getCategoryIsHome()
         {
             try
@@ -354,7 +354,7 @@ namespace CucDiSanVN.Controllers
             }
             int _totalRecord = 0;
             _pageIndex = _pageIndex ?? 1;
-            var entity = _services.GetAll(null, null, null, Id, null, _languageId, false, _pageIndex, 10);
+            var entity = _services.GetAll2(null, null, null, Id, null, _languageId, false, true, _pageIndex, 10);
             _totalRecord = entity.TotalRecord;
             ViewBag.TotalRecord = _totalRecord.ToString();
             ViewBag.TotalPage = entity.Total;
@@ -374,7 +374,7 @@ namespace CucDiSanVN.Controllers
             }
             int _totalRecord = 0;
             _pageIndex = _pageIndex ?? 1;
-            var entity = _services.GetAll(null, null, null, Id, null, _languageId, false, _pageIndex, null);
+            var entity = _services.GetAll2(null, null, null, Id, null, _languageId, false, true, _pageIndex, null);
             _totalRecord = entity.TotalRecord;
             ViewBag.TotalRecord = _totalRecord.ToString();
             ViewBag.TotalPage = entity.Total;
@@ -700,7 +700,7 @@ namespace CucDiSanVN.Controllers
             _pageIndex = _pageIndex ?? 1;
             var entity = new ContentView();
             if (!string.IsNullOrEmpty(SearchKey))
-                entity = _services.GetAll(SearchKey, null, null, null, "News", _languageId, false, _pageIndex, 20);
+                entity = _services.GetAll2(SearchKey, null, null, null, "News", _languageId, false, true, _pageIndex, 20);
             _totalRecord = entity.TotalRecord;
             ViewBag.TotalRecord = _totalRecord.ToString();
             ViewBag.TotalPage = entity.Total;
@@ -755,7 +755,7 @@ namespace CucDiSanVN.Controllers
                     model.contactTitle = entity.contactTitle;
                     model.contactEmail = entity.contactEmail;
                     model.contactBody = entity.contactBody;
-                     model.createTime = DateTime.Now; 
+                    model.createTime = DateTime.Now;
                     model.isTrash = false;
                     _contactServices.Add(model);
                     _contactServices.Save();
@@ -774,7 +774,7 @@ namespace CucDiSanVN.Controllers
         [OutputCache(Duration = 60, Location = OutputCacheLocation.Client)]
         public ActionResult GetAllAnh(int? _pageIndex)
         {
-            var entiys = _services.GetAll(null, null, null, null, "csukienquaanh", 1, false, _pageIndex, 12);
+            var entiys = _services.GetAll2(null, null, null, null, "csukienquaanh", 1, false, true, _pageIndex, 12);
             ViewBag.TotalRecord = entiys.TotalRecord;
             ViewBag.TotalPage = entiys.Total;
             ViewBag.PageIndex = _pageIndex ?? 1;
@@ -821,7 +821,7 @@ namespace CucDiSanVN.Controllers
         {
             int Id = 0;
             int.TryParse(_configSystemServices.GetValueByKey("ThongBao"), out Id);
-            var entity = _services.GetAll(null, null, null, Id, "News", _languageId, false, null, null);
+            var entity = _services.GetAll2(null, null, null, Id, "News", _languageId, false, true, null, null);
             return PartialView(entity.Contents.Take(10));
         }
     }

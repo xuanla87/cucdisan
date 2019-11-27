@@ -357,7 +357,7 @@
 
         public IEnumerable<Content> getCategoryIsHome(int _languageId)
         {
-            var enContent = _Repository.GetMulti(x => x.languageId == _languageId && x.isTrash == false && x.isHome == true && x.contentKey != "csukienquaanh" && x.contentKey != "cbanner");
+            var enContent = _Repository.GetMulti(x => x.languageId == _languageId && x.isTrash == false && x.isHome == true && (x.contentKey == "cthongtindisanvanhoa" || x.contentKey == "cnews" || x.contentKey == "cdisanvanhoa" || x.contentKey == "canphamtailieu" || x.contentKey == "cduthaovanbanphapluat" || x.contentKey == "cthutuchanhchinh" || x.contentKey == "cvanbanphapluat"));
             return enContent;
         }
 
@@ -370,7 +370,7 @@
                 List<Content> _listContent = new List<Content>();
                 foreach (var item in _list)
                 {
-                    var enContent = _Repository.GetMulti(x => x.parentId == item && x.isTrash == false && x.contentKey != eCurent.contentKey && x.isHome == true && x.approval == true);
+                    var enContent = _Repository.GetMulti(x => x.parentId == item && x.isTrash == false && (x.contentKey == "News" || x.contentKey == "AnPhamTaiLieu" || x.contentKey == "DiSanVanHoa" || x.contentKey == "Duthaovanbanphapluat" || x.contentKey == "Thongtindisanvanhoa" || x.contentKey == "TTHC" || x.contentKey == "Document") && x.isHome == true && x.approval == true);
                     enContent = enContent.OrderByDescending(x => x.updateTime);
                     var _entity = enContent.ToList();
                     if (_entity.Count > 0)
@@ -391,8 +391,8 @@
             var eCurent = GetById(_id);
             if (eCurent != null)
             {
-                var enContent = _Repository.GetMulti(x => x.parentId == _id && x.contentKey == eCurent.contentKey).ToList();
-                if (enContent.Count() > 0)
+                var enContent = _Repository.GetMulti(x => x.parentId == _id && x.contentKey == eCurent.contentKey && x.isTrash == false && x.approval == true).ToList();
+                if (enContent.Count > 0)
                 {
                     foreach (var item in enContent)
                     {
@@ -416,9 +416,8 @@
             var eCurent = GetById(_id);
             if (eCurent != null)
             {
-                var enContent = _Repository.GetMulti(x => x.contentKey == eCurent.contentKey && x.parentId == _id).ToList();
-                enContent = enContent.Where(x => x.parentId == _id && x.contentKey == eCurent.contentKey).ToList();
-                if (enContent.Count() > 0)
+                var enContent = _Repository.GetMulti(x => x.contentKey == eCurent.contentKey && x.parentId == _id && x.isTrash == false && x.approval == true).ToList();
+                if (enContent.Count > 0)
                 {
                     foreach (var item in enContent)
                     {
@@ -441,7 +440,10 @@
                     _list2.Add(item);
                 }
             }
-            _list2.Add(_id);
+            if (!_list2.Contains(_id))
+            {
+                _list2.Add(_id);
+            }
             return _list2;
         }
         public Content GetById(int _id)

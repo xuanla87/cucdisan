@@ -26,6 +26,7 @@ namespace CucDiSanVN.Areas.Admin.Models
         public string NgayBanHanh { get; set; }
         public int Sort { get; set; }
         public string TacGia { get; set; }
+        public bool Approval { get; set; }
 
     }
 }

@@ -56,7 +56,8 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     Note = x.note,
                     ParentId = x.parentId,
                     ParentName = _services.GetNameById(x.parentId),
-                    CreateTime = x.updateTime.ToString("dd/MM/yyyy")
+                    CreateTime = x.updateTime.ToString("dd/MM/yyyy"),
+                    Approval = (x.approval ?? false)
                 });
                 return View(model);
             }
@@ -144,7 +145,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.contentKey = "SuKienQuaAnh";
                     _services.Update(model);
                     _services.Save();
-                    _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Cập nhật sựa kiên qua ảnh Id:" + model.contentId, userIp = "", userName = User.Identity.Name });
+                    _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Cập nhật sựa kiên qua ảnh Id:" + model.contentId + ":" + model.contentName, userIp = "", userName = User.Identity.Name });
                     _serviceLog.Save();
                 }
                 else
@@ -171,18 +172,19 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.note = entity.Note;
                     model.tacGia = entity.TacGia;
                     model.contentName = entity.Name;
-                     model.createTime = DateTime.Now; model.ngayBanHanh = DateTime.Now;
+                    model.createTime = DateTime.Now; model.ngayBanHanh = DateTime.Now;
                     model.isSort = entity.Sort;
                     model.isTrash = false;
                     model.isView = 0;
                     model.languageId = entity.LanguageId;
+                    model.approval = false;
                     model.contentKey = "SuKienQuaAnh";
                     _services.Add(model);
                     _services.Save();
                     model.contentAlias = model.contentAlias + "-" + model.contentId;
                     _services.Update(model);
                     _services.Save();
-                    _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Thêm mới sự kiện qua ảnh Id:" + model.contentId, userIp = "", userName = User.Identity.Name });
+                    _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Thêm mới sự kiện qua ảnh Id:" + model.contentId + ":" + model.contentName, userIp = "", userName = User.Identity.Name });
                     _serviceLog.Save();
                 }
                 return RedirectToAction("Index", new { _parentId = entity.ParentId });
@@ -399,7 +401,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.contentName = entity.Name;
                     _services.Update(model);
                     _services.Save();
-                    _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Cập nhật chuyên mục sự kiện qua ảnh Id:" + model.contentId, userIp = "", userName = User.Identity.Name });
+                    _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Cập nhật chuyên mục sự kiện qua ảnh Id:" + model.contentId + ":" + model.contentName, userIp = "", userName = User.Identity.Name });
                     _serviceLog.Save();
                 }
                 else
@@ -419,6 +421,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                         ngayBanHanh = DateTime.Now,
                         isSort = 0,
                         isHome = entity.IsHome,
+                        approval = true,
                         isTrash = false,
                         isView = 0,
                         languageId = entity.LanguageId,
@@ -429,7 +432,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.contentAlias = model.contentAlias + "-" + model.contentId;
                     _services.Update(model);
                     _services.Save();
-                    _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Thêm mới chuyên mục sự kiện qua ảnh Id:" + model.contentId, userIp = "", userName = User.Identity.Name });
+                    _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Thêm mới chuyên mục sự kiện qua ảnh Id:" + model.contentId + ":" + model.contentName, userIp = "", userName = User.Identity.Name });
                     _serviceLog.Save();
                 }
                 return RedirectToAction("Category", new { _parentId = entity.ParentId });

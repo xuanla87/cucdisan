@@ -20,6 +20,10 @@
 
         Content UnTrash(int _id);
 
+        Content Approval(int _id);
+
+        Content UnApproval(int _id);
+
         ContentView GetAll(string _keyWords, DateTime? _fromDate, DateTime? _toDate, int? _parentId, string _contentKey, int? _languageId, bool? _isTrash, int? _pageIndex, int? _pageSize);
         ContentView GetVanBan(string _keyWords, DateTime? _fromDate, DateTime? _toDate, int? _parentId, string _contentKey, int? _languageId, bool? _isTrash, int? _pageIndex, int? _pageSize);
 
@@ -279,6 +283,24 @@
             return enContent;
         }
 
+        public Content Approval(int _id)
+        {
+            var enContent = _Repository.GetSingleById(_id);
+            if (enContent != null && enContent.approval != true)
+                enContent.approval = true;
+            _Repository.Update(enContent);
+            Save();
+            return enContent;
+        }
+        public Content UnApproval(int _id)
+        {
+            var enContent = _Repository.GetSingleById(_id);
+            if (enContent != null && enContent.approval == true)
+                enContent.approval = false;
+            _Repository.Update(enContent);
+            Save();
+            return enContent;
+        }
         public Content GetByAlias(string _alias)
         {
             if (!string.IsNullOrEmpty(_alias))

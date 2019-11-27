@@ -32,6 +32,7 @@
         public bool? isNew { get; set; }
         public DateTime ngayBanHanh { get; set; }
         public string tacGia { get; set; }
+        public bool? approval { get; set; }
     }
     [Table("Contact")]
     public partial class Contact

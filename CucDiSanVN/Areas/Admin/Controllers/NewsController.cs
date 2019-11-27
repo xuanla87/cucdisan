@@ -57,7 +57,8 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     Note = x.note,
                     ParentId = x.parentId,
                     ParentName = _services.GetNameById(x.parentId),
-                    CreateTime = x.updateTime.ToString("dd/MM/yyyy")
+                    CreateTime = x.updateTime.ToString("dd/MM/yyyy"),
+                    Approval = (x.approval ?? false)
                 });
                 return View(model);
             }
@@ -232,7 +233,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.isSort = entity.No.GetValueOrDefault();
                     _services.Update(model);
                     _services.Save();
-                    _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Cập nhật chuyên mục tin tức Id:" + model.contentId, userIp = "", userName = User.Identity.Name });
+                    _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Cập nhật chuyên mục tin tức Id:" + model.contentId + ":" + model.contentName, userIp = "", userName = User.Identity.Name });
                     _serviceLog.Save();
                 }
                 else
@@ -262,7 +263,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.contentAlias = model.contentAlias + "-" + model.contentId;
                     _services.Update(model);
                     _services.Save();
-                    _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Thêm mới chuyên mục tin tức Id:" + model.contentId, userIp = "", userName = User.Identity.Name });
+                    _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Thêm mới chuyên mục tin tức Id:" + model.contentId + ":" + model.contentName, userIp = "", userName = User.Identity.Name });
                     _serviceLog.Save();
                 }
                 return RedirectToAction("Category", new { _parentId = entity.ParentId });
@@ -354,7 +355,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.isSort = entity.Sort;
                     _services.Update(model);
                     _services.Save();
-                    _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Cập nhật tin tức Id:" + model.contentId, userIp = "", userName = User.Identity.Name });
+                    _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Cập nhật tin tức Id:" + model.contentId + ":" + model.contentName, userIp = "", userName = User.Identity.Name });
                     _serviceLog.Save();
                 }
                 else
@@ -381,18 +382,19 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.tacGia = entity.TacGia;
                     model.note = entity.Note;
                     model.contentName = entity.Name;
-                     model.createTime = DateTime.Now; model.ngayBanHanh = DateTime.Now;
+                    model.createTime = DateTime.Now; model.ngayBanHanh = DateTime.Now;
                     model.isSort = entity.Sort;
                     model.isTrash = false;
                     model.isView = 0;
                     model.languageId = entity.LanguageId;
                     model.contentKey = "News";
+                    model.approval = false;
                     _services.Add(model);
                     _services.Save();
                     model.contentAlias = model.contentAlias + "-" + model.contentId;
                     _services.Update(model);
                     _services.Save();
-                    _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Thêm mới tin tức Id:" + model.contentId, userIp = "", userName = User.Identity.Name });
+                    _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Thêm mới tin tức Id:" + model.contentId + ":" + model.contentName, userIp = "", userName = User.Identity.Name });
                     _serviceLog.Save();
                 }
                 return RedirectToAction("Index", new { _parentId = entity.ParentId });
@@ -450,9 +452,30 @@ namespace CucDiSanVN.Areas.Admin.Controllers
 
         public ActionResult Trash(int Id)
         {
-            _services.Trash(Id);
-            _services.Save();
-            _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Xóa nội dung:" + Id, userIp = "", userName = User.Identity.Name });
+            var model = _services.Trash(Id);
+            _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Xóa nội dung:" + Id + ":" + model.contentName, userIp = "", userName = User.Identity.Name });
+            _serviceLog.Save();
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult UnTrash(int Id)
+        {
+            var model = _services.UnTrash(Id);
+            _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Xóa nội dung:" + Id + ":" + model.contentName, userIp = "", userName = User.Identity.Name });
+            _serviceLog.Save();
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult Approval(int Id)
+        {
+            var model = _services.Approval(Id);
+            _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Duyệt nội dung:" + Id + ":" + model.contentName, userIp = "", userName = User.Identity.Name });
+            _serviceLog.Save();
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult UnApproval(int Id)
+        {
+            var model = _services.UnApproval(Id);
+            _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Hủy duyệt nội dung:" + Id + ":" + model.contentName, userIp = "", userName = User.Identity.Name });
             _serviceLog.Save();
             return Json(true, JsonRequestBehavior.AllowGet);
         }

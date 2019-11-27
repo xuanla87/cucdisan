@@ -79,7 +79,25 @@ $("#thumbnail").click(function () {
 $('.sidebar-menu  li a[href="' + location.pathname + '"]').parent('li').addClass('active');
 $('.sidebar-menu li:has(li.active)').addClass('active');
 $('.sidebar-menu  a[href="' + location.pathname + '"]').parent('li').addClass('active');
-
+function untrash(x, y) {
+    var check = confirm('Bạn có chắn chắn muốn khôi phục không?');
+    if (check) {
+        if (x > 0) {
+            $.ajax({
+                type: "GET",
+                url: "/Admin/News/UnTrash",
+                data: { id: x },
+                datatype: "json",
+                success: function (data) {
+                    window.location.href = "/Admin/" + y;
+                }
+            });
+        }
+        else {
+            alert("Lỗi không thể khôi phục!");
+        }
+    }
+}
 function trash(x, y) {
     var check = confirm('Bạn có chắn chắn muốn xóa không?');
     if (check) {
@@ -97,6 +115,34 @@ function trash(x, y) {
         else {
             alert("Lỗi không thể xóa!");
         }
+    }
+}
+function approval(x, y) {
+
+    if (x > 0) {
+        $.ajax({
+            type: "GET",
+            url: "/Admin/News/Approval",
+            data: { id: x },
+            datatype: "json",
+            success: function (data) {
+                window.location.href = "/Admin/" + y;
+            }
+        });
+    }
+}
+function unapproval(x, y) {
+
+    if (x > 0) {
+        $.ajax({
+            type: "GET",
+            url: "/Admin/News/UnApproval",
+            data: { id: x },
+            datatype: "json",
+            success: function (data) {
+                window.location.href = "/Admin/" + y;
+            }
+        });
     }
 }
 function setLanguage(x) {

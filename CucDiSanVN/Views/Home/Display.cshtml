@@ -34,9 +34,6 @@
     {
         <div class="page-content">
             <h1 class="page-title">@Model.contentName</h1>
-            <div class="date-post text-left">
-                <i class="fa fa-clock-o"></i> @Model.createTime.ToString("dd-MM-yyyy HH-mm")
-            </div>
             <img src="@Model.contentThumbnail" alt="@Model.contentName" />
         </div>
     }
@@ -44,20 +41,10 @@
     {
         <div class="page-content">
             <h1 class="page-title">@Model.contentName</h1>
-            <div class="date-post text-left">
-                <i class="fa fa-clock-o"></i> @Model.createTime.ToString("dd-MM-yyyy HH-mm")
-            </div>
             <div class="description">
                 @Html.Raw(Model.note)
             </div>
             @Html.Raw(Model.contentBody)
-            @if (!string.IsNullOrEmpty(Model.tacGia))
-            {
-                <div class="text-right">
-                    <div>Tác Giả</div>
-                    @Html.Raw(Model.tacGia)
-                </div>
-            }
         </div>
     }
 }

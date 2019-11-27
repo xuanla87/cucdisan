@@ -17,9 +17,11 @@ namespace CucDiSanVN.Areas.Admin.Controllers
     public class ActionLogController : Controller
     {
         IActionLogServices _serviceLog;
-        public ActionLogController(IActionLogServices serviceLog)
+        IContentServices _contentService;
+        public ActionLogController(IActionLogServices serviceLog, IContentServices contentService)
         {
             _serviceLog = serviceLog;
+            _contentService = contentService;
         }
         public ActionResult Index(DateTime? _fromDate, DateTime? _toDate, int? _pageIndex)
         {

@@ -68,7 +68,7 @@
                                         <th width="150">Link</th>
                                         <th>Ngày tạo</th>
                                         <th>Chuyên mục</th>
-                                        <th width="120">Thao tác</th>
+                                        <th width="180">Thao tác</th>
                                     </tr>
                                 </thead>
                                 @if (Model != null && Model.Count() > 0)
@@ -83,8 +83,29 @@
                                             <td>@item.CreateTime</td>
                                             <td>@item.ParentName</td>
                                             <td>
-                                                <a title="Cập nhật" class="btn btn-warning btn-flat" href="@Url.Action("Detail", "News", new { Id = item.Id })"><i class="fa fa-pencil"></i></a>
-                                                <button type="button" class="btn btn-danger btn-flat" title="Xóa" onclick="trash('@item.Id')"><i class="fa fa-trash"></i></button>
+                                                @if (User.Identity.Name == "admin@gmail.com" || User.Identity.Name == "xuanla87@gmail.com")
+                                                {
+                                                    if (item.Approval)
+                                                    {
+                                                        <a title="Cập nhật" class="btn btn-warning btn-flat" href="@Url.Action("Detail", "News", new { Id = item.Id })"><i class="fa fa-pencil"></i></a>
+                                                        <button type="button" class="btn btn-danger btn-flat" title="Xóa" onclick="trash('@item.Id','News')"><i class="fa fa-trash"></i></button>
+                                                        <button type="button" class="btn btn-info btn-flat" title="Hủy" onclick="unapproval('@item.Id','News')"><i class="fa fa-exclamation-triangle"></i></button>
+                                                    }
+                                                    else
+                                                    {
+                                                        <a title="Cập nhật" class="btn btn-warning btn-flat" href="@Url.Action("Detail", "News", new { Id = item.Id })"><i class="fa fa-pencil"></i></a>
+                                                        <button type="button" class="btn btn-danger btn-flat" title="Xóa" onclick="trash('@item.Id','News')"><i class="fa fa-trash"></i></button>
+                                                        <button type="button" class="btn btn-success btn-flat" title="Duyệt" onclick="approval('@item.Id','News')"><i class="fa fa-check"></i></button>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    if (item.Approval != true)
+                                                    {
+                                                        <a title="Cập nhật" class="btn btn-warning btn-flat" href="@Url.Action("Detail", "News", new { Id = item.Id })"><i class="fa fa-pencil"></i></a>
+                                                        <button type="button" class="btn btn-danger btn-flat" title="Xóa" onclick="trash('@item.Id','News')"><i class="fa fa-trash"></i></button>
+                                                    }
+                                                }
                                             </td>
                                         </tr>
                                     }

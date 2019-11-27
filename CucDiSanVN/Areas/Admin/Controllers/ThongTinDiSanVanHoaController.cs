@@ -56,7 +56,8 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     Note = x.note,
                     ParentId = x.parentId,
                     ParentName = _services.GetNameById(x.parentId),
-                    CreateTime = x.updateTime.ToString("dd/MM/yyyy")
+                    CreateTime = x.updateTime.ToString("dd/MM/yyyy"),
+                    Approval = (x.approval ?? false)
                 });
                 return View(model);
             }
@@ -225,7 +226,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.isSort = entity.No.GetValueOrDefault();
                     _services.Update(model);
                     _services.Save();
-                    _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Cập nhật chuyên mục thông tin di sản văn hóa Id:" + model.contentId, userIp = "", userName = User.Identity.Name });
+                    _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Cập nhật chuyên mục thông tin di sản văn hóa Id:" + model.contentId + ":" + model.contentName, userIp = "", userName = User.Identity.Name });
                     _serviceLog.Save();
                 }
                 else
@@ -245,6 +246,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                         ngayBanHanh = DateTime.Now,
                         isSort = entity.No.GetValueOrDefault(),
                         isHome = entity.IsHome,
+                        approval = true,
                         isTrash = false,
                         isView = 0,
                         languageId = entity.LanguageId,
@@ -255,7 +257,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.contentAlias = model.contentAlias + "-" + model.contentId;
                     _services.Update(model);
                     _services.Save();
-                    _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Thêm mới chuyên mục thông tin di sản văn hóa Id:" + model.contentId, userIp = "", userName = User.Identity.Name });
+                    _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Thêm mới chuyên mục thông tin di sản văn hóa Id:" + model.contentId + ":" + model.contentName, userIp = "", userName = User.Identity.Name });
                     _serviceLog.Save();
                 }
                 return RedirectToAction("Category", new { _parentId = entity.ParentId });
@@ -324,7 +326,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     if (entity.Alias.Contains("-" + entity.Id))
                         model.contentAlias = entity.Alias;
                     else
-                        model.contentAlias = entity.Alias +"-"+ entity.Id;
+                        model.contentAlias = entity.Alias + "-" + entity.Id;
                     model.contentBody = entity.BodyContent;
                     model.contentDescription = entity.MetaDescription;
                     model.contentId = entity.Id;
@@ -342,7 +344,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.contentKey = "Thongtindisanvanhoa";
                     _services.Update(model);
                     _services.Save();
-                    _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Cập nhật thông tin di sản văn hóa Id:" + model.contentId, userIp = "", userName = User.Identity.Name });
+                    _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Cập nhật thông tin di sản văn hóa Id:" + model.contentId + ":" + model.contentName, userIp = "", userName = User.Identity.Name });
                     _serviceLog.Save();
                 }
                 else
@@ -374,13 +376,14 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.isTrash = false;
                     model.isView = 0;
                     model.languageId = entity.LanguageId;
+                    model.approval = false;
                     model.contentKey = "Thongtindisanvanhoa";
                     _services.Add(model);
                     _services.Save();
                     model.contentAlias = model.contentAlias + "-" + model.contentId;
                     _services.Update(model);
                     _services.Save();
-                    _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Thêm mới thông tin di sản văn hóa Id:" + model.contentId, userIp = "", userName = User.Identity.Name });
+                    _serviceLog.Add(new ActionLog { actionLogStatus = 1, actionLogTime = DateTime.Now, actionLogType = 1, actionNote = "Thêm mới thông tin di sản văn hóa Id:" + model.contentId + ":" + model.contentName, userIp = "", userName = User.Identity.Name });
                     _serviceLog.Save();
                 }
                 return RedirectToAction("Index", new { _parentId = entity.ParentId });

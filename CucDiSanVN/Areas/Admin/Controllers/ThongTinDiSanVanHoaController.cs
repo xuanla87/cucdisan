@@ -295,7 +295,8 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     Note = model.note,
                     ParentId = model.parentId,
                     Sort = model.isSort,
-                    TacGia = model.tacGia
+                    TacGia = model.tacGia,
+                    IsHome = (model.isHome ?? false)
                 };
                 ViewBag.Title = "Cập nhật thông tin di sản văn hóa";
             }
@@ -341,6 +342,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.contentName = entity.Name;
                     model.isSort = entity.Sort;
                     model.tacGia = entity.TacGia;
+                    model.isHome = entity.IsHome;
                     model.contentKey = "Thongtindisanvanhoa";
                     _services.Update(model);
                     _services.Save();
@@ -375,6 +377,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.isSort = entity.Sort;
                     model.isTrash = false;
                     model.isView = 0;
+                    model.isHome = entity.IsHome;
                     model.languageId = entity.LanguageId;
                     model.approval = false;
                     model.contentKey = "Thongtindisanvanhoa";

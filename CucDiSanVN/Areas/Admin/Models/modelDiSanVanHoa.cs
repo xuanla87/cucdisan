@@ -26,6 +26,7 @@ namespace CucDiSanVN.Areas.Admin.Models
         public int Sort { get; set; }
         public string TacGia { get; set; }
         public bool Approval { get; set; }
+        public bool IsHome { get; set; }
 
     }
 }

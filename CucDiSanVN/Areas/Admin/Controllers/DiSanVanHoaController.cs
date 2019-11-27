@@ -173,7 +173,8 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     MetaTitle = model.contentTitle,
                     Name = model.contentName,
                     Note = model.note,
-                    ParentId = model.parentId
+                    ParentId = model.parentId,
+                    IsHome = (model.isHome ?? false)
                 };
                 if (model.isHome.HasValue)
                 {
@@ -297,7 +298,8 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     Note = model.note,
                     ParentId = model.parentId,
                     Sort = model.isSort,
-                    TacGia = model.tacGia
+                    TacGia = model.tacGia,
+                    IsHome = (model.isHome ?? false)
                 };
                 ViewBag.Title = "Cập nhật di sản văn hóa";
             }
@@ -334,6 +336,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     model.contentId = entity.Id;
                     model.contentThumbnail = entity.Img;
                     model.contentTitle = entity.MetaTitle;
+                    model.isHome = entity.IsHome;
                     if (string.IsNullOrEmpty(entity.CreateTime))
                     {
                         model.updateTime = DateTime.Now;
@@ -374,7 +377,7 @@ namespace CucDiSanVN.Areas.Admin.Controllers
                     {
                         model.updateTime = DateTime.ParseExact(entity.CreateTime, "dd/MM/yyyy", CultureInfo.InvariantCulture);
                     }
-
+                    model.isHome = entity.IsHome;
                     model.parentId = entity.ParentId;
                     model.note = entity.Note;
                     model.contentName = entity.Name;

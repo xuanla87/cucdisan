@@ -26,6 +26,7 @@
 
         ContentView GetAll(string _keyWords, DateTime? _fromDate, DateTime? _toDate, int? _parentId, string _contentKey, int? _languageId, bool? _isTrash, int? _pageIndex, int? _pageSize);
         ContentView GetAll2(string _keyWords, DateTime? _fromDate, DateTime? _toDate, int? _parentId, string _contentKey, int? _languageId, bool? _isTrash, bool? _approval, int? _pageIndex, int? _pageSize);
+        ContentView GetAll3(int _parentId, int? _languageId, int? _pageIndex, int? _pageSize);
         ContentView GetVanBan(string _keyWords, DateTime? _fromDate, DateTime? _toDate, int? _parentId, string _contentKey, int? _languageId, bool? _isTrash, int? _pageIndex, int? _pageSize);
 
         ContentView GetThongBao(string _keyWords, DateTime? _fromDate, DateTime? _toDate, int? _parentId, int? _languageId, bool? _isTrash, int? _pageIndex, int? _pageSize);
@@ -169,6 +170,21 @@
             {
                 enContent = enContent.Skip((_pageIndex.Value - 1) * _pageSize.Value);
             }
+            var totalPage = 0;
+            if (_pageSize != null)
+            {
+                totalPage = (int)Math.Ceiling(1.0 * totalRecord / _pageSize.Value);
+                enContent = enContent.Take(_pageSize.Value);
+            }
+            return new ContentView { Contents = enContent, Total = totalPage, TotalRecord = totalRecord };
+        }
+        public ContentView GetAll3(int _parentId, int? _languageId, int? _pageIndex, int? _pageSize)
+        {
+            var enContent = _Repository.GetMulti(x => x.parentId == _parentId && x.approval == true && x.isTrash == false && x.languageId == _languageId.Value);
+            enContent = enContent.OrderByDescending(x => x.updateTime);
+            int totalRecord = enContent.Count();
+            if (_pageIndex != null && _pageSize != null)
+                enContent = enContent.Skip((_pageIndex.Value - 1) * _pageSize.Value);
             var totalPage = 0;
             if (_pageSize != null)
             {

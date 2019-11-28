@@ -299,7 +299,7 @@ namespace CucDiSanVN.Controllers
                 int.TryParse(_configSystemServices.GetValueByKey("BoxHinhAnh"), out Id);
             else
                 int.TryParse(_configSystemServices.GetValueByKey("BoxHinhAnhEn"), out Id);
-            var entity = _services.GetAll2(null, null, null, Id, "SuKienQuaAnh", _languageId, false,true, null, null);
+            var entity = _services.GetAll2(null, null, null, Id, "SuKienQuaAnh", _languageId, false, true, null, null);
             var model = _services.GetById(Id);
             ViewBag.Url = model.note;
             return PartialView(entity.Contents.ToList());
@@ -354,7 +354,7 @@ namespace CucDiSanVN.Controllers
             }
             int _totalRecord = 0;
             _pageIndex = _pageIndex ?? 1;
-            var entity = _services.GetAll2(null, null, null, Id, null, _languageId, false, true, _pageIndex, 10);
+            var entity = _services.GetAll3(Id, _languageId, _pageIndex, 10);
             _totalRecord = entity.TotalRecord;
             ViewBag.TotalRecord = _totalRecord.ToString();
             ViewBag.TotalPage = entity.Total;

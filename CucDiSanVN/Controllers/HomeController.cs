@@ -38,18 +38,18 @@ namespace CucDiSanVN.Controllers
             this._contactServices = contactServices;
             this._lienKetServices = lienKetServices;
         }
-        [OutputCache(Duration = 60, Location = OutputCacheLocation.Client)]
+        [OutputCache(Duration = 600, Location = OutputCacheLocation.Client)]
         public ActionResult Index()
         {
             return PartialView();
         }
-        [OutputCache(Duration = 60, Location = OutputCacheLocation.Client)]
+        [OutputCache(Duration = 600, Location = OutputCacheLocation.Client)]
         public ActionResult Detail(string pageUrl)
         {
             var entity = _services.GetByAlias(pageUrl);
             return View(entity);
         }
-        [OutputCache(Duration = 60, Location = OutputCacheLocation.Client)]
+        [OutputCache(Duration = 600, Location = OutputCacheLocation.Client)]
         public ActionResult Display(string pageUrl, int? _pageIndex)
         {
             var entity = _services.GetByAlias(pageUrl);
@@ -64,17 +64,17 @@ namespace CucDiSanVN.Controllers
                 ViewBag.Title = _configSystemServices.GetValueByKey("SiteTitle");
             return View(entity);
         }
-        [OutputCache(Duration = 60, Location = OutputCacheLocation.Client)]
+        [OutputCache(Duration = 600, Location = OutputCacheLocation.Client)]
         public ActionResult pageLeft()
         {
             return PartialView();
         }
-        [OutputCache(Duration = 60, Location = OutputCacheLocation.Client)]
+        [OutputCache(Duration = 600, Location = OutputCacheLocation.Client)]
         public ActionResult pageRight()
         {
             return PartialView();
         }
-        [OutputCache(Duration = 60, Location = OutputCacheLocation.Client)]
+        [OutputCache(Duration = 600, Location = OutputCacheLocation.Client)]
         public ActionResult getMenuMain()
         {
             try
@@ -92,7 +92,7 @@ namespace CucDiSanVN.Controllers
             List<Menu> eMenus = _menuServices.GetByParent(Id).Where(x => x.isTrash == false).OrderBy(x => x.isSort).ToList();
             return PartialView(eMenus);
         }
-        [OutputCache(Duration = 60, Location = OutputCacheLocation.Client)]
+        [OutputCache(Duration = 600, Location = OutputCacheLocation.Client)]
         public ActionResult getMenuLeft1()
         {
             try
@@ -115,7 +115,7 @@ namespace CucDiSanVN.Controllers
             List<Menu> eMenus = _menuServices.GetByParent(Id).Where(x => x.isTrash == false).OrderBy(x => x.isSort).ToList();
             return PartialView(eMenus);
         }
-        [OutputCache(Duration = 60, Location = OutputCacheLocation.Client)]
+        [OutputCache(Duration = 600, Location = OutputCacheLocation.Client)]
         public ActionResult getMenuLeft3()
         {
             try
@@ -138,7 +138,7 @@ namespace CucDiSanVN.Controllers
             List<Menu> eMenus = _menuServices.GetByParent(Id).Where(x => x.isTrash == false).OrderBy(x => x.isSort).ToList();
             return PartialView(eMenus);
         }
-        [OutputCache(Duration = 60, Location = OutputCacheLocation.Client)]
+        [OutputCache(Duration = 600, Location = OutputCacheLocation.Client)]
         public ActionResult getMenuLeft2()
         {
             try
@@ -161,7 +161,7 @@ namespace CucDiSanVN.Controllers
             List<Menu> eMenus = _menuServices.GetByParent(Id).Where(x => x.isTrash == false).OrderBy(x => x.isSort).ToList();
             return PartialView(eMenus);
         }
-        [OutputCache(Duration = 60, Location = OutputCacheLocation.Client)]
+        [OutputCache(Duration = 600, Location = OutputCacheLocation.Client)]
         public ActionResult getMenuLeft4()
         {
             try
@@ -184,30 +184,30 @@ namespace CucDiSanVN.Controllers
             List<Menu> eMenus = _menuServices.GetByParent(Id).Where(x => x.isTrash == false).OrderBy(x => x.isSort).ToList();
             return PartialView(eMenus);
         }
-        [OutputCache(Duration = 60, Location = OutputCacheLocation.Client)]
+        [OutputCache(Duration = 600, Location = OutputCacheLocation.Client)]
         public ActionResult getMenuFooter(int? Id)
         {
             List<Menu> eMenus = _menuServices.GetByParent(Id).OrderBy(x => x.isSort).ToList();
             return PartialView(eMenus);
         }
-        [OutputCache(Duration = 60, Location = OutputCacheLocation.Client)]
+        [OutputCache(Duration = 600, Location = OutputCacheLocation.Client)]
         public ActionResult getSubMenu(int Id)
         {
             List<Menu> eMenus = _menuServices.GetByParent(Id).OrderBy(x => x.isSort).ToList();
             return PartialView(eMenus);
         }
-        [OutputCache(Duration = 60, Location = OutputCacheLocation.Client)]
+        [OutputCache(Duration = 600, Location = OutputCacheLocation.Client)]
         public ActionResult getSubMenu2(int Id)
         {
             List<Menu> eMenus = _menuServices.GetByParent(Id).OrderBy(x => x.isSort).ToList();
             return PartialView(eMenus);
         }
-        [OutputCache(Duration = 60, Location = OutputCacheLocation.Client)]
+        [OutputCache(Duration = 600, Location = OutputCacheLocation.Client)]
         public ActionResult getBoxLeft(int? Id)
         {
             return View();
         }
-        [OutputCache(Duration = 60, Location = OutputCacheLocation.Client)]
+        [OutputCache(Duration = 600, Location = OutputCacheLocation.Client)]
         public ActionResult getFooterInfor()
         {
             try
@@ -229,7 +229,7 @@ namespace CucDiSanVN.Controllers
             }
             return PartialView();
         }
-        [OutputCache(Duration = 60, Location = OutputCacheLocation.Client)]
+        [OutputCache(Duration = 600, Location = OutputCacheLocation.Client)]
         public ActionResult suKienQuaAnh()
         {
             try
@@ -242,13 +242,13 @@ namespace CucDiSanVN.Controllers
             var entity = _services.GetAll2(null, null, null, null, "SuKienQuaAnh", _languageId, false, true, null, null);
             return PartialView(entity.Contents);
         }
-        [OutputCache(Duration = 60, Location = OutputCacheLocation.Client)]
+        [OutputCache(Duration = 600, Location = OutputCacheLocation.Client)]
         public ActionResult suKienQuaAnhItem(int Id)
         {
             var entity = _services.GetAll2(null, null, null, Id, "SuKienQuaAnh", _languageId, false, true, null, null);
             return PartialView(entity.Contents);
         }
-        [OutputCache(Duration = 60, Location = OutputCacheLocation.Client)]
+        [OutputCache(Duration = 600, Location = OutputCacheLocation.Client)]
         public ActionResult getBannerRight()
         {
             try
@@ -266,7 +266,7 @@ namespace CucDiSanVN.Controllers
             var entity = _services.GetAll(null, null, null, Id, "Banner", _languageId, false, null, null);
             return PartialView(entity.Contents.OrderBy(x => x.isSort).ToList());
         }
-        [OutputCache(Duration = 60, Location = OutputCacheLocation.Client)]
+        [OutputCache(Duration = 600, Location = OutputCacheLocation.Client)]
         public ActionResult getBannerLeft()
         {
             try
@@ -284,7 +284,7 @@ namespace CucDiSanVN.Controllers
             var entity = _services.GetAll(null, null, null, Id, "Banner", _languageId, false, null, null);
             return PartialView(entity.Contents.ToList());
         }
-        [OutputCache(Duration = 60, Location = OutputCacheLocation.Client)]
+        [OutputCache(Duration = 600, Location = OutputCacheLocation.Client)]
         public ActionResult getAnh()
         {
             try
@@ -304,12 +304,12 @@ namespace CucDiSanVN.Controllers
             ViewBag.Url = model.note;
             return PartialView(entity.Contents.ToList());
         }
-        [OutputCache(Duration = 60, Location = OutputCacheLocation.Client)]
+        [OutputCache(Duration = 600, Location = OutputCacheLocation.Client)]
         public ActionResult getVideo()
         {
             return PartialView();
         }
-        [OutputCache(Duration = 60, Location = OutputCacheLocation.Client)]
+        [OutputCache(Duration = 600, Location = OutputCacheLocation.Client)]
         public ActionResult getCategoryIsHome()
         {
             try
@@ -322,13 +322,13 @@ namespace CucDiSanVN.Controllers
             IEnumerable<Content> _list = _services.getCategoryIsHome(_languageId).OrderBy(x => x.isSort);
             return PartialView(_list.Take(3).ToList());
         }
-        [OutputCache(Duration = 60, Location = OutputCacheLocation.Client)]
+        [OutputCache(Duration = 600, Location = OutputCacheLocation.Client)]
         public ActionResult getContentInCategoryHomeId(int Id, int Total)
         {
             IEnumerable<Content> _list = _services.getContentInCategoryIsHome(Id, Total);
             return PartialView(_list);
         }
-        [OutputCache(Duration = 60, Location = OutputCacheLocation.Client)]
+        [OutputCache(Duration = 600, Location = OutputCacheLocation.Client)]
         public ActionResult getBreadcrumb(string pageUrl)
         {
             var entity = _services.GetByAlias(pageUrl);
@@ -342,7 +342,7 @@ namespace CucDiSanVN.Controllers
             }
             return PartialView();
         }
-        [OutputCache(Duration = 60, Location = OutputCacheLocation.Client)]
+        [OutputCache(Duration = 600, Location = OutputCacheLocation.Client)]
         public ActionResult getChildDisplay(int Id, string _url, int? _pageIndex)
         {
             try
@@ -362,7 +362,7 @@ namespace CucDiSanVN.Controllers
             ViewBag.CurentUrl = _url;
             return PartialView(entity.Contents.OrderBy(x => x.isSort));
         }
-        [OutputCache(Duration = 60, Location = OutputCacheLocation.Client)]
+        [OutputCache(Duration = 600, Location = OutputCacheLocation.Client)]
         public ActionResult getChildDisplay2(int Id, string _url, int? _pageIndex)
         {
             try
@@ -382,13 +382,13 @@ namespace CucDiSanVN.Controllers
             ViewBag.CurentUrl = _url;
             return PartialView(entity.Contents.OrderBy(x => x.isSort));
         }
-        [OutputCache(Duration = 60, Location = OutputCacheLocation.Client)]
+        [OutputCache(Duration = 600, Location = OutputCacheLocation.Client)]
         public ActionResult getVideoIsHome()
         {
             var entity = _videoServices.GetIsHome();
             return PartialView(entity);
         }
-        [OutputCache(Duration = 60, Location = OutputCacheLocation.Client)]
+        [OutputCache(Duration = 600, Location = OutputCacheLocation.Client)]
         public ActionResult VideoAll(int? Id, int? _pageIndex)
         {
             if (Id.HasValue && Id > 0)
@@ -413,7 +413,7 @@ namespace CucDiSanVN.Controllers
             ViewBag.PageIndex = _pageIndex ?? 1;
             return View(entity.Videos);
         }
-        [OutputCache(Duration = 60, Location = OutputCacheLocation.Client)]
+        [OutputCache(Duration = 600, Location = OutputCacheLocation.Client)]
         public ActionResult VideoDetail(int Id)
         {
             var model = _videoServices.GetById(Id);
@@ -425,7 +425,7 @@ namespace CucDiSanVN.Controllers
                 ViewBag.Breadcrumb = "<a href=\"video-clip\">Danh sách video</a> > " + model.videoTitle;
             return View(model);
         }
-        [OutputCache(Duration = 60, Location = OutputCacheLocation.Client)]
+        [OutputCache(Duration = 600, Location = OutputCacheLocation.Client)]
         public ActionResult _HitCounter()
         {
             try
@@ -452,7 +452,7 @@ namespace CucDiSanVN.Controllers
             ViewBag.LaguageId = _languageId;
             return PartialView();
         }
-        [OutputCache(Duration = 60, Location = OutputCacheLocation.Client)]
+        [OutputCache(Duration = 600, Location = OutputCacheLocation.Client)]
         public ActionResult _fixAlias()
         {
             try
@@ -475,7 +475,7 @@ namespace CucDiSanVN.Controllers
             }
             return View();
         }
-        [OutputCache(Duration = 60, Location = OutputCacheLocation.Client)]
+        [OutputCache(Duration = 600, Location = OutputCacheLocation.Client)]
         public ActionResult _getLanguage()
         {
             try
@@ -488,13 +488,13 @@ namespace CucDiSanVN.Controllers
             ViewBag.LanguageId = _languageId;
             return PartialView();
         }
-        [OutputCache(Duration = 60, Location = OutputCacheLocation.Client)]
+        [OutputCache(Duration = 600, Location = OutputCacheLocation.Client)]
         public ActionResult _setLanguage(int _languageId)
         {
             Session["languageId"] = _languageId;
             return Redirect("/");
         }
-        [OutputCache(Duration = 60, Location = OutputCacheLocation.Client)]
+        [OutputCache(Duration = 600, Location = OutputCacheLocation.Client)]
         public ActionResult YKienDongGop(string _searchKey, int? _pageIndex)
         {
             var entitys = _feedbackServices.All(null, null, null, null, null, false, false, null, null);
@@ -507,7 +507,7 @@ namespace CucDiSanVN.Controllers
             ViewBag.SearchKey = _searchKey;
             return View(entityEnd.Feedbacks);
         }
-        [OutputCache(Duration = 60, Location = OutputCacheLocation.Client)]
+        [OutputCache(Duration = 600, Location = OutputCacheLocation.Client)]
         public ActionResult YKienDongGopDetail(int Id)
         {
             var entity = _feedbackServices.GetById(Id);
@@ -584,7 +584,7 @@ namespace CucDiSanVN.Controllers
             ViewBag.ListFile = models.ToList();
             return View(model);
         }
-        [OutputCache(Duration = 60, Location = OutputCacheLocation.Client)]
+        [OutputCache(Duration = 600, Location = OutputCacheLocation.Client)]
         public string getFileName(string _linkFile)
         {
             string[] _list = _linkFile.Split('/');
@@ -612,7 +612,7 @@ namespace CucDiSanVN.Controllers
             _captcha.Dispose();
             return File(ms.ToArray(), "image/png");
         }
-        [OutputCache(Duration = 60, Location = OutputCacheLocation.Client)]
+        [OutputCache(Duration = 600, Location = OutputCacheLocation.Client)]
         public ActionResult FromDongGop(int feedbackId)
         {
             DongGopYKienModel model = new DongGopYKienModel();
@@ -664,7 +664,7 @@ namespace CucDiSanVN.Controllers
             }
             return RedirectToAction("YKienDongGopDetail", new { Id = model.feedbackId });
         }
-        [OutputCache(Duration = 60, Location = OutputCacheLocation.Client)]
+        [OutputCache(Duration = 600, Location = OutputCacheLocation.Client)]
         public ActionResult ViewVanBan(int Id, string _url, int? _pageIndex)
         {
             try
@@ -686,7 +686,7 @@ namespace CucDiSanVN.Controllers
             ViewBag.ListItem = entitys.Contents.ToList();
             return PartialView(entity.Contents);
         }
-        [OutputCache(Duration = 60, Location = OutputCacheLocation.Client)]
+        [OutputCache(Duration = 600, Location = OutputCacheLocation.Client)]
         public ActionResult Search(string SearchKey, int? _pageIndex)
         {
             try
@@ -708,7 +708,7 @@ namespace CucDiSanVN.Controllers
             ViewBag.SearchKey = SearchKey;
             return View(entity.Contents);
         }
-        [OutputCache(Duration = 60, Location = OutputCacheLocation.Client)]
+        [OutputCache(Duration = 600, Location = OutputCacheLocation.Client)]
         public ActionResult TraCuuVanBan(string _Name, string _No, string _NgayBanHanh, int? _pageIndex)
         {
             try
@@ -735,7 +735,7 @@ namespace CucDiSanVN.Controllers
             ViewBag._NgayBanHanh = _NgayBanHanh;
             return View(entity.Contents);
         }
-        [OutputCache(Duration = 60, Location = OutputCacheLocation.Client)]
+        [OutputCache(Duration = 600, Location = OutputCacheLocation.Client)]
         public ActionResult LienHe()
         {
             Session["CAPTCHA"] = GetRandomText();
@@ -765,13 +765,13 @@ namespace CucDiSanVN.Controllers
             }
             return View(entity);
         }
-        [OutputCache(Duration = 60, Location = OutputCacheLocation.Client)]
+        [OutputCache(Duration = 600, Location = OutputCacheLocation.Client)]
         public ActionResult LienKetWeb()
         {
             var model = _lienKetServices.All(null, null, false, 1, 30);
             return PartialView(model.LienKetWebs);
         }
-        [OutputCache(Duration = 60, Location = OutputCacheLocation.Client)]
+        [OutputCache(Duration = 600, Location = OutputCacheLocation.Client)]
         public ActionResult GetAllAnh(int? _pageIndex)
         {
             var entiys = _services.GetAll2(null, null, null, null, "csukienquaanh", 1, false, true, _pageIndex, 12);
@@ -780,7 +780,7 @@ namespace CucDiSanVN.Controllers
             ViewBag.PageIndex = _pageIndex ?? 1;
             return View(entiys);
         }
-        [OutputCache(Duration = 60, Location = OutputCacheLocation.Client)]
+        [OutputCache(Duration = 600, Location = OutputCacheLocation.Client)]
         public ActionResult GetBannerMain()
         {
             string banner = "";
@@ -798,7 +798,7 @@ namespace CucDiSanVN.Controllers
                 ViewBag.BannerMain = "<a href=\"/\"><img src=\"../Content/banner.png\" alt=\"banner\" /></a>";
             return PartialView();
         }
-        [OutputCache(Duration = 60, Location = OutputCacheLocation.Client)]
+        [OutputCache(Duration = 600, Location = OutputCacheLocation.Client)]
         public ActionResult SoDoWebsite()
         {
             try
@@ -816,7 +816,7 @@ namespace CucDiSanVN.Controllers
             List<Menu> eMenus = _menuServices.GetByParent(Id).Where(x => x.isTrash == false).OrderBy(x => x.isSort).ToList();
             return View(eMenus);
         }
-        [OutputCache(Duration = 60, Location = OutputCacheLocation.Client)]
+        [OutputCache(Duration = 600, Location = OutputCacheLocation.Client)]
         public ActionResult ThongBao()
         {
             int Id = 0;

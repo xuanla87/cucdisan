@@ -178,6 +178,7 @@
             }
             return new ContentView { Contents = enContent, Total = totalPage, TotalRecord = totalRecord };
         }
+
         public ContentView GetAll3(int _parentId, int? _languageId, int? _pageIndex, int? _pageSize)
         {
             var enContent = _Repository.GetMulti(x => x.parentId == _parentId && x.approval == true && x.isTrash == false && x.languageId == _languageId.Value);
